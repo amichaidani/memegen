@@ -73,13 +73,20 @@ function onCaptionDelete() {
 function onSelectMeme(el) {
     changeSelectedMeme(el.dataset["id"]); // Model update
     console.log('data-set: ',el.dataset["id"]);
-    $(`#${el.id}`).css('border', '3px solid red'); 
+    el.style.border= "thick solid #0000FF"
+    onEditMeme();
 }
 
 function renderMemes () {
     let strHTMLs = getStrHTMLs ();
     $('.grid-container').html(strHTMLs)
 }
+
+function onEditMeme(); {
+    console.log('Opening editor');
+    
+}
+
 // End of gallery funcs
 
 function onCaptionChange(el) {
