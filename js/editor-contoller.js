@@ -9,19 +9,13 @@ var gCtx;
 function renderCanvas() {
     //Todo: Limit displayed img to max width of 75% of viewport
     let selectedMeme = getSelectedMeme();
-
-    let img = new Image;
-    img.src = selectedMeme.url;
-
-    gCanvas.width = img.width;
-    gCanvas.height = img.height;
+    let elImg = document.querySelector('#selected-img');
+    elImg.src = selectedMeme.url;
+    gCanvas.width = elImg.width;
+    gCanvas.height = elImg.height;
     gCtx = gCanvas.getContext('2d')
 
-    img.onload = function () {
-        gCanvas.style.width = img.width;
-        gCanvas.style.height = img.height;
-        gCtx.drawImage(img, 0, 0); // Or at whatever offset you like
-    };
+    gCtx.drawImage(elImg, 0, 0, elImg.width, elImg.height);
     $('.caption').remove(); // Clear all caption elements
     createDefaultCaptions(); // Construct default top/bottom captions
     renderCaptions(); // Create caption elements and inject to DOM
@@ -29,7 +23,7 @@ function renderCanvas() {
     setTimeout(() => {
         $('.caption').first().css('top', '20px');
         // TODO: Shorten this horrible line:
-        $('.caption').last().css('top', ($(gCanvas).height() - parseInt($('.caption').last().css('font-size'))) + 'px');
+        $('.caption').last().css('top', ($(gCanvas).height() - parseInt($('.caption').last().css('font-size'))) - 20 + 'px');
     }, 20); // Fix the timeout shit!
 
     $('.caption').last().blur();
