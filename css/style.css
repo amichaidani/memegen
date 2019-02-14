@@ -237,6 +237,7 @@ input[type="search"] {
     height: 30px;
     border-radius: 3px;
     border: 1px solid #333;
+    -webkit-appearance: none;
 }
 
 button {
