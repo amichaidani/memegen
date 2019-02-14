@@ -134,6 +134,9 @@ small, .text_small {
         height: 180px;
         box-shadow: 1px 1px 10px rgba(0, 0, 0, .15);
     }
+    .grid-container {
+        margin-top: 190px;
+    }
     .meme-search-box>* {
         width: 100%;
     }
