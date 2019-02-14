@@ -3,7 +3,7 @@ var gOffset = [0, 0];
 var elCaption;
 var gIsDown = false;
 var gFocusedCaption = null;
-var gCanvas;
+var gElMemeImg;
 var gCtx;
 
 function renderCanvas() {
@@ -11,15 +11,17 @@ function renderCanvas() {
     let selectedMeme = getSelectedMeme();
     let elImg = document.querySelector('.canvas-main');
     elImg.src = selectedMeme.url;
-    gCanvas = document.querySelector('.canvas-main');
+    gElMemeImg = elImg;
     $('.caption').remove(); // Clear all caption elements
     createDefaultCaptions(); // Construct default top/bottom captions
     renderCaptions(); // Create caption elements and inject to DOM
+    setTimeout(function () {
+        $('.caption').first().css('top', '20px');
+        // TODO: Shorten this horrible line:
+        $('.caption').css('top', ($(gElMemeImg).outerHeight - 70) + 'px');
+        $('.caption').last().blur();
 
-    $('.caption').first().css('top', '20px');
-    // TODO: Shorten this horrible line:
-    $('.caption').last().css('top', elImg.height - 70 + 'px');
-    $('.caption').last().blur();
+    }, 100)
 
     gFocusedCaption = null;
 
@@ -91,7 +93,7 @@ document.addEventListener('mousemove', function (event) {
 
         if (gMousePosition.x + gOffset[0] <= 0 ||
             gMousePosition.y + gOffset[1] <= $('.canvas-main').position().top ||
-            gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= $('.canvas-main').outerWidth(true) - 2 ||
+            gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= $('.canvas-main').outerWidth(true) ||
             gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > $('.canvas-main').offset().top + $('.canvas-main').outerHeight(true) - 2
         ) return;
 
