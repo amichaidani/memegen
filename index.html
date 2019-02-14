@@ -48,27 +48,31 @@
             <div class="editor-container">
                 <img class="canvas-main" src="">
             </div>
-            <div class="caption-tools">
-                <span class="add-delete-caption btn-group">
-                    <button id="caption-add" onclick="onCaptionAdd()">Add</button>
-                    <button id="caption-delete" onclick="onCaptionDelete()"><i class="far fa-trash-alt"></i> </button>
-                </span>
-                <span class="color-swatch"><i class="fas fa-palette" onclick="propagateColorClick()"></i>
-                    <input type="color" id="caption-color-picker" onchange="onCaptionChangeColor(this)">
-                </span>
-                <span class="change-caption-style btn-group">
-                    <button id="caption-smaller" onclick="onCaptionSmaller()">-</button>
-                    <button id="caption-larger" onclick="onCaptionLarger()">+</button>
-                </span>
+            <div class="tools-wrapper">
+                <div class="caption-tools">
+                    <div class="edit-tools">
+                        <span class="add-delete-caption btn-group">
+                            <button id="caption-add" onclick="onCaptionAdd()">Add</button>
+                            <button id="caption-delete" onclick="onCaptionDelete()"><i class="far fa-trash-alt"></i>
+                            </button>
+                        </span>
+                        <span class="color-swatch"><i class="fas fa-palette" onclick="propagateColorClick()"></i>
+                            <input type="color" id="caption-color-picker" onchange="onCaptionChangeColor(this)">
+                        </span>
+                        <span class="change-caption-style btn-group">
+                            <button id="caption-smaller" onclick="onCaptionSmaller()">-</button>
+                            <button id="caption-larger" onclick="onCaptionLarger()">+</button>
+                        </span>
+                    </div>
+                    <div class="save-tools"> <span class="btn-group">
+                            <button id="editor-reset" onclick="onEditorReset()">Reset</button>
+                            <button id="editor-download" onclick="onEditorDownload()">Download</button>
+                            <button onclick="onChangeView()">Back to Gallery</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
 
-            </div>
-            <div>
-                <span class="btn-group">
-                    <button id="editor-reset" onclick="onEditorReset()">Reset</button>
-                    <button id="editor-download" onclick="onEditorDownload()">Download</button>
-                    <button onclick="onChangeView()">Back to Gallery</button>
-                </span>
-            </div>
         </div>
     </section>
     <script src="js/utils.js"></script>

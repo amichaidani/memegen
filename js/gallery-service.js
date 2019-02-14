@@ -12,7 +12,6 @@ var gMemes = [];
 var gKeywords = {}
 
 function createGMemes() {
-    gMemes.push(createMeme('img/eddie.jpg', ['preaching']))
     gMemes.push(createMeme('img/man.png', ['sad']))
     gMemes.push(createMeme('img/meme3.jpg',['preaching', 'mad']))
     gMemes.push(createMeme('img/meme4.jpg',['preaching', 'fighting']))
