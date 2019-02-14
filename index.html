@@ -32,20 +32,26 @@
 
     <!-- Editor section -->
     <section class="editor">
-        <div class="editor-container">
-            <canvas width="500" height="500" class="canvas-main">
-            </canvas>
-        </div>
-        <div class="caption-tools">
-            <button id="caption-add" onclick="onCaptionAdd()">Add</button>
-            <button id="caption-delete" onclick="onCaptionDelete()">Delete</button>
-            <input type="color" id="caption-color-picker" onchange="onCaptionChangeColor(this)">
-            <button id="caption-smaller" onclick="onCaptionSmaller()">-</button>
-            <button id="caption-larger" onclick="onCaptionLarger()">+</button>
-
-            <div>
-                <input id="caption-text">
+        <div class="editor-wrapper">
+            <div class="editor-container">
+                <canvas class="canvas-main">
+                </canvas>
             </div>
+            <div class="caption-tools">
+                <button id="caption-add" onclick="onCaptionAdd()">Add</button>
+                <button id="caption-delete" onclick="onCaptionDelete()">Delete</button>
+                <input type="color" id="caption-color-picker" onchange="onCaptionChangeColor(this)">
+                <button id="caption-smaller" onclick="onCaptionSmaller()">-</button>
+                <button id="caption-larger" onclick="onCaptionLarger()">+</button>
+                <button id="editor-reset" onclick="onEditorReset()">Reset</button>
+
+                <div>
+                    <input id="caption-text">
+                </div>
+
+            </div>
+            <button class="switch-view" onclick="changeView()">View-editor/view gallery</button>
+        </div>
 
         </div>
         <button class="switch-view" onclick="onChangeView()">View-editor/view gallery</button>

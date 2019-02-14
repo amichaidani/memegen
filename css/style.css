@@ -81,6 +81,7 @@ small, .text_small {
 
 .caption {
     display: block;
+    text-align: center;
     font-family: Impact, arial, sans-serif;
     color: #ffffff;
     -webkit-text-stroke-width: 2px;
@@ -103,15 +104,20 @@ small, .text_small {
     cursor: text;
 }
 
+.editor-wrapper {
+    text-align: center;
+}
+
 .editor-container {
+    padding-top: 20px;
     text-align: center;
     position: relative;
-    max-width: 500px;
+    display: inline-block;
     margin: 0 auto;
 }
 
 [contenteditable]:focus {
-    outline: 1px dashed rgba(0, 0, 0, 0.5);
+    outline: 2px dashed rgba(0, 0, 0, 0.5);
 }
 
 .canvas-main {

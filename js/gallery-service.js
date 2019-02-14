@@ -43,6 +43,10 @@ function changeSelectedMeme(id) {
     gSelectedMeme = getMemeById(id);
 }
 
+function getSelectedMeme() {
+    return gSelectedMeme;
+}
+
 function getMemeById(id) {
     let searchedImgIdx = gMemes.findIndex(img => img.id === +id)
     return gMemes[searchedImgIdx]
