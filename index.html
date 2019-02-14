@@ -29,8 +29,12 @@
             </canvas>
         </div>
         <div class="caption-tools">
-            <button id="caption-add" onclick="onCaptionAdd()">+</button>
-            <button id="caption-delete" onclick="onCaptionDelete()">-</button>
+            <button id="caption-add" onclick="onCaptionAdd()">Add</button>
+            <button id="caption-delete" onclick="onCaptionDelete()">Delete</button>
+            <input type="color" id="caption-change-color" onchange="onCaptionChangeColor(this)">
+            <button id="caption-smaller" onclick="onCaptionSmaller()">-</button>
+            <button id="caption-larger" onclick="onCaptionLarger()">+</button>
+
             <div>
                 <input id="caption-text">
             </div>

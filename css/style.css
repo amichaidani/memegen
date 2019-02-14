@@ -81,6 +81,7 @@ small, .text_small {
 }
 
 .caption {
+    display: block;
     font-family: Impact, arial, sans-serif;
     color: #fff;
     -webkit-text-stroke-width: 2px;
@@ -93,8 +94,8 @@ small, .text_small {
     user-select: none;
     -o-user-select: none;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 100px;
+    left: 100px;
     cursor: pointer;
     font-size: 50px;
 }
@@ -108,6 +109,10 @@ small, .text_small {
     position: relative;
     max-width: 500px;
     margin: 0 auto;
+}
+
+[contenteditable]:focus {
+    outline: 1px dashed rgba(0, 0, 0, 0.5);
 }
 
 .canvas-main {

@@ -3,13 +3,15 @@ var mousePosition;
 var offset = [0, 0];
 var elCaption;
 var isDown = false;
+var outOfBounds = false;
 var gFocusedCaption = null;
+
 
 function init() {
     createDefaultCaptions();
     renderCaptions();
-    $('.gallery').show();
-    $('.editor').hide();
+    $('.gallery').hide();
+    $('.editor').show();
 }
 
 function renderCaptions() {
@@ -22,10 +24,11 @@ function renderCaptions() {
 function renderNewCaption(caption) {
     let strHTML = '';
     strHTML += `
-        <span class="caption" data-id="${caption.id}" onmousedown="onCaptionClick(this,event)" onmouseup="onCaptionRelease()" contenteditable="true" oninput="onCaptionChange(this)">${caption.txt}!</span>
+        <div class="caption" data-id="${caption.id}" onmousedown="onCaptionClick(this,event)" onmouseup="onCaptionRelease()" contenteditable="true" oninput="onCaptionChange(this)">${caption.txt}!</span>
         `
-    $('.editor-container').append(strHTML)
-    $('.caption').focus();
+    $('.editor-container').append(strHTML);
+    $('.caption').last()[0].focus();
+    gFocusedCaption = $('.caption').last()[0];
 }
 
 // Clicked on caption
@@ -42,11 +45,14 @@ function onCaptionClick(el, ev) {
 function onCaptionRelease() {
     isDown = false;
     gFocusedCaption.focus();
+    // gFocusedCaption = null;
 }
 
 // Track mouse movement for drag-and-drop
 document.addEventListener('mousemove', function (event) {
     event.preventDefault();
+
+    // if (event.clientX
     if (isDown && gFocusedCaption) {
         mousePosition = {
 
@@ -54,6 +60,10 @@ document.addEventListener('mousemove', function (event) {
             y: event.clientY
 
         };
+        if (mousePosition.x + offset[0] <= 0 ||
+            mousePosition.y + offset[1] <= 0 ||
+            $(gFocusedCaption).bottom
+        ) return;
         gFocusedCaption.style.left = (mousePosition.x + offset[0]) + 'px';
         gFocusedCaption.style.top = (mousePosition.y + offset[1]) + 'px';
     }
@@ -65,17 +75,40 @@ function onCaptionAdd() {
 }
 
 function onCaptionDelete() {
-    deleteCaption(gFocusedCaption.dataset.id);
-    deRenderCaption(gFocusedCaption);
+    if (gFocusedCaption) {
+        deleteCaption(+gFocusedCaption.dataset.id);
+        gFocusedCaption.remove();
+    }
 }
+
+function onCaptionChangeColor(el) {
+    let chosenColor = el.value;
+    let id = +gFocusedCaption.dataset.id;
+
+    if (gFocusedCaption) {
+        changeCaptionColor(id, chosenColor);
+        gFocusedCaption.style.color = chosenColor;
+    }
+}
+
+function onCaptionLarger() {
+    if (gFocusedCaption) {
+        let size = captionLarger(+gFocusedCaption.dataset.id);
+        $(gFocusedCaption).css('font-size', size + 'px').focus();
+    }
+}
+
+function onCaptionSmaller() {
+    if (gFocusedCaption) {
+        let size = captionSmaller(+gFocusedCaption.dataset.id);
+        $(gFocusedCaption).css('font-size', size + 'px').focus();
+    }
+}
+
+
 // Galerry funcs
 function onSelectMeme(el) {
     changeSelectedMeme(el.id); // Model update
-}
-
-function getMeme() {
-    console.log('GET MEME WORKS!');
-    console.log('clicked img: ', gSelectedImg);
 }
 
 // End of gallery funcs
