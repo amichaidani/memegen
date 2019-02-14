@@ -29,8 +29,3 @@ function onUploadMeme() {
     gMemes.push(createMeme(objectURL, ['happy']))
     renderMemes()
 }
-// End of gallery funcs
-
-function onCaptionChange(el) {
-    updateCaption(+el.dataset.id, el.innerText);
-}

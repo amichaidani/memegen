@@ -170,3 +170,8 @@ function drawCaptionsOnCanvas() {
         gCtx.fillText(text, captionCoords.x, captionCoords.y);
     });
 }
+
+
+function onCaptionChange(el) {
+    updateCaption(+el.dataset.id, el.innerText);
+}
