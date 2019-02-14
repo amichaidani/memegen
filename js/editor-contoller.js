@@ -16,13 +16,11 @@ function renderCanvas() {
     createDefaultCaptions(); // Construct default top/bottom captions
     renderCaptions(); // Create caption elements and inject to DOM
 
-    setTimeout(() => {
-        $('.caption').first().css('top', '20px');
-        // TODO: Shorten this horrible line:
-        $('.caption').last().css('top', ($(gCanvas).height() - parseInt($('.caption').last().css('font-size'))) - 20 + 'px');
-    }, 20); // Fix the timeout shit!
-
+    $('.caption').first().css('top', '20px');
+    // TODO: Shorten this horrible line:
+    $('.caption').last().css('top', elImg.height - 70 + 'px');
     $('.caption').last().blur();
+
     gFocusedCaption = null;
 
 }

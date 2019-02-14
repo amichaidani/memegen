@@ -14,11 +14,6 @@ function onEditMeme() {
     onChangeView();
 }
 
-function onChangeView() {
-    $('.gallery').toggle('hide');
-    $('.editor').toggle('hide');
-}
-
 // test on upload image
 function onUploadMeme() {
     // debugger
