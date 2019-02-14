@@ -70,12 +70,9 @@ function onCaptionDelete() {
 }
 // Galerry funcs
 function onSelectMeme(el) {
-    changeSelectedMeme(el.id); // Model update
-}
-
-function getMeme() {
-    console.log('GET MEME WORKS!');
-    console.log('clicked img: ', gSelectedImg);
+    changeSelectedMeme(el.dataset["id"]); // Model update
+    console.log('data-set: ',el.dataset["id"]);
+    $(`#${el.id}`).css('border', '3px solid red'); 
 }
 
 // End of gallery funcs
