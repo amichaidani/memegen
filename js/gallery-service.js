@@ -1,18 +1,41 @@
 'use strict'
 
+var gNextMemeId = 1
 // TO DO : 
 // The user may also filter the list by selecting a keyword from a
 //  list where each word size is determined by the popularity
 //   of the keyword search (make an initial “random” setup so it will look good from the start):
 // Start editing , key words, 
 
-var gMemes = [
-    { id: 1, url: 'img/eddie.jpg', keywords: ['preaching'] },
-    { id: 2, url: 'img/man.png', keywords: ['happy'] },
-    { id: 3, url: 'img/man.png', keywords: ['sad'] },
-    { id: 4, url: 'img/man.png', keywords: ['sad'] }
-];
-// url('../img/eddie.jpg');
+var gMemes = [];
+
+function createGMemes() {
+    gMemes.push(createMeme('img/eddie.jpg', ['preaching']))
+    gMemes.push(createMeme('img/man.png', ['sad']))
+    gMemes.push(createMeme('img/meme3.jpg',['preaching', 'mad']))
+    gMemes.push(createMeme('img/meme4.jpg',['preaching', 'fighting']))
+    gMemes.push(createMeme('img/meme5.jpg', ['preaching', 'fighting']))
+
+    // { id: gNextMemeId, url: , keywords:  },
+    // { id: 2, url: , keywords: ['happy'] },
+    // { id: 3, url: 'img/man.png', keywords:  },
+    // { id: 4, url: 'img/man.png', keywords: ['sad'] }
+    // { id: 4, url: 'img/man.png', keywords: ['sad'] }
+    // { id: 4, url: 'img/man.png', keywords: ['sad'] }
+    // { id: 4, url: 'img/man.png', keywords: ['sad'] }
+    // { id: 4, url: 'img/man.png', keywords: ['sad'] }
+}
+
+function createMeme(url, keywords) {
+    let meme = {
+        id: gNextMemeId,
+        url: url,
+        keywords: keywords
+    }
+    gNextMemeId++
+    return meme
+}
+
 
 var gSelectedMeme = null;
 

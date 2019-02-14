@@ -10,6 +10,7 @@ var gCtx;
 function init() {
     $('.gallery').show();
     $('.editor').hide();
+    createGMemes();
     renderMemes();
 }
 
@@ -159,12 +160,23 @@ function renderMemes() {
 
 function onEditMeme() {
     renderCanvas();
-    changeView();
+    onChangeView();
 }
 
-function changeView() {
+function onChangeView() {
     $('.gallery').toggle('hide');
     $('.editor').toggle('hide');
+}
+
+// test on upload image
+function onUploadMeme() {
+    // debugger
+    const selectedFile = document.getElementById('add_meme').files[0];
+    console.log('selected file : ', selectedFile);
+    const objectURL = window.URL.createObjectURL(selectedFile);
+    // const objectURL = window.URL.createObjectURL(fileObj);
+    gMemes.push(createMeme(objectURL, ['happy']))
+    renderMemes()
 }
 // End of gallery funcs
 
