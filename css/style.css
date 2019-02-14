@@ -58,23 +58,33 @@ small, .text_small {
 
 /* Elements */
 
+.gallery-wrapper {
+    max-width: 980px;
+    margin: auto;
+    padding: 10px 10px;
+}
+
 .grid-container {
     display: grid;
     grid-gap: 10px;
-    background-color: rgb(235, 242, 247);
-    padding: 10px;
-    grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
-    border: 1px solid pink;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    max-width: 980px;
+    margin: 20px auto;
+    align-items: stretch;
 }
 
-/* Grid elemens */
+.gallery-toolbar {
+    display: flex;
+    justify-content: center;
+}
+
+/* Grid Elements */
 
 .meme-img {
-    width: 300px;
-    height: 300px;
-    max-height: 100%;
+    width: 200px;
+    height: 200px;
     background-position: center center;
-    object-fit: cover;
+    object-fit: contain;
     cursor: pointer;
     background-repeat: no-repeat;
 }
@@ -83,6 +93,7 @@ small, .text_small {
     display: block;
     text-align: center;
     text-overflow: clip;
+    line-height: 1;
     font-family: Impact, arial, sans-serif;
     color: #ffffff;
     -webkit-text-stroke-width: 2px;
@@ -110,7 +121,6 @@ small, .text_small {
 }
 
 .editor-container {
-    padding-top: 20px;
     text-align: center;
     position: relative;
     display: inline-block;

@@ -32,6 +32,9 @@ function renderCanvas() {
         $('.caption').last().css('top', ($(gCanvas).height() - parseInt($('.caption').last().css('font-size'))) + 'px');
     }, 20); // Fix the timeout shit!
 
+    $('.caption').last().blur();
+    gFocusedCaption = null;
+
 }
 
 function renderCaptions() {
@@ -160,13 +163,15 @@ function drawCaptionsOnCanvas() {
         fontStr = $(this).css('font-size') + ' ' + $(this).css('font-family');
         captionCoords = {
             x: $(this).position().left,
-            y: $(this).position().top
+            y: $(this).position().top + $(this).outerHeight()
         }
         text = $(this).text();
         color = $(this).css('color');
         gCtx.font = fontStr;
         gCtx.fillStyle = color;
-
+        gCtx.strokeStyle = 'black';
+        gCtx.lineWidth = 4;
+        gCtx.strokeText(text, captionCoords.x, captionCoords.y);
         gCtx.fillText(text, captionCoords.x, captionCoords.y);
     });
 }
