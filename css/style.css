@@ -123,14 +123,17 @@ small, .text_small {
 }
 
 @media (max-width:420px) {
-    /* .gallery header {
-        height: 180px;
-        box-sizing: border-box;
+    .gallery header {
         position: fixed;
+        background: white;
+        left: 0;
         width: 100vw;
-        background: #fff;
-        left: 0px;
-    } */
+        top: 0;
+        padding: 10px;
+        box-sizing: border-box;
+        height: 180px;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, .15);
+    }
     .meme-search-box>* {
         width: 100%;
     }
