@@ -7,10 +7,10 @@
 // Start editing , key words, 
 
 var gMemes = [
-    { id: 1, url: '../img/eddie.jpg', keywords: ['preaching'] },
-    { id: 2, url: '../img/man.png', keywords: ['happy'] },
-    { id: 3, url: '../img/man.png', keywords: ['sad'] },
-    { id: 4, url: '../img/man.png', keywords: ['sad'] },
+    { id: 1, url: 'img/eddie.jpg', keywords: ['preaching'] },
+    { id: 2, url: 'img/man.png', keywords: ['happy'] },
+    { id: 3, url: 'img/man.png', keywords: ['sad'] },
+    { id: 4, url: 'img/man.png', keywords: ['sad'] }
 ];
 // url('../img/eddie.jpg');
 
@@ -21,7 +21,6 @@ function changeSelectedMeme(id) {
 }
 
 function getMemeById(id) {
-    // debugger
     let searchedImgIdx = gMemes.findIndex(img => img.id === +id)
     return gMemes[searchedImgIdx]
 }
@@ -36,5 +35,4 @@ function getStrHTMLs() {
     strHTMLs = strHTMLs.join('')
     console.log('strhtmls: ', strHTMLs);
     return strHTMLs
-    
 }

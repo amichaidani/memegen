@@ -82,11 +82,15 @@ function renderMemes () {
     $('.grid-container').html(strHTMLs)
 }
 
-function onEditMeme(); {
+function onEditMeme() {
     console.log('Opening editor');
     
 }
 
+function changeView() {
+    $('.gallery').toggle('hide');
+    $('.editor').toggle('hide');
+}
 // End of gallery funcs
 
 function onCaptionChange(el) {
