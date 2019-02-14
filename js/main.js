@@ -10,6 +10,7 @@ function init() {
     renderCaptions();
     $('.gallery').show();
     $('.editor').hide();
+    renderMemes();
 }
 
 function renderCaptions() {
@@ -75,6 +76,10 @@ function onSelectMeme(el) {
     $(`#${el.id}`).css('border', '3px solid red'); 
 }
 
+function renderMemes () {
+    let strHTMLs = getStrHTMLs ();
+    $('.grid-container').html(strHTMLs)
+}
 // End of gallery funcs
 
 function onCaptionChange(el) {

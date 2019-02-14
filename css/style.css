@@ -63,18 +63,16 @@ small, .text_small {
     grid-gap: 10px;
     background-color: rgb(235, 242, 247);
     padding: 10px;
-    grid-template: 1fr 1fr / 1fr 1fr;
+    grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
     border: 1px solid pink;
 }
 
 /* Grid elemens */
 
 .meme-img {
-    grid-column: 1/2;
-    grid-row: 1/2;
-    background-image: url('../img/eddie.jpg');
-    height: 200px;
     width: 200px;
+    height: 200px;
+    max-height: 100%;
     background-position: center center;
     object-fit: cover;
     cursor: pointer;
