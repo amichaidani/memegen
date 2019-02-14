@@ -11,10 +11,12 @@ var gImgs = [
     { id: 1, url: 'img/eddie.jpg', keywords: ['preaching'] },
     { id: 2, url: 'img/man.jpg', keywords: ['happy'] },
     { id: 3, url: 'img/man.jpg', keywords: ['sad'] },
+    { id: 4, url: 'img/man.jpg', keywords: ['sad'] },
 
 ];
+var gSelectedImg;
 var gMeme = {
-    selectedImgId: 1,
+    selectedImgId: gSelectedImg,
     txts: [{
         line: 'I never eat Falafel',
         size: 20, align: 'left',
@@ -22,3 +24,9 @@ var gMeme = {
     }]
 }
 
+
+function getImg(id) {
+    // debugger
+    let searchedImgIdx = gImgs.findIndex( img => img.id === +id)
+    return gImgs[searchedImgIdx]
+}

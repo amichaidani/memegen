@@ -5,7 +5,13 @@ function init() {
 // Galerry funcs
 function getClickedImgInfo (id) {
     console.log('id: ', id);
-    
+    gSelectedImg = getImg(id)
+    getMeme(gSelectedImg)
+}
+
+function getMeme () {
+    console.log('GET MEME WORKS!');
+    console.log('clicked img: ', gSelectedImg);
 }
 
 // End of gallery funcs
