@@ -6,8 +6,10 @@ var gNextMemeId = 1
 //  list where each word size is determined by the popularity
 //   of the keyword search (make an initial “random” setup so it will look good from the start):
 // Start editing , key words, 
+// Add keyword input to keywords cloud
 
 var gMemes = [];
+var gKeywords = {}
 
 function createGMemes() {
     gMemes.push(createMeme('img/eddie.jpg', ['preaching']))
@@ -15,15 +17,6 @@ function createGMemes() {
     gMemes.push(createMeme('img/meme3.jpg',['preaching', 'mad']))
     gMemes.push(createMeme('img/meme4.jpg',['preaching', 'fighting']))
     gMemes.push(createMeme('img/meme5.jpg', ['preaching', 'fighting']))
-
-    // { id: gNextMemeId, url: , keywords:  },
-    // { id: 2, url: , keywords: ['happy'] },
-    // { id: 3, url: 'img/man.png', keywords:  },
-    // { id: 4, url: 'img/man.png', keywords: ['sad'] }
-    // { id: 4, url: 'img/man.png', keywords: ['sad'] }
-    // { id: 4, url: 'img/man.png', keywords: ['sad'] }
-    // { id: 4, url: 'img/man.png', keywords: ['sad'] }
-    // { id: 4, url: 'img/man.png', keywords: ['sad'] }
 }
 
 function createMeme(url, keywords) {
@@ -60,6 +53,5 @@ function getStrHTMLs() {
     })
 
     strHTMLs = strHTMLs.join('')
-    console.log('strhtmls: ', strHTMLs);
     return strHTMLs
 }

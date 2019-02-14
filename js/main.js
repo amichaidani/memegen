@@ -149,7 +149,6 @@ function onEditorReset() {
 // Galerry funcs
 function onSelectMeme(el) {
     changeSelectedMeme(el.dataset["id"]); // Model update
-    console.log('data-set: ', el.dataset["id"]);
     onEditMeme();
 }
 
@@ -169,14 +168,12 @@ function onChangeView() {
 }
 
 // Upload image
-function onUploadMeme() {
-    keywords = prompt('Please type Keywords sepersted by space to the Meme')
-    keywords = keywords.split(' ')
-    console.log('key words: ', keywords);
-    
+function onUploadMeme(ev) {
+    let str = prompt('Please type Keywords sepersted by space to describe Meme')
+    let keywords = str.split(' ')
     const selectedFile = document.getElementById('add_meme').files[0];
     const objectURL = window.URL.createObjectURL(selectedFile);
-    gMemes.push(createMeme(objectURL, ['happy']))
+    gMemes.push(createMeme(objectURL, keywords))
     renderMemes()
 }
 // End of gallery funcs

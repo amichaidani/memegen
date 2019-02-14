@@ -20,9 +20,11 @@
         <button class="btn switch-view-btn" onclick="onChangeView()">View-editor/view gallery</button>
         <!-- Image upload -->
         <label for="add_meme">Add New Meme</label>
-
-        <input type="file" id="add_meme" name="add_meme" accept="image/png, image/jpeg" onchange="onUploadMeme()">
+        <input type="file" id="add_meme" name="add_meme" accept="image/png, image/jpeg" onchange="onUploadMeme(event)">
         <!-- end of image upload try -->
+        <label for="meme-search">Searh Meme</label>
+        <input type="search" id="meme-search" name="meme-search">
+        <button>Search</button>
 
         <div class="grid-container">
         </div>
