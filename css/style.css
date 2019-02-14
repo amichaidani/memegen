@@ -216,6 +216,13 @@ small, .text_small {
     width: auto;
 }
 
+@media (max-width:420px){
+    .canvas-main {
+        max-height: 60vh;
+        width: auto;
+    }
+}
+
 .caption {
     display: block;
     text-align: center;
