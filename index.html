@@ -6,21 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
     <link rel="stylesheet" href="css/helpers.css">
     <script src="lib/jquery-3.3.1.min.js"></script>
     <title>Meme Generator</title>
 </head>
 
 <body onload="init()">
+    <header>
+        <h1 class="logo">memgen</h1>
+    </header>
     <!-- Gallery section -->
     <section class="gallery">
         <div class="gallery-wrapper">
             <header>
-                <h2>Meme Generator</h2>
                 <div class="gallery-toolbar">
                     <!-- Image upload -->
                     <span class="image-upload gallery-tool">
@@ -46,7 +51,6 @@
     <section class="editor">
         <img id="selected-img" src="" hidden />
         <div class="editor-wrapper">
-
             <div class="editor-container">
                 <img class="canvas-main" src="">
             </div>
