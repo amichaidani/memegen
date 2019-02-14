@@ -116,14 +116,29 @@ function onCaptionSmaller() {
 // Galerry funcs
 function onSelectMeme(el) {
     changeSelectedMeme(el.dataset["id"]); // Model update
+<<<<<<< HEAD
     console.log('data-set: ', el.dataset["id"]);
     el.style.border = "thick solid #0000FF";
+=======
+    console.log('data-set: ',el.dataset["id"]);
+    el.style.border= "thick solid #0000FF"
+>>>>>>> 6dc84ef3ba25ad827bcdf32964825cefb4c52e6b
     onEditMeme();
 }
 
 function renderMemes() {
     let strHTMLs = getStrHTMLs();
     $('.grid-container').html(strHTMLs)
+}
+
+function onEditMeme() {
+    console.log('Opening editor');
+    
+}
+
+function changeView() {
+    $('.gallery').toggle('hide');
+    $('.editor').toggle('hide');
 }
 // End of gallery funcs
 
