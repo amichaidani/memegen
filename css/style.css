@@ -89,7 +89,7 @@ small, .text_small {
     justify-content: center;
     flex-direction: row;
     align-items: center;
-    border: 1px solid #ececec;
+    border: 0;
     border-radius: 3px;
     padding: 1rem;
     flex-basis: 50%;
@@ -146,6 +146,29 @@ small, .text_small {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)
 }
 
+.editor-wrapper {
+    text-align: center;
+    margin-top: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.editor-container {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+[contenteditable]:focus {
+    outline: 2px dashed rgba(0, 0, 0, 0.5);
+}
+
+.canvas-main {
+    max-height: 75vh;
+    width: auto;
+}
+
 .caption {
     display: block;
     text-align: center;
@@ -173,29 +196,6 @@ small, .text_small {
     cursor: text;
 }
 
-.editor-wrapper {
-    text-align: center;
-    margin-top: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.editor-container {
-    text-align: center;
-    position: relative;
-    display: inline-block;
-    margin: 0 auto;
-}
-
-[contenteditable]:focus {
-    outline: 2px dashed rgba(0, 0, 0, 0.5);
-}
-
-.canvas-main {
-    max-height: 75vh;
-    width: auto;
-}
-
 @media (max-width:740px) {
     .editor {
         height: 100vh;
@@ -215,7 +215,7 @@ small, .text_small {
         width: 100%;
         background: #fff;
         box-shadow: 1px 1px 10px rgba(0, 0, 0, .15);
-        padding: 10px 0;
+        padding: 20px 0;
     }
 }
 
@@ -328,7 +328,7 @@ input[type="color"]::-webkit-color-swatch:active {
 
 .color-swatch .fas {
     position: absolute;
-    top: 6px;
+    top: 7px;
     left: 15px;
     mix-blend-mode: difference;
     color: #ffff;
