@@ -10,8 +10,9 @@ var gFocusedCaption = null;
 function init() {
     createDefaultCaptions();
     renderCaptions();
-    $('.gallery').hide();
-    $('.editor').show();
+    $('.gallery').show();
+    $('.editor').hide();
+    renderMemes();
 }
 
 function renderCaptions() {
@@ -108,9 +109,15 @@ function onCaptionSmaller() {
 
 // Galerry funcs
 function onSelectMeme(el) {
-    changeSelectedMeme(el.id); // Model update
+    changeSelectedMeme(el.dataset["id"]); // Model update
+    console.log('data-set: ',el.dataset["id"]);
+    $(`#${el.id}`).css('border', '3px solid red'); 
 }
 
+function renderMemes () {
+    let strHTMLs = getStrHTMLs ();
+    $('.grid-container').html(strHTMLs)
+}
 // End of gallery funcs
 
 function onCaptionChange(el) {
