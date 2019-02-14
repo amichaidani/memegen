@@ -246,7 +246,6 @@ small, .text_small {
 @media (max-width:740px) {
     .editor {
         height: calc(100vh-96px);
-        background: #f4f4f4;
     }
     .canvas-main {
         max-width: 100%;
