@@ -26,9 +26,9 @@ function updateCaption(id, newTxt) {
     caption.txt = newTxt;
 }
 
-function deleteCaption(id)[
+function deleteCaption(id) {
     let caption = getCaptionById(id);
-]
+}
 
 function getCaptionById(id) {
     let foundCaption = gCaptions.find((caption) => {

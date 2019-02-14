@@ -8,7 +8,8 @@ var gFocusedCaption = null;
 function init() {
     createDefaultCaptions();
     renderCaptions();
-    $('.gallery').hide();
+    $('.gallery').show();
+    $('.editor').hide();
 }
 
 function renderCaptions() {
@@ -67,6 +68,17 @@ function onCaptionDelete() {
     deleteCaption(gFocusedCaption.dataset.id);
     deRenderCaption(gFocusedCaption);
 }
+// Galerry funcs
+function onSelectMeme(el) {
+    changeSelectedMeme(el.id); // Model update
+}
+
+function getMeme() {
+    console.log('GET MEME WORKS!');
+    console.log('clicked img: ', gSelectedImg);
+}
+
+// End of gallery funcs
 
 function onCaptionChange(el) {
     updateCaption(+el.dataset.id, el.innerText);
