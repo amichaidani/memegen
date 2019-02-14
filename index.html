@@ -21,19 +21,21 @@
         <div class="gallery-wrapper">
             <header>
                 <h2>Meme Generator</h2>
+                <div class="gallery-toolbar">
+                    <!-- Image upload -->
+                    <span class="image-upload gallery-tool">
+                        <input type="file" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
+                            onchange="onUploadMeme(event)">
+                    </span>
+                    <!-- end of image upload try -->
+                    <span class="meme-search-box gallery-tool">
+                        <input type="search" id="meme-search" class="meme-search" name="meme-search"
+                            placeholder="Enter keywords">
+                        <button>Search</button>
+                    </span>
+                </div>
             </header>
-            <div class="gallery-toolbar">
-                <!-- Image upload -->
-                <span class="image-upload gallery-tool">
-                    <input type="file" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
-                        onchange="onUploadMeme(event)">
-                </span>
-                <!-- end of image upload try -->
-                <span class="meme-search-box gallery-tool">
-                    <input type="search" id="meme-search" name="meme-search" placeholder="Enter keywords">
-                    <button>Search</button>
-                </span>
-            </div>
+
             <div class="grid-container">
             </div>
 
