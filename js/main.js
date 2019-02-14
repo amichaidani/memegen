@@ -138,13 +138,14 @@ function onChangeView() {
     $('.editor').toggle('hide');
 }
 
-// test on upload image
+// Upload image
 function onUploadMeme() {
-    // debugger
+    keywords = prompt('Please type Keywords sepersted by space to the Meme')
+    keywords = keywords.split(' ')
+    console.log('key words: ', keywords);
+    
     const selectedFile = document.getElementById('add_meme').files[0];
-    console.log('selected file : ', selectedFile);
     const objectURL = window.URL.createObjectURL(selectedFile);
-    // const objectURL = window.URL.createObjectURL(fileObj);
     gMemes.push(createMeme(objectURL, ['happy']))
     renderMemes()
 }
