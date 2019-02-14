@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/reset.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="css/helpers.css">
     <script src="lib/jquery-3.3.1.min.js"></script>
     <title>Meme Generator</title>
@@ -16,8 +18,6 @@
 <body onload="init()">
     <!-- Gallery section -->
     <section class="gallery">
-        <h2>Gallery</h2>
-        <button class="btn switch-view-btn" onclick="onChangeView()">View-editor/view gallery</button>
         <!-- Image upload -->
         <label for="add_meme">Add New Meme</label>
 
@@ -28,8 +28,6 @@
         </div>
     </section>
 
-
-
     <!-- Editor section -->
     <section class="editor">
         <div class="editor-wrapper">
@@ -38,27 +36,32 @@
                 </canvas>
             </div>
             <div class="caption-tools">
-                <button id="caption-add" onclick="onCaptionAdd()">Add</button>
-                <button id="caption-delete" onclick="onCaptionDelete()">Delete</button>
-                <input type="color" id="caption-color-picker" onchange="onCaptionChangeColor(this)">
-                <button id="caption-smaller" onclick="onCaptionSmaller()">-</button>
-                <button id="caption-larger" onclick="onCaptionLarger()">+</button>
-                <button id="editor-reset" onclick="onEditorReset()">Reset</button>
-
-                <div>
-                    <input id="caption-text">
-                </div>
-
+                <span class="add-delete-caption btn-group">
+                    <button id="caption-add" onclick="onCaptionAdd()">Add</button>
+                    <button id="caption-delete" onclick="onCaptionDelete()"><i class="far fa-trash-alt"></i> </button>
+                </span>
+                <span class="color-swatch"><i class="fas fa-palette" onclick="propagateColorClick()"></i>
+                    <input type="color" id="caption-color-picker" onchange="onCaptionChangeColor(this)">
+                </span>
+                <span class="change-caption-style btn-group">
+                    <button id="caption-smaller" onclick="onCaptionSmaller()">-</button>
+                    <button id="caption-larger" onclick="onCaptionLarger()">+</button>
+                </span>
+                <span class="btn-group">
+                    <button id="editor-reset" onclick="onEditorReset()">Reset</button>
+                    <button id="editor-download" onclick="onEditorDownload()">Download</button>
+                </span>
             </div>
-            <button class="switch-view" onclick="changeView()">View-editor/view gallery</button>
         </div>
 
         </div>
-        <button class="switch-view" onclick="onChangeView()">View-editor/view gallery</button>
     </section>
+    <button class="switch-view" onclick="onChangeView()">View-editor/view gallery</button>
     <script src="js/utils.js"></script>
     <script src="js/gallery-service.js"></script>
     <script src="js/editor-service.js"></script>
+    <script src="js/gallery-contoller.js"></script>
+    <script src="js/editor-contoller.js"></script>
     <script src="js/main.js"></script>
 </body>
 
