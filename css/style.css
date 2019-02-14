@@ -110,7 +110,7 @@ small, .text_small {
     width: initial;
 }
 
-@media (max-width:420px) {
+@media (max-width:600px) {
     .meme-search-box>* {
         width: 100%;
     }
