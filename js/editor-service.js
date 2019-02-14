@@ -27,7 +27,15 @@ function updateCaption(id, newTxt) {
 }
 
 function deleteCaption(id) {
-    let caption = getCaptionById(id);
+    let captioniDx = getCaptionIdxById(id);
+    gCaptions.splice(captioniDx, 1);
+}
+
+function getCaptionIdxById(id) {
+    let foundCaption = gCaptions.findIndex((caption) => {
+        return caption.id === id;
+    })
+    return foundCaption;
 }
 
 function getCaptionById(id) {
@@ -39,4 +47,23 @@ function getCaptionById(id) {
 
 function getCaptions() {
     return gCaptions;
+}
+
+function changeCaptionColor(id, color) {
+    let caption = getCaptionById(id);
+    caption.color = color;
+}
+
+function captionLarger(id) {
+    let caption = getCaptionById(id);
+    if (caption.fontSize >= 90) return;
+    caption.fontSize += 10;
+    return caption.fontSize;
+}
+
+function captionSmaller(id) {
+    let caption = getCaptionById(id);
+    if (caption.fontSize <= 10) return;
+    caption.fontSize -= 10;
+    return caption.fontSize;
 }
