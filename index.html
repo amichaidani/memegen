@@ -18,7 +18,12 @@
     <section class="gallery">
         <h2>Gallery</h2>
         <button class="btn switch-view-btn" onclick="onChangeView()">View-editor/view gallery</button>
-        <button class="btn switch-view-btn" onclick="addImage()">Upload Meme</button>
+        <!-- Image upload -->
+        <label for="add_meme">Add New Meme</label>
+
+        <input type="file" id="add_meme" name="add_meme" accept="image/png, image/jpeg" onchange="onUploadMeme()">
+        <!-- end of image upload try -->
+
         <div class="grid-container">
         </div>
     </section>
@@ -41,7 +46,7 @@
             <div>
                 <input id="caption-text">
             </div>
-            
+
         </div>
         <button class="switch-view" onclick="onChangeView()">View-editor/view gallery</button>
     </section>

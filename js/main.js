@@ -9,10 +9,12 @@ var gFocusedCaption = null;
 
 
 function init() {
+
     createDefaultCaptions();
     renderCaptions();
     $('.gallery').hide();
     $('.editor').show();
+    createGMemes();
     renderMemes();
 }
 
@@ -134,6 +136,17 @@ function onEditMeme() {
 function onChangeView() {
     $('.gallery').toggle('hide');
     $('.editor').toggle('hide');
+}
+
+// test on upload image
+function onUploadMeme() {
+    // debugger
+    const selectedFile = document.getElementById('add_meme').files[0];
+    console.log('selected file : ', selectedFile);
+    const objectURL = window.URL.createObjectURL(selectedFile);
+    // const objectURL = window.URL.createObjectURL(fileObj);
+    gMemes.push(createMeme(objectURL, ['happy']))
+    renderMemes()
 }
 // End of gallery funcs
 
