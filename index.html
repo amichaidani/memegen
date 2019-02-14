@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/helpers.css">
     <script src="lib/jquery-3.3.1.min.js"></script>
     <title>Meme Generator</title>
 </head>
@@ -16,7 +17,8 @@
     <!-- Gallery section -->
     <section class="gallery">
         <h2>Gallery</h2>
-        <button class="switch-view" onclick="changeView()">View-editor/view gallery</button>
+        <button class="btn switch-view-btn" onclick="onChangeView()">View-editor/view gallery</button>
+        <button class="btn switch-view-btn" onclick="addImage()">Upload Meme</button>
         <div class="grid-container">
         </div>
     </section>
@@ -37,7 +39,7 @@
             </div>
             
         </div>
-        <button class="switch-view" onclick="changeView()">View-editor/view gallery</button>
+        <button class="switch-view" onclick="onChangeView()">View-editor/view gallery</button>
     </section>
 
     <script src="js/gallery-service.js"></script>

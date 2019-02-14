@@ -87,7 +87,7 @@ function onEditMeme() {
     
 }
 
-function changeView() {
+function onChangeView() {
     $('.gallery').toggle('hide');
     $('.editor').toggle('hide');
 }
