@@ -81,7 +81,7 @@ small, .text_small {
 .caption {
     display: block;
     font-family: Impact, arial, sans-serif;
-    color: #fff;
+    color: #ffffff;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
     position: absolute;

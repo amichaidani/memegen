@@ -1,6 +1,7 @@
 // Mouse tracking vars
 var mousePosition;
 var offset = [0, 0];
+var end = [0, 0];
 var elCaption;
 var isDown = false;
 var outOfBounds = false;
@@ -10,8 +11,8 @@ var gFocusedCaption = null;
 function init() {
     createDefaultCaptions();
     renderCaptions();
-    $('.gallery').show();
-    $('.editor').hide();
+    $('.gallery').hide();
+    $('.editor').show();
     renderMemes();
 }
 
@@ -36,16 +37,21 @@ function renderNewCaption(caption) {
 function onCaptionClick(el, ev) {
     isDown = true;
     gFocusedCaption = el;
+    updateTools();
     offset = [
         el.offsetLeft - ev.clientX,
         el.offsetTop - ev.clientY
     ];
 }
 
+function updateTools() {
+    $('#caption-color-picker').val(rgb2hex($(gFocusedCaption).css("color")));
+}
+
 // Released mouse from caption
 function onCaptionRelease() {
     isDown = false;
-    gFocusedCaption.focus();
+    $(gFocusedCaption).focus();
     // gFocusedCaption = null;
 }
 
@@ -63,8 +69,9 @@ document.addEventListener('mousemove', function (event) {
         };
         if (mousePosition.x + offset[0] <= 0 ||
             mousePosition.y + offset[1] <= 0 ||
-            $(gFocusedCaption).bottom
+            mousePosition.y + offset[1] + gFocusedCaption.offsetHeight > $('.canvas-main').offset().top + $('.canvas-main').outerHeight(true) - 2
         ) return;
+
         gFocusedCaption.style.left = (mousePosition.x + offset[0]) + 'px';
         gFocusedCaption.style.top = (mousePosition.y + offset[1]) + 'px';
     }
@@ -106,16 +113,16 @@ function onCaptionSmaller() {
     }
 }
 
-
 // Galerry funcs
 function onSelectMeme(el) {
     changeSelectedMeme(el.dataset["id"]); // Model update
-    console.log('data-set: ',el.dataset["id"]);
-    $(`#${el.id}`).css('border', '3px solid red'); 
+    console.log('data-set: ', el.dataset["id"]);
+    el.style.border = "thick solid #0000FF";
+    onEditMeme();
 }
 
-function renderMemes () {
-    let strHTMLs = getStrHTMLs ();
+function renderMemes() {
+    let strHTMLs = getStrHTMLs();
     $('.grid-container').html(strHTMLs)
 }
 // End of gallery funcs
