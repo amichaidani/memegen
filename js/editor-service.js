@@ -2,6 +2,7 @@ gCaptions = [];
 gCaptionNextId = 0;
 
 function createDefaultCaptions() {
+    gCaptions = [];
     createCaption('Heading Top');
     createCaption('Heading Bottom');
 }
