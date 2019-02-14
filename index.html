@@ -24,9 +24,15 @@
         <div class="editor-container">
             <canvas width="500" height="500" class="canvas-main">
             </canvas>
-            <span class="text-line">Hello!</span>
         </div>
-
+        <div class="caption-tools">
+            <button id="caption-add" onclick="onCaptionAdd()">+</button>
+            <button id="caption-delete" onclick="onCaptionDelete()">-</button>
+            <div>
+                <input id="caption-text">
+            </div>
+            
+        </div>
     </section>
 
     <script src="js/meme-service.js"></script>
