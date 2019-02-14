@@ -75,7 +75,7 @@ small, .text_small {
     max-width: 980px;
     margin: 20px auto;
     align-items: stretch;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .gallery-toolbar {
@@ -95,20 +95,6 @@ small, .text_small {
     flex-basis: 50%;
 }
 
-@media (max-width:740px) {
-    .gallery-toolbar {
-        flex-direction: column;
-    }
-    .gallery-tool {
-        justify-content: center;
-        text-align: center;
-        margin-bottom: 1rem;
-        flex-direction: column;
-    }
-}
-
-/* Grid Elements */
-
 .meme-img {
     width: 200px;
     height: 200px;
@@ -120,16 +106,40 @@ small, .text_small {
     transition: .3s;
 }
 
+@media (max-width:740px) {
+    .gallery-toolbar {
+        flex-direction: column;
+    }
+    .gallery-tool {
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 1rem;
+        flex-direction: column;
+    }
+    .grid-container {
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        max-width: 980px;
+        align-items: stretch;
+        justify-content: space-around;
+    }
+    .meme-img {
+        width: 100%;
+    }
+}
+
+/* Grid Elements */
+
 .meme-img:hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)
 }
 
 .selected-img {
-    height: auto;
+    width: 20vw;
 }
 
 .caption {
-    display: block;
+    im display: block;
     text-align: center;
     text-overflow: clip;
     line-height: 1;
@@ -158,6 +168,8 @@ small, .text_small {
 .editor-wrapper {
     text-align: center;
     margin-top: 20px;
+    max-width: 800px;
+    margin: 20px auto;
 }
 
 .editor-container {
@@ -173,6 +185,13 @@ small, .text_small {
 
 .canvas-main {
     border: 1px solid #333;
+    max-width: 50vw;
+}
+
+@media (max-width:740px) {
+    .canvas-main {
+        max-width: 100%;
+    }
 }
 
 .caption-tools {
@@ -199,6 +218,7 @@ button {
     margin-right: 0;
     display: inline-block;
     font-weight: 700;
+    -webkit-appearance: none;
 }
 
 button:focus {

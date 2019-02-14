@@ -26,6 +26,6 @@ function onUploadMeme() {
     console.log('selected file : ', selectedFile);
     const objectURL = window.URL.createObjectURL(selectedFile);
     // const objectURL = window.URL.createObjectURL(fileObj);
-    gMemes.push(createMeme(objectURL, ['happy']))
+    gMemes.unshift(createMeme(objectURL, ['happy']))
     renderMemes()
 }

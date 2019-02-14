@@ -3,19 +3,15 @@ var gOffset = [0, 0];
 var elCaption;
 var gIsDown = false;
 var gFocusedCaption = null;
-var gCanvas = $('.canvas-main')[0];
+var gCanvas;
 var gCtx;
 
 function renderCanvas() {
     //Todo: Limit displayed img to max width of 75% of viewport
     let selectedMeme = getSelectedMeme();
-    let elImg = document.querySelector('#selected-img');
+    let elImg = document.querySelector('.canvas-main');
     elImg.src = selectedMeme.url;
-    gCanvas.width = elImg.width;
-    gCanvas.height = elImg.height;
-    gCtx = gCanvas.getContext('2d')
-
-    gCtx.drawImage(elImg, 0, 0, elImg.width, elImg.height);
+    gCanvas = document.querySelector('.canvas-main');
     $('.caption').remove(); // Clear all caption elements
     createDefaultCaptions(); // Construct default top/bottom captions
     renderCaptions(); // Create caption elements and inject to DOM
