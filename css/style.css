@@ -200,6 +200,16 @@ small, .text_small {
     .btn-group button {
         margin-left: -1px;
     }
+    .btn-group button:first-child {
+        border-left: 1px solid #333;
+        border-radius: 3px 0px 0px 3px;
+        margin: 0;
+    }
+    .btn-group button:last-child {
+        border-right: 1px solid #333;
+        border-radius: 0px 3px 3px 0px;
+        margin: 0;
+    }
 }
 
 @media (max-width:740px) {
