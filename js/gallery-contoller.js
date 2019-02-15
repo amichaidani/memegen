@@ -18,7 +18,7 @@ function onEditMeme() {
 
 function onAddMemeRequest () {
     $('.upload-meme-btn').toggle('.hide')
-    $('section.add-meme').toggle('.hide')
+    $('.add-meme-section').toggle('.hide')
 }
 function onUploadMeme() {
 
@@ -27,5 +27,5 @@ function onUploadMeme() {
     let keywords = ['happy', 'funny', 'mad', 'warning']
     addMeme(objectURL, keywords)
     renderMemes()
-    $('.add-meme label').text('Add another Meme')
+    $('.add-meme-section label').text('Add another Meme')
 }

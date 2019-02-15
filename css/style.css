@@ -135,12 +135,12 @@ small, .text_small {
     padding: 0 0.5rem;
 }
 
-.add-meme label {
+.add-meme-section label {
     margin-right: 0.2rem;
     margin-bottom: 0;
     padding: 0 0.5rem;
 }
-.add-meme label:hover {
+.add-meme-scetion label:hover {
     background: linear-gradient(to right, #f953c6, #b91d73);
     color: #fff;
 }
@@ -166,6 +166,12 @@ small, .text_small {
     .meme-search {
         margin-right: 0;
         margin-bottom: 0.2rem;
+    }
+    .add-meme-section>* {
+        width: 100%;
+    }
+    .add-meme-section label {
+        padding: 0;
     }
     .gallery-toolbar {
         flex-direction: column;
