@@ -54,3 +54,7 @@ function getStrHTMLs() {
     strHTMLs = strHTMLs.join('')
     return strHTMLs
 }
+
+function addMeme(url, keywords) {   // User add new Meme
+    gMemes.unshift(createMeme(url, keywords))
+}

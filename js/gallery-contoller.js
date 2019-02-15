@@ -14,13 +14,18 @@ function onEditMeme() {
     onChangeView();
 }
 
-// test on upload image
+// Upload meme
+
+function onAddMemeRequest () {
+    $('.upload-meme-btn').toggle('.hide')
+    $('section.add-meme').toggle('.hide')
+}
 function onUploadMeme() {
-    // debugger
+
     const selectedFile = document.getElementById('add_meme').files[0];
-    console.log('selected file : ', selectedFile);
     const objectURL = window.URL.createObjectURL(selectedFile);
-    // const objectURL = window.URL.createObjectURL(fileObj);
-    gMemes.unshift(createMeme(objectURL, ['happy']))
+    let keywords = ['happy', 'funny', 'mad', 'warning']
+    addMeme(objectURL, keywords)
     renderMemes()
+    $('.add-meme label').text('Add another Meme')
 }

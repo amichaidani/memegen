@@ -16,6 +16,10 @@
 .center {
     justify-content: center;
 }
+
+.space-between {
+    justify-content: space-between;
+}
 .space-evenly {
     justify-content: space-evenly;
 }
@@ -87,3 +91,11 @@
 .cover {
     background-size: cover;
 } 
+
+.hide {
+  display: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
