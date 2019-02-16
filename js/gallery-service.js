@@ -9,7 +9,8 @@ var gNextMemeId = 1
 // Add keyword input to keywords cloud
 
 var gMemes = [];
-var gKeywords = {}
+var gKeywords = {};
+var gSelectedMeme = null;
 
 function createGMemes() {
     gMemes.push(createMeme('img/man.png', ['sad']))
@@ -27,9 +28,6 @@ function createMeme(url, keywords) {
     gNextMemeId++
     return meme
 }
-
-
-var gSelectedMeme = null;
 
 function changeSelectedMeme(id) {
     gSelectedMeme = getMemeById(id);

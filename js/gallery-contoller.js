@@ -1,6 +1,5 @@
 function onSelectMeme(el) {
     changeSelectedMeme(el.dataset["id"]); // Model update
-    console.log('data-set: ', el.dataset["id"]);
     onEditMeme();
 }
 
@@ -16,16 +15,15 @@ function onEditMeme() {
 
 // Upload meme
 
-function onAddMemeRequest () {
-    $('.upload-meme-btn').toggle('.hide')
-    $('.add-meme-section').toggle('.hide')
+function onAddMemeRequest() {
+    $('.upload-meme-btn').hide();
+    $('.add-meme-section').show();
 }
-function onUploadMeme() {
-
+function onUploadMeme(ev) {
+    let str = prompt('Please type Keywords sepersted by space to describe Meme')
+    let keywords = str.split(' ')
     const selectedFile = document.getElementById('add_meme').files[0];
     const objectURL = window.URL.createObjectURL(selectedFile);
-    let keywords = ['happy', 'funny', 'mad', 'warning']
-    addMeme(objectURL, keywords)
+    gMemes.push(createMeme(objectURL, keywords))
     renderMemes()
-    $('.add-meme-section label').text('Add another Meme')
 }

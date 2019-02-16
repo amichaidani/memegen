@@ -129,14 +129,20 @@ function onCaptionChangeColor(el) {
 function onCaptionLarger() {
     if (gFocusedCaption) {
         let size = captionLarger(+gFocusedCaption.dataset.id);
-        $(gFocusedCaption).css('font-size', size + 'px').focus();
+        if (size) {
+            $(gFocusedCaption).css('font-size', size + 'px')
+        }
+        $(gFocusedCaption).focus();
     }
 }
 
 function onCaptionSmaller() {
     if (gFocusedCaption) {
         let size = captionSmaller(+gFocusedCaption.dataset.id);
-        $(gFocusedCaption).css('font-size', size + 'px').focus();
+        if (size) {
+            $(gFocusedCaption).css('font-size', size + 'px').focus();
+        }
+        $(gFocusedCaption).focus();
     }
 }
 
