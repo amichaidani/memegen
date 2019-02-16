@@ -23,72 +23,74 @@
     <header>
         <h1 class="logo">memegen</h1>
     </header>
-    <!-- Gallery section -->
-    <section class="gallery">
-        <div class="gallery-wrapper">
-            <div class="gallery-toolbar">
-                <!-- Image upload -->
-                <div class="image-upload gallery-tool">
-                    <label for="add_meme" class="upload-meme-btn">Upload Meme</label>
-                    <section class="add-meme-section hide">
-                        <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
-                            onchange="onUploadMeme()">
-                    </section>
-                </div>
-                <!-- end of image upload -->
-
-                <!-- Search box -->
-                <div class="meme-search-box gallery-tool">
-                    <input type="search" id="meme-search" class="meme-search" name="meme-search"
-                        placeholder="Enter keywords" onchange="onKeywordSearch(this.value)">
-                    <button class="btn-search"></button>
-                </div>
-            </div>
-            <!-- Tags cloud -->
-            <div class="tags-container flex align-center">
-            </div>
-            <!-- Meme grid -->
-            <div class="grid-container">
-            </div>
-        </div>
-    </section>
-
-    <!-- Editor section -->
-    <section class="editor">
-        <img id="selected-img" src="" hidden />
-        <div class="editor-wrapper">
-            <div class="editor-container">
-                <img class="meme-background" src="">
-            </div>
-            <div class="tools-wrapper">
-                <div class="caption-tools">
-                    <div class="edit-tools">
-                        <span class="color-swatch"><i class="fas fa-palette" onclick="propagateColorClick()"></i>
-                            <input type="color" class="caption-color-picker" onchange="onCaptionChangeColor(this)">
-                        </span>
-                        <span class="change-caption-style btn-group">
-                            <button class="btn-caption-smaller" onclick="onCaptionSmaller()">-</button>
-                            <button class="btn-caption-larger" onclick="onCaptionLarger()">+</button>
-                        </span>
-                        <span class="add-delete-caption btn-group">
-                            <button class="btn-caption-delete" onclick="onCaptionDelete()"><i
-                                    class="far fa-trash-alt"></i>
-                            </button>
-                            <button class="btn-caption-add" onclick="onCaptionAdd()">Add</button>
-                        </span>
+    <main>
+        <!-- Gallery section -->
+        <section class="gallery">
+            <div class="gallery-wrapper">
+                <div class="gallery-toolbar">
+                    <!-- Image upload -->
+                    <div class="image-upload gallery-tool">
+                        <label for="add_meme" class="upload-meme-btn">Upload Meme</label>
+                        <section class="add-meme-section hide">
+                            <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
+                                onchange="onUploadMeme()">
+                        </section>
                     </div>
-                    <div class="save-tools"> <span class="btn-group">
-                            <button class="btn-back-to-gallery" onclick="onChangeView()">Gallery</button>
-                            <button class="btn-editor-reset" onclick="onEditorReset()">Reset</button>
-                            <a href="" download="my-img.jpg" id="download-link"><button class="btn-editor-download"
-                                    onclick="onEditorDownload()">Download</button></a>
-                        </span>
+                    <!-- end of image upload -->
+
+                    <!-- Search box -->
+                    <div class="meme-search-box gallery-tool">
+                        <input type="search" id="meme-search" class="meme-search" name="meme-search"
+                            placeholder="Enter keywords" onchange="onKeywordSearch(this.value)">
+                        <button class="btn-search"></button>
                     </div>
                 </div>
+                <!-- Tags cloud -->
+                <div class="tags-container flex align-center">
+                </div>
+                <!-- Meme grid -->
+                <div class="grid-container">
+                </div>
             </div>
-        </div>
-        <canvas hidden></canvas>
-    </section>
+        </section>
+
+        <!-- Editor section -->
+        <section class="editor">
+            <img id="selected-img" src="" hidden />
+            <div class="editor-wrapper">
+                <div class="editor-container">
+                    <img class="meme-background" src="">
+                </div>
+                <div class="tools-wrapper">
+                    <div class="caption-tools">
+                        <div class="edit-tools">
+                            <span class="color-swatch"><i class="fas fa-palette" onclick="propagateColorClick()"></i>
+                                <input type="color" class="caption-color-picker" onchange="onCaptionChangeColor(this)">
+                            </span>
+                            <span class="change-caption-style btn-group">
+                                <button class="btn-caption-smaller" onclick="onCaptionSmaller()">-</button>
+                                <button class="btn-caption-larger" onclick="onCaptionLarger()">+</button>
+                            </span>
+                            <span class="add-delete-caption btn-group">
+                                <button class="btn-caption-delete" onclick="onCaptionDelete()"><i
+                                        class="far fa-trash-alt"></i>
+                                </button>
+                                <button class="btn-caption-add" onclick="onCaptionAdd()">Add</button>
+                            </span>
+                        </div>
+                        <div class="save-tools"> <span class="btn-group">
+                                <button class="btn-back-to-gallery" onclick="onChangeView()">Gallery</button>
+                                <button class="btn-editor-reset" onclick="onEditorReset()">Reset</button>
+                                <a href="" download="my-meme.jpg" id="download-link"><button class="btn-editor-download"
+                                        onclick="onEditorDownload()">Download</button></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <canvas hidden></canvas>
+        </section>
+    </main>
     <script src="js/utils.js"></script>
     <script src="js/gallery-service.js"></script>
     <script src="js/editor-service.js"></script>

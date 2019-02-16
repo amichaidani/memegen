@@ -1,7 +1,5 @@
 // TODO:
-// 1) handle canvas img resizing
 // 2) Touch commands for mobile
-// 3) download gMemes
 
 var gFocusedCaption = null;
 var gElMemeImg;
@@ -28,8 +26,19 @@ function setupEditor() {
     createDefaultCaptions(); // Construct default top/bottom captions
     renderCaptions(); // Create caption elements and inject to DOM
 
+    setTimeout(() => {
+        placeDefaultCaptions()
+    }, 300);
+
     gFocusedCaption = null;
 
+}
+
+function placeDefaultCaptions() {
+    $('.caption').each(function (idx) {
+        $(this).css('left', ((gElMemeImg.width / 2) - ($(this).outerWidth() / 2)) + 'px');
+        $(this).css('top', (idx === 0) ? '20px' : gElMemeImg.height - 70 + 'px');
+    })
 }
 
 // Render '.caption' elements
@@ -49,6 +58,8 @@ function renderNewCaption(caption) {
     $('.editor-container').append(strHTML);
     $('.caption').last()[0].focus();
     gFocusedCaption = $('.caption').last()[0];
+    $(gFocusedCaption).css('left', ((gElMemeImg.width / 2) - ($(gFocusedCaption).outerWidth() / 2)) + 'px');
+    $(gFocusedCaption).css('top', ((gElMemeImg.height / 2) - ($(gFocusedCaption).outerHeight() / 2)) + 'px');
     updateTools();
 }
 
@@ -178,7 +189,7 @@ function renderToCanvas() {
 
     $('.caption').each(function (index) {
         elCtx.fillStyle = $(this).css('color');
-        elCtx.font = 'normal normal 300 50px Impact';
+        elCtx.font = 'normal normal 300 ' + $(this).css('font-size') + ' Impact';
         elCtx.strokeStyle = $(this).css('-webkit-text-stroke-color');
         elCtx.lineWidth = 4;
         elCtx.strokeText($(this).text(), $(this).position().left, $(this).position().top + $(this).outerHeight());
@@ -191,7 +202,6 @@ function renderToCanvas() {
 
 function downloadImg() {
     let imgContent = gCanvas.toDataURL('image/jpeg');
-    console.log(imgContent);
     document.querySelector('#download-link').href = imgContent;
 }
 // EDITOR TOOLS END
