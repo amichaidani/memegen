@@ -5,6 +5,7 @@
 
 var gFocusedCaption = null;
 var gElMemeImg;
+var gCanvas;
 
 // Mouse tracking vars
 var gMousePosition;
@@ -13,11 +14,11 @@ var elCaption;
 var gIsDown = false;
 
 function initEditor() {
-    rednerEditor();
+    setupEditor();
     onChangeView();
 }
 
-function rednerEditor() {
+function setupEditor() {
     //Todo: Limit displayed img to max width of 75% of viewport
     let selectedMeme = getSelectedMeme();
     gElMemeImg = document.querySelector('.meme-background');
@@ -153,7 +154,7 @@ function onCaptionSmaller() {
 
 // Clicked on reset
 function onEditorReset() {
-    rednerEditor();
+    setupEditor();
 }
 
 // Clicked on download
@@ -163,28 +164,40 @@ function onEditorDownload() {
 
 function renderToCanvas() {
     // Get canvas
-    let elCanvas = $('canvas')[0];
-    let elCtx = elCanvas.getContext('2d');
+    gCanvas = $('canvas')[0];
+    let elCtx = gCanvas.getContext('2d');
     // Set canvas to EXACT dimensions of meme img
-    $(elCanvas).css('width', $(gElMemeImg).outerWidth() + 'px');
-    $(elCanvas).css('height', $(gElMemeImg).outerHeight() + 'px');
+    $(gCanvas).css('width', $(gElMemeImg).outerWidth() + 'px');
+    $(gCanvas).css('height', $(gElMemeImg).outerHeight() + 'px');
     // .. And set the context to the right size as well
-    elCtx.canvas.width = $(elCanvas).width();
-    elCtx.canvas.height = $(elCanvas).height();
+    elCtx.canvas.width = $(gCanvas).width();
+    elCtx.canvas.height = $(gCanvas).height();
 
     // Draw meme background img
-    elCtx.drawImage(gElMemeImg, 0, 0, $(elCanvas).width(), $(elCanvas).height());
+    elCtx.drawImage(gElMemeImg, 0, 0, $(gCanvas).width(), $(gCanvas).height());
 
-    let captions = getCaptions();
-    captions.forEach(caption => {
-        
-    })
+    $('.caption').each(function (index) {
+        elCtx.fillStyle = $(this).css('color');
+        elCtx.font = 'normal normal 300 50px Impact';
+        elCtx.strokeStyle = $(this).css('-webkit-text-stroke-color');
+        elCtx.lineWidth = 4;
+        elCtx.strokeText($(this).text(), $(this).position().left, $(this).position().top + $(this).outerHeight());
+        elCtx.fillText($(this).text(), $(this).position().left, $(this).position().top + $(this).outerHeight());
+    });
+
+    downloadImg();
+
 }
 
+function downloadImg() {
+    let imgContent = gCanvas.toDataURL('image/jpeg');
+    console.log(imgContent);
+    document.querySelector('#download-link').href = imgContent;
+}
 // EDITOR TOOLS END
 
 function propagateColorClick() {
-    $("#caption-color-picker")[0].click();
+    $('.caption-color-picker')[0].click();
 }
 
 // Change state of editor toolbar to get style of focused caption

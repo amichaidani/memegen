@@ -109,7 +109,9 @@ label.upload-meme-btn:before {
     font-family: 'Font Awesome 5 Free';
     content: '\f0fe';
     margin-right: 0.3rem;
-    font-weight:500;
+    font-weight: 500;
+    color: #999;
+    font-size: 0.8em;
 }
 
 label.upload-meme-btn {
@@ -122,8 +124,6 @@ label.upload-meme-btn {
     padding: 0.2rem 0.5rem;
     box-sizing: border-box;
 }
-
-
 
 .btn {
     margin: 0 20px 10px 0;
@@ -409,7 +409,7 @@ input[type="color"]::-webkit-color-swatch:active {
     position: relative;
     display: inline-block;
     margin: 0 auto;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-size: 0;
 }
 
@@ -431,6 +431,7 @@ input[type="color"]::-webkit-color-swatch:active {
 
 .caption {
     display: block;
+    white-space:nowrap;
     text-align: center;
     text-overflow: clip;
     line-height: 1;
@@ -473,6 +474,10 @@ input[type="color"]::-webkit-color-swatch:active {
         /* box-shadow: 1px 1px 10px rgba(0, 0, 0, .15); */
         padding: 20px 0;
     }
+}
+
+.tools-wrapper {
+    background: #fff;
 }
 
 .caption-tools {
