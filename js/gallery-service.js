@@ -83,7 +83,8 @@ function getMemesStrHTMLs() {
 }
 
 function addMeme(url, keywords) {   // User adds new Meme
-    gMemes.unshift(createMeme(url, keywords))
+    gMemes.push(createMeme(url, keywords))
+    keywords.forEach((keyword) => updateKeywords(keyword))
 }
 
 function updateKeywords(key) {
@@ -92,7 +93,6 @@ function updateKeywords(key) {
         gKeywordsMap[key].searchCount++
         changeFontSizeToKeywords(keyIdx, key)
     } else {
-        console.log('This key word does not exist and it will now be added');
         gKeywords.unshift(key);
         gKeywordsMap[key] = { searchCount: 6, fontSize: MIN_KEY_WORD_FONT_SIZE }
     }

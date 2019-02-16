@@ -42,6 +42,6 @@ function onUploadMeme(ev) {
     let keywords = str.split(' ')
     const selectedFile = document.getElementById('add_meme').files[0];
     const objectURL = window.URL.createObjectURL(selectedFile);
-    gMemes.push(createMeme(objectURL, keywords))
+    addMeme(objectURL, keywords)
     renderMemes()
 }
