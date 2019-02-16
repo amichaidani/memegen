@@ -18,7 +18,7 @@ function onEditMeme() {
     onChangeView();
 }
 
-function onKeywordSearch (searchedWord) {
+function onKeywordSearch(searchedWord) {
     let str = searchedWord.toLowerCase()
     let regex = /([a-z])\w*/g
     firstWord = str.match(regex)[0]
@@ -34,8 +34,8 @@ function renderKeywords() {
 // Upload meme
 
 function onAddMemeRequest() {
-    $('.upload-meme-btn').toggle('.hide')
-    $('.add-meme-section').toggle('.hide')
+    $('.upload-meme-btn').hide();
+    $('.add-meme-section').show();
 }
 function onUploadMeme(ev) {
     let str = prompt('Please type Keywords sepersted by space to describe Meme')
