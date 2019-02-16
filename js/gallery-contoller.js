@@ -34,7 +34,7 @@ function renderKeywords() {
 
 // Upload meme
 function onAddMemeRequest() {
-    $('.upload-meme-btn').hide();
+    $('.btn-upload-meme').hide();
     $('.add-meme-section').show();
 }
 function onUploadMeme(ev) {

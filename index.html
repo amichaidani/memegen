@@ -31,11 +31,11 @@
                 <div class="meme-search-box space-between gallery-tool">
                     <input type="search" id="meme-search" class="meme-search" name="meme-search"
                         placeholder="Enter keywords" onchange="onKeywordSearch(this.value)">
-                    <button>Search</button>
+                    <button class="btn-search"></button>
                 </div>
                 <!-- Image upload -->
                 <div class="image-upload gallery-tool space-between">
-                    <button class="upload-meme-btn" onclick="onAddMemeRequest(event)">Upload File</button>
+                    <button class="btn-upload-meme" onclick="onAddMemeRequest(event)">Upload File</button>
                     <div class="add-meme-section hide flex">
                         <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
                             onchange="onUploadMeme(event)">

@@ -242,10 +242,15 @@ input[type="color"]::-webkit-color-swatch:active {
     justify-content: flex-end;
 }
 
-.upload-meme-btn:before {
+.btn-upload-meme:before {
     font-family: 'Font Awesome 5 Free';
     content: '\f093';
     margin-right: 0.3rem;
+}
+
+.btn-search:before {
+    font-family: 'Font Awesome 5 Free';
+    content: '\f002';
 }
 
 @media (max-width:420px) {
@@ -367,6 +372,8 @@ input[type="color"]::-webkit-color-swatch:active {
     position: relative;
     display: inline-block;
     margin: 0 auto;
+    overflow: hidden;
+    font-size: 0;
 }
 
 [contenteditable]:focus {
@@ -412,8 +419,7 @@ input[type="color"]::-webkit-color-swatch:active {
 }
 
 @media (max-width:740px) {
-    .editor {
-    }
+    .editor {}
     .canvas-main {
         max-width: 100%;
         max-height: auto;
