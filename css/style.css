@@ -355,10 +355,6 @@ input[type="color"]::-webkit-color-swatch:active {
 
 /* ========== */
 
-.editor {
-    margin-top: 40px
-}
-
 .editor-wrapper {
     text-align: center;
     margin-top: 20px;
@@ -417,7 +413,6 @@ input[type="color"]::-webkit-color-swatch:active {
 
 @media (max-width:740px) {
     .editor {
-        height: calc(100vh-96px);
     }
     .canvas-main {
         max-width: 100%;

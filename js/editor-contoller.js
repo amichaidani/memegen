@@ -176,7 +176,7 @@ function propagateColorClick() {
 
 // Change state of editor toolbar to get style of focused caption
 function updateTools() {
-    let elColorPicker = $('#caption-color-picker')
+    let elColorPicker = $('.caption-color-picker')
     if (gFocusedCaption) {
         $(elColorPicker).val(rgb2hex($(gFocusedCaption).css("color")));
     } else {
