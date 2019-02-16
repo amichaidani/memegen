@@ -1,39 +1,45 @@
+// TODO:
+// 1) handle canvas img resizing
+// 2) Touch commands for mobile
+// 3) download gMemes
+
+var gFocusedCaption = null;
+var gElMemeImg;
+
+// Mouse tracking vars
 var gMousePosition;
 var gOffset = [0, 0];
 var elCaption;
 var gIsDown = false;
-var gFocusedCaption = null;
-var gElMemeImg;
-var gCtx;
 
-function renderCanvas() {
+function initEditor() {
+    rednerEditor();
+    onChangeView();
+}
+
+function rednerEditor() {
     //Todo: Limit displayed img to max width of 75% of viewport
     let selectedMeme = getSelectedMeme();
-    let elImg = document.querySelector('.canvas-main');
-    elImg.src = selectedMeme.url;
-    gElMemeImg = elImg;
+    gElMemeImg = document.querySelector('.meme-background');
+    gElMemeImg.src = selectedMeme.url;
+
     $('.caption').remove(); // Clear all caption elements
     createDefaultCaptions(); // Construct default top/bottom captions
     renderCaptions(); // Create caption elements and inject to DOM
-    setTimeout(function () {
-        $('.caption').first().css('top', '20px');
-        // TODO: Shorten this horrible line:
-        $('.caption').css('top', ($(gElMemeImg).outerHeight - 70) + 'px');
-        $('.caption').last().blur();
-
-    }, 100)
 
     gFocusedCaption = null;
 
 }
 
+// Render '.caption' elements
 function renderCaptions() {
-    let captions = getCaptions();
+    let captions = getCaptions(); // Get captions from model
     captions.forEach(caption => {
         renderNewCaption(caption)
     });
 }
 
+// Render single new caption
 function renderNewCaption(caption) {
     let strHTML = '';
     strHTML += `
@@ -45,6 +51,7 @@ function renderNewCaption(caption) {
     updateTools();
 }
 
+// CAPTIONS DRAG FUNCTION START
 // Clicked on caption
 function onCaptionClick(el, ev) {
     ev.stopPropagation();
@@ -55,20 +62,6 @@ function onCaptionClick(el, ev) {
         el.offsetLeft - ev.clientX,
         el.offsetTop - ev.clientY
     ];
-}
-
-function propagateColorClick() {
-    $("#caption-color-picker")[0].click();
-}
-
-
-function updateTools() {
-    let elColorPicker = $('#caption-color-picker')
-    if (gFocusedCaption) {
-        $(elColorPicker).val(rgb2hex($(gFocusedCaption).css("color")));
-    } else {
-        $(elColorPicker).val('#ffffff');
-    }
 }
 
 // Released mouse from caption
@@ -92,21 +85,30 @@ document.addEventListener('mousemove', function (event) {
         };
 
         if (gMousePosition.x + gOffset[0] <= 0 ||
-            gMousePosition.y + gOffset[1] <= $('.canvas-main').position().top ||
-            gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= $('.canvas-main').outerWidth(true) ||
-            gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > $('.canvas-main').offset().top + $('.canvas-main').outerHeight(true) - 2
+            gMousePosition.y + gOffset[1] <= $(gElMemeImg).position().top ||
+            gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= gElMemeImg.offsetWidth ||
+            gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > gElMemeImg.offsetHeight
         ) return;
 
         gFocusedCaption.style.left = (gMousePosition.x + gOffset[0]) + 'px';
         gFocusedCaption.style.top = (gMousePosition.y + gOffset[1]) + 'px';
     }
 }, true);
+// CAPTIONS DRAG FUNCTION END
 
+// EDITOR TOOLS START
+// Changed value of caption text
+function onCaptionChange(el) {
+    updateCaption(+el.dataset.id, el.innerText);
+}
+
+// Clicked on add new caption
 function onCaptionAdd() {
     let caption = createCaption('New Caption');
     renderNewCaption(caption);
 }
 
+// Clicked on delete caption
 function onCaptionDelete() {
     if (gFocusedCaption) {
         deleteCaption(+gFocusedCaption.dataset.id);
@@ -116,6 +118,7 @@ function onCaptionDelete() {
     updateTools();
 }
 
+// Clicked on caption color change
 function onCaptionChangeColor(el) {
     if (gFocusedCaption) {
         let chosenColor = el.value;
@@ -126,6 +129,7 @@ function onCaptionChangeColor(el) {
     }
 }
 
+// Clicked on caption enlarge font size
 function onCaptionLarger() {
     if (gFocusedCaption) {
         let size = captionLarger(+gFocusedCaption.dataset.id);
@@ -136,6 +140,7 @@ function onCaptionLarger() {
     }
 }
 
+// Clicked on caption decrease font size
 function onCaptionSmaller() {
     if (gFocusedCaption) {
         let size = captionSmaller(+gFocusedCaption.dataset.id);
@@ -146,33 +151,49 @@ function onCaptionSmaller() {
     }
 }
 
+// Clicked on reset
 function onEditorReset() {
-    renderCanvas();
+    rednerEditor();
 }
 
+// Clicked on download
 function onEditorDownload() {
-    drawCaptionsOnCanvas();
+    rednerEditor();
 }
 
-function drawCaptionsOnCanvas() {
-    $('.caption').each(function (idx) {
-        fontStr = $(this).css('font-size') + ' ' + $(this).css('font-family');
-        captionCoords = {
-            x: $(this).position().left,
-            y: $(this).position().top + $(this).outerHeight()
-        }
-        text = $(this).text();
-        color = $(this).css('color');
-        gCtx.font = fontStr;
-        gCtx.fillStyle = color;
-        gCtx.strokeStyle = 'black';
-        gCtx.lineWidth = 4;
-        gCtx.strokeText(text, captionCoords.x, captionCoords.y);
-        gCtx.fillText(text, captionCoords.x, captionCoords.y);
-    });
+// EDITOR TOOLS END
+
+function propagateColorClick() {
+    $("#caption-color-picker")[0].click();
 }
 
-
-function onCaptionChange(el) {
-    updateCaption(+el.dataset.id, el.innerText);
+// Change state of editor toolbar to get style of focused caption
+function updateTools() {
+    let elColorPicker = $('.caption-color-picker')
+    if (gFocusedCaption) {
+        $(elColorPicker).val(rgb2hex($(gFocusedCaption).css("color")));
+    } else {
+        $(elColorPicker).val('#ffffff');
+    }
 }
+
+// function drawCaptionsOnCanvas() {
+//     $('.caption').each(function (idx) {
+//         fontStr = $(this).css('font-size') + ' ' + $(this).css('font-family');
+//         captionCoords = {
+//             x: $(this).position().left,
+//             y: $(this).position().top + $(this).outerHeight()
+//         }
+//         text = $(this).text();
+//         color = $(this).css('color');
+//         gCtx.font = fontStr;
+//         gCtx.fillStyle = color;
+//         gCtx.strokeStyle = 'black';
+//         gCtx.lineWidth = 4;
+//         gCtx.strokeText(text, captionCoords.x, captionCoords.y);
+//         gCtx.fillText(text, captionCoords.x, captionCoords.y);
+//     });
+// }
+
+
+

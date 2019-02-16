@@ -15,8 +15,7 @@ function renderMemes() {
 }
 
 function onEditMeme() {
-    renderCanvas();
-    onChangeView();
+    initEditor();
 }
 
 function onKeywordSearch(searchedWord) {
@@ -28,10 +27,11 @@ function onKeywordSearch(searchedWord) {
 
 function renderKeywords() {
     let strHTMLs = getKeywordsStrHTMLs();
-    let elContainer = document.querySelector('.tags-container');
-    elContainer.innerHTML = strHTMLs;
+    let elContainer = document.querySelector('.tags-container')
+    elContainer.innerHTML = strHTMLs
+    $(elContainer).hide();
+    $(elContainer).fadeIn()
 }
-// Upload meme
 
 function onUploadMeme() {
     let str = prompt('Please type Keywords sepersted by space to describe Meme')

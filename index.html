@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Css Files -->
+    <!-- CSS Files -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/helpers.css">
     <link rel="stylesheet" href="css/style.css">
@@ -29,27 +29,41 @@
             <header>
                 <div class="gallery-toolbar">
                     <!-- Image upload -->
-                    <span class="image-upload gallery-tool space-between">
+                    <div class="image-upload gallery-tool space-between">
                         <label for="add_meme" class="upload-meme-btn">Upload Meme</label>
                         <section class="add-meme-section hide flex">
                             <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
                                 onchange="onUploadMeme()">
                         </section>
-                    </span>
+                    </div>
                     <!-- end of image upload -->
-                    <span class="meme-search-box space-between gallery-tool">
+                    <!-- <span class="meme-search-box space-between gallery-tool">
                         <input type="search" id="meme-search" class="meme-search" name="meme-search"
                             placeholder="Enter keywords" onchange="onKeywordSearch(this.value)">
                         <button>Search</button>
-                    </span>
+                    </span> -->
+            <div class="gallery-toolbar">
+                <!-- Search box -->
+                <div class="meme-search-box space-between gallery-tool">
+                    <input type="search" id="meme-search" class="meme-search" name="meme-search"
+                        placeholder="Enter keywords" onchange="onKeywordSearch(this.value)">
+                    <button class="btn-search"></button>
                 </div>
-            </header>
-
+                <!-- Image upload -->
+                <!-- <div class="image-upload gallery-tool space-between">
+                    <button class="btn-upload-meme" onclick="onAddMemeRequest(event)">Upload File</button>
+                    <div class="add-meme-section hide flex">
+                        <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
+                            onchange="onUploadMeme(event)">
+                    </div>
+                </div> -->
+            </div>
+            <!-- Tags cloud -->
+            <div class="tags-container flex align-center">
+            </div>
+            <!-- Meme grid -->
             <div class="grid-container">
             </div>
-            <!-- // Tags -->
-            <section class="tags-container flex">
-            </section>
         </div>
     </section>
 
@@ -58,28 +72,29 @@
         <img id="selected-img" src="" hidden />
         <div class="editor-wrapper">
             <div class="editor-container">
-                <img class="canvas-main" src="">
+                <img class="meme-background" src="">
             </div>
             <div class="tools-wrapper">
                 <div class="caption-tools">
                     <div class="edit-tools">
                         <span class="color-swatch"><i class="fas fa-palette" onclick="propagateColorClick()"></i>
-                            <input type="color" id="caption-color-picker" onchange="onCaptionChangeColor(this)">
+                            <input type="color" class="caption-color-picker" onchange="onCaptionChangeColor(this)">
                         </span>
                         <span class="change-caption-style btn-group">
-                            <button id="caption-smaller" onclick="onCaptionSmaller()">-</button>
-                            <button id="caption-larger" onclick="onCaptionLarger()">+</button>
+                            <button class="btn-caption-smaller" onclick="onCaptionSmaller()">-</button>
+                            <button class="btn-caption-larger" onclick="onCaptionLarger()">+</button>
                         </span>
                         <span class="add-delete-caption btn-group">
-                            <button id="caption-delete" onclick="onCaptionDelete()"><i class="far fa-trash-alt"></i>
+                            <button class="btn-caption-delete" onclick="onCaptionDelete()"><i
+                                    class="far fa-trash-alt"></i>
                             </button>
-                            <button id="caption-add" onclick="onCaptionAdd()">Add</button>
+                            <button class="btn-caption-add" onclick="onCaptionAdd()">Add</button>
                         </span>
                     </div>
                     <div class="save-tools"> <span class="btn-group">
-                        <button onclick="onChangeView()">Gallery</button>
-                            <button id="editor-reset" onclick="onEditorReset()">Reset</button>
-                            <button id="editor-download" onclick="onEditorDownload()">Download</button>
+                            <button class="btn-back-to-gallery" onclick="onChangeView()">Gallery</button>
+                            <button class="btn-editor-reset" onclick="onEditorReset()">Reset</button>
+                            <button class="btn-editor-download" onclick="onEditorDownload()">Download</button>
                         </span>
                     </div>
                 </div>
