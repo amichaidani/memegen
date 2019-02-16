@@ -140,6 +140,7 @@ small, .text_small {
     margin-bottom: 0;
     padding: 0 0.5rem;
 }
+
 .add-meme-scetion label:hover {
     background: linear-gradient(to right, #f953c6, #b91d73);
     color: #fff;
@@ -233,7 +234,7 @@ small, .text_small {
     width: auto;
 }
 
-@media (max-width:420px){
+@media (max-width:420px) {
     .canvas-main {
         max-height: 60vh;
         width: auto;
@@ -407,4 +408,15 @@ input[type="color"]::-webkit-color-swatch:active {
     position: fixed;
     top: 0;
     left: 0;
+}
+
+/* Tags Style (keywords) */
+
+.tags-container {
+    background-color: #ffc1fb;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+.tags-container span {
+    margin-left: 5px;
 }

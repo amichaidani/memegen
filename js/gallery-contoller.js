@@ -1,3 +1,8 @@
+function galleryControllerInit() {
+    createKeywordsMap();
+    renderKeywords();
+}
+
 function onSelectMeme(el) {
     changeSelectedMeme(el.dataset["id"]); // Model update
     console.log('data-set: ', el.dataset["id"]);
@@ -5,7 +10,7 @@ function onSelectMeme(el) {
 }
 
 function renderMemes() {
-    let strHTMLs = getStrHTMLs();
+    let strHTMLs = getMemesStrHTMLs();
     $('.grid-container').html(strHTMLs)
 }
 
@@ -14,9 +19,22 @@ function onEditMeme() {
     onChangeView();
 }
 
+function onKeywordSearch (searchedWord) {
+    let str = searchedWord.toLowerCase()
+    let regex = /([a-z])\w*/g
+    firstWord = str.match(regex)[0]
+    updateKeywords(firstWord)
+}
+
+
+function renderKeywords() {
+    let strHTMLs = getKeywordsStrHTMLs();
+    let elContainer = document.querySelector('.tags-container')
+    elContainer.innerHTML = strHTMLs
+}
 // Upload meme
 
-function onAddMemeRequest () {
+function onAddMemeRequest() {
     $('.upload-meme-btn').toggle('.hide')
     $('.add-meme-section').toggle('.hide')
 }

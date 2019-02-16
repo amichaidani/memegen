@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-        <!-- Jquery -->
+    <!-- Jquery -->
     <script src="lib/jquery-3.3.1.min.js"></script>
     <title>Meme Generator</title>
 </head>
@@ -30,18 +30,19 @@
                 <div class="gallery-toolbar">
                     <!-- Image upload -->
                     <span class="image-upload gallery-tool space-between">
-                        <button class="upload-meme-btn" onclick="onAddMemeRequest(event)">Want to add your own Meme?</button>
+                        <button class="upload-meme-btn" onclick="onAddMemeRequest(event)">Want to add your own
+                            Meme?</button>
                         <section class="add-meme-section hide flex">
-                            
+
                             <label for="add_meme" class="add-meme pointer">Add your own Meme</label>
                             <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
-                            onchange="onUploadMeme(event)">
+                                onchange="onUploadMeme(event)">
                         </section>
                     </span>
                     <!-- end of image upload -->
                     <span class="meme-search-box space-between gallery-tool">
                         <input type="search" id="meme-search" class="meme-search" name="meme-search"
-                            placeholder="Enter keywords">
+                            placeholder="Enter keywords" onchange="onKeywordSearch(this.value)">
                         <button>Search</button>
                     </span>
                 </div>
@@ -49,7 +50,9 @@
 
             <div class="grid-container">
             </div>
-
+            <!-- // Tags -->
+            <section class="tags-container flex">
+            </section>
         </div>
     </section>
 

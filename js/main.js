@@ -12,6 +12,7 @@ function init() {
     $('.editor').hide();
     createGMemes();
     renderMemes();
+    galleryControllerInit();
 }
 
 function renderCanvas() {
@@ -153,7 +154,7 @@ function onSelectMeme(el) {
 }
 
 function renderMemes() {
-    let strHTMLs = getStrHTMLs();
+    let strHTMLs = getMemesStrHTMLs();
     $('.grid-container').html(strHTMLs)
 }
 
