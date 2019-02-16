@@ -3,14 +3,14 @@
 // 2) Touch commands for mobile
 // 3) download gMemes
 
+var gFocusedCaption = null;
+var gElMemeImg;
+
 // Mouse tracking vars
 var gMousePosition;
 var gOffset = [0, 0];
 var elCaption;
 var gIsDown = false;
-
-var gFocusedCaption = null;
-var gElMemeImg;
 
 function initEditor() {
     rednerEditor();
@@ -26,13 +26,6 @@ function rednerEditor() {
     $('.caption').remove(); // Clear all caption elements
     createDefaultCaptions(); // Construct default top/bottom captions
     renderCaptions(); // Create caption elements and inject to DOM
-    setTimeout(function () {
-        $('.caption').first().css('top', '20px');
-        // TODO: Shorten this horrible line:
-        $('.caption').css('top', ($(gElMemeImg).outerHeight - 70) + 'px');
-        $('.caption').last().blur();
-
-    }, 100)
 
     gFocusedCaption = null;
 
