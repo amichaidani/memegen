@@ -83,7 +83,7 @@ function getMemesStrHTMLs() {
 }
 
 function addMeme(url, keywords) {   // User adds new Meme
-    gMemes.push(createMeme(url, keywords))
+    gMemes.unshift(createMeme(url, keywords))
     keywords.forEach((keyword) => updateKeywords(keyword))
 }
 
