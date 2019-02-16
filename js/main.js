@@ -1,11 +1,6 @@
-// Mouse tracking vars
-var gMousePosition;
-var gOffset = [0, 0];
-var elCaption;
-var gIsDown = false;
-var gFocusedCaption = null;
-var gCanvas = $('.canvas-main')[0];
-var gCtx;
+const GALLERY_VIEW = 'gallery';
+const EDITOR_VIEW = 'editor';
+var gCurrentView = GALLERY_VIEW;
 
 function init() {
     $('.gallery').show();
@@ -164,21 +159,15 @@ function onEditMeme() {
 }
 
 function onChangeView() {
-    $('.gallery').toggle('hide');
-    $('.editor').toggle('hide');
-}
-
-// Upload image
-function onUploadMeme(ev) {
-    let str = prompt('Please type Keywords sepersted by space to describe Meme')
-    let keywords = str.split(' ')
-    const selectedFile = document.getElementById('add_meme').files[0];
-    const objectURL = window.URL.createObjectURL(selectedFile);
-    gMemes.push(createMeme(objectURL, keywords))
-    renderMemes()
-}
-// End of gallery funcs
-
-function onCaptionChange(el) {
-    updateCaption(+el.dataset.id, el.innerText);
+    if (gCurrentView === GALLERY_VIEW) {
+        $('.gallery').fadeToggle('fast', function () {
+            $('.editor').fadeToggle();
+        });
+        gCurrentView = EDITOR_VIEW;
+    } else {
+        $('.editor').fadeToggle('fast', function () {
+            $('.gallery').fadeToggle();
+        });
+        gCurrentView = GALLERY_VIEW;
+    }
 }

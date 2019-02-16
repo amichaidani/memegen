@@ -25,6 +25,7 @@ function createKeywordsMap() {
     })
 }
 
+var gSelectedMeme = null;
 
 function createGMemes() {
     gMemes.push(createMeme('img/man.png', ['smiling']))
@@ -42,9 +43,6 @@ function createMeme(url, keywords) {
     gNextMemeId++
     return meme
 }
-
-
-var gSelectedMeme = null;
 
 function changeSelectedMeme(id) {
     gSelectedMeme = getMemeById(id);

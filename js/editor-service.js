@@ -57,14 +57,14 @@ function changeCaptionColor(id, color) {
 
 function captionLarger(id) {
     let caption = getCaptionById(id);
-    if (caption.fontSize >= 90) return;
+    if (caption.fontSize >= 90) return false;
     caption.fontSize += 10;
     return caption.fontSize;
 }
 
 function captionSmaller(id) {
     let caption = getCaptionById(id);
-    if (caption.fontSize <= 10) return;
+    if (caption.fontSize <= 10) return false;
     caption.fontSize -= 10;
     return caption.fontSize;
 }

@@ -29,7 +29,6 @@ h1, h2, h3, h4, h5 {
     margin: 0 0 1rem;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    line-height: 1.15;
 }
 
 h1 {
@@ -60,12 +59,8 @@ small, .text_small {
 
 .logo {
     font-family: 'Pacifico', cursive;
-    background: linear-gradient(to right, #f953c6, #b91d73);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    -webkit-background-clip: text;
-    background-clip: text;
-    padding: 20px;
-    -webkit-text-fill-color: transparent;
+    color: red;
+    padding: 0px 20px 10px 20px;
     text-align: center;
 }
 
@@ -147,20 +142,6 @@ small, .text_small {
 }
 
 @media (max-width:420px) {
-    .gallery header {
-        position: fixed;
-        background: white;
-        left: 0;
-        width: 100%;
-        top: 0;
-        padding: 20px 10px;
-        box-sizing: border-box;
-        height: 140px;
-        box-shadow: 1px 1px 10px rgba(0, 0, 0, .15);
-    }
-    .grid-container {
-        margin-top: 50px;
-    }
     .meme-search-box>* {
         width: 100%;
     }
@@ -353,8 +334,22 @@ button:focus {
     border-radius: 0px 3px 3px 0px;
 }
 
+@media (max-width:420px) {
+    .btn-group button {
+        border: 1px solid #333;
+        border-radius: 0;
+        margin-right: 0.2rem;
+    }
+    .btn-group button:first-child {
+        border-radius: 3px;
+    }
+    .btn-group button:last-child {
+        border-radius: 3px;
+    }
+}
+
 button:hover {
-    background: linear-gradient(to right, #f953c6, #b91d73);
+    background: red;
     color: #fff;
 }
 
