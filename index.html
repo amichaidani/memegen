@@ -30,10 +30,10 @@
                 <div class="gallery-toolbar">
                     <!-- Image upload -->
                     <span class="image-upload gallery-tool space-between">
-                        <button class="upload-meme-btn" onclick="onAddMemeRequest(event)">Upload File</button>
+                        <label for="add_meme" class="upload-meme-btn">Upload Meme</label>
                         <section class="add-meme-section hide flex">
                             <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
-                                onchange="onUploadMeme(event)">
+                                onchange="onUploadMeme()">
                         </section>
                     </span>
                     <!-- end of image upload -->

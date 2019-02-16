@@ -1,4 +1,5 @@
 function galleryControllerInit() {
+    createKeywords();
     createKeywordsMap();
     renderKeywords();
 }
@@ -19,25 +20,20 @@ function onEditMeme() {
 }
 
 function onKeywordSearch(searchedWord) {
-    let str = searchedWord.toLowerCase()
-    let regex = /([a-z])\w*/g
-    firstWord = str.match(regex)[0]
-    updateKeywords(firstWord)
+    let str = searchedWord.toLowerCase();
+    let regex = /([a-z])\w*/g;
+    firstWord = str.match(regex).forEach(keyword => updateKeywords(keyword))
+    renderKeywords();
 }
-
 
 function renderKeywords() {
     let strHTMLs = getKeywordsStrHTMLs();
-    let elContainer = document.querySelector('.tags-container')
-    elContainer.innerHTML = strHTMLs
+    let elContainer = document.querySelector('.tags-container');
+    elContainer.innerHTML = strHTMLs;
 }
 // Upload meme
 
-function onAddMemeRequest() {
-    $('.upload-meme-btn').hide();
-    $('.add-meme-section').show();
-}
-function onUploadMeme(ev) {
+function onUploadMeme() {
     let str = prompt('Please type Keywords sepersted by space to describe Meme')
     let keywords = str.split(' ')
     const selectedFile = document.getElementById('add_meme').files[0];
