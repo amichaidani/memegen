@@ -14,8 +14,7 @@ function renderMemes() {
 }
 
 function onEditMeme() {
-    renderCanvas();
-    onChangeView();
+    initEditor();
 }
 
 function onKeywordSearch(searchedWord) {
@@ -25,14 +24,13 @@ function onKeywordSearch(searchedWord) {
     updateKeywords(firstWord)
 }
 
-
 function renderKeywords() {
     let strHTMLs = getKeywordsStrHTMLs();
     let elContainer = document.querySelector('.tags-container')
     elContainer.innerHTML = strHTMLs
 }
-// Upload meme
 
+// Upload meme
 function onAddMemeRequest() {
     $('.upload-meme-btn').hide();
     $('.add-meme-section').show();
