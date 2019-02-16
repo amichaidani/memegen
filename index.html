@@ -26,45 +26,31 @@
     <!-- Gallery section -->
     <section class="gallery">
         <div class="gallery-wrapper">
-            <header>
-                <div class="gallery-toolbar">
-                    <!-- Image upload -->
-                    <div class="image-upload gallery-tool space-between">
-                        <label for="add_meme" class="upload-meme-btn">Upload Meme</label>
-                        <section class="add-meme-section hide flex">
-                            <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
-                                onchange="onUploadMeme()">
-                        </section>
-                    </div>
-                    <!-- end of image upload -->
-                    <!-- <span class="meme-search-box space-between gallery-tool">
-                        <input type="search" id="meme-search" class="meme-search" name="meme-search"
-                            placeholder="Enter keywords" onchange="onKeywordSearch(this.value)">
-                        <button>Search</button>
-                    </span> -->
-                    <div class="gallery-toolbar">
-                        <!-- Search box -->
-                        <div class="meme-search-box space-between gallery-tool">
-                            <input type="search" id="meme-search" class="meme-search" name="meme-search"
-                                placeholder="Enter keywords" onchange="onKeywordSearch(this.value)">
-                            <button class="btn-search"></button>
-                        </div>
-                        <!-- Image upload -->
-                        <!-- <div class="image-upload gallery-tool space-between">
-                    <button class="btn-upload-meme" onclick="onAddMemeRequest(event)">Upload File</button>
-                    <div class="add-meme-section hide flex">
+            <div class="gallery-toolbar">
+                <!-- Image upload -->
+                <div class="image-upload gallery-tool">
+                    <label for="add_meme" class="upload-meme-btn">Upload Meme</label>
+                    <section class="add-meme-section hide">
                         <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
-                            onchange="onUploadMeme(event)">
-                    </div>
-                </div> -->
-                    </div>
-                    <!-- Tags cloud -->
-                    <div class="tags-container flex align-center">
-                    </div>
-                    <!-- Meme grid -->
-                    <div class="grid-container">
-                    </div>
+                            onchange="onUploadMeme()">
+                    </section>
                 </div>
+                <!-- end of image upload -->
+
+                <!-- Search box -->
+                <div class="meme-search-box gallery-tool">
+                    <input type="search" id="meme-search" class="meme-search" name="meme-search"
+                        placeholder="Enter keywords" onchange="onKeywordSearch(this.value)">
+                    <button class="btn-search"></button>
+                </div>
+            </div>
+            <!-- Tags cloud -->
+            <div class="tags-container flex align-center">
+            </div>
+            <!-- Meme grid -->
+            <div class="grid-container">
+            </div>
+        </div>
     </section>
 
     <!-- Editor section -->
