@@ -28,6 +28,8 @@ function renderKeywords() {
     let strHTMLs = getKeywordsStrHTMLs();
     let elContainer = document.querySelector('.tags-container')
     elContainer.innerHTML = strHTMLs
+    $(elContainer).hide();
+    $(elContainer).fadeIn()
 }
 
 // Upload meme

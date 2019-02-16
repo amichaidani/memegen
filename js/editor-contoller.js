@@ -13,14 +13,14 @@ var gFocusedCaption = null;
 var gElMemeImg;
 
 function initEditor() {
-    renderCanvas();
+    rednerEditor();
     onChangeView();
 }
 
-function renderCanvas() {
+function rednerEditor() {
     //Todo: Limit displayed img to max width of 75% of viewport
     let selectedMeme = getSelectedMeme();
-    gElMemeImg = document.querySelector('.canvas-main');
+    gElMemeImg = document.querySelector('.meme-background');
     gElMemeImg.src = selectedMeme.url;
 
     $('.caption').remove(); // Clear all caption elements
@@ -93,9 +93,8 @@ document.addEventListener('mousemove', function (event) {
 
         if (gMousePosition.x + gOffset[0] <= 0 ||
             gMousePosition.y + gOffset[1] <= $(gElMemeImg).position().top ||
-            gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= $(gElMemeImg).outerWidth(true) ||
-            // Fix the bottom border detection
-            gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > $(gElMemeImg).offset().top + $(gElMemeImg).outerHeight(true) - 2
+            gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= gElMemeImg.offsetWidth ||
+            gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > gElMemeImg.offsetHeight
         ) return;
 
         gFocusedCaption.style.left = (gMousePosition.x + gOffset[0]) + 'px';
@@ -161,12 +160,12 @@ function onCaptionSmaller() {
 
 // Clicked on reset
 function onEditorReset() {
-    renderCanvas();
+    rednerEditor();
 }
 
 // Clicked on download
 function onEditorDownload() {
-    drawCaptionsOnCanvas();
+    rednerEditor();
 }
 
 // EDITOR TOOLS END
