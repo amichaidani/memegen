@@ -158,7 +158,27 @@ function onEditorReset() {
 
 // Clicked on download
 function onEditorDownload() {
-    rednerEditor();
+    renderToCanvas();
+}
+
+function renderToCanvas() {
+    // Get canvas
+    let elCanvas = $('canvas')[0];
+    let elCtx = elCanvas.getContext('2d');
+    // Set canvas to EXACT dimensions of meme img
+    $(elCanvas).css('width', $(gElMemeImg).outerWidth() + 'px');
+    $(elCanvas).css('height', $(gElMemeImg).outerHeight() + 'px');
+    // .. And set the context to the right size as well
+    elCtx.canvas.width = $(elCanvas).width();
+    elCtx.canvas.height = $(elCanvas).height();
+
+    // Draw meme background img
+    elCtx.drawImage(gElMemeImg, 0, 0, $(elCanvas).width(), $(elCanvas).height());
+
+    let captions = getCaptions();
+    captions.forEach(caption => {
+        
+    })
 }
 
 // EDITOR TOOLS END
@@ -176,24 +196,4 @@ function updateTools() {
         $(elColorPicker).val('#ffffff');
     }
 }
-
-// function drawCaptionsOnCanvas() {
-//     $('.caption').each(function (idx) {
-//         fontStr = $(this).css('font-size') + ' ' + $(this).css('font-family');
-//         captionCoords = {
-//             x: $(this).position().left,
-//             y: $(this).position().top + $(this).outerHeight()
-//         }
-//         text = $(this).text();
-//         color = $(this).css('color');
-//         gCtx.font = fontStr;
-//         gCtx.fillStyle = color;
-//         gCtx.strokeStyle = 'black';
-//         gCtx.lineWidth = 4;
-//         gCtx.strokeText(text, captionCoords.x, captionCoords.y);
-//         gCtx.fillText(text, captionCoords.x, captionCoords.y);
-//     });
-// }
-
-
 
