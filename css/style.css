@@ -30,7 +30,7 @@ body {
 /* The infamous impact font! */
 
 @font-face {
-    font-family: Impact;
+    font-family: 'Impact';
     src: url('../fonts/impact.ttf');
 }
 
@@ -395,9 +395,6 @@ header {
 
 /* Tags Style (keywords) */
 
-.gallery-content {
-    flex-direction: column;
-}
 
 .tags-wrapper {
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -594,7 +591,7 @@ ul.drop-down-list {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     top: 0;

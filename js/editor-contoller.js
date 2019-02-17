@@ -26,7 +26,7 @@ function setMouseVars() {
 function initEditor() {
     updateCaptionsSizeByMediaQuery(gIsMobile)
     gCanvas = document.querySelector('canvas')
-    gCtx = gCanvas.getContext('2d')
+    gCtx = gCanvas.getContext('2d');
     setMouseVars();
     setupEditor();
     onChangeView();
@@ -176,42 +176,12 @@ function onCanvasTouch(ev) {
             diffY = startY - touchLastY;
         }
     }
+    
     touchLastX = startX;
     touchLastY = startY;
-    let newCoords = {
-        x: gFocusedCaption.x + diffX,
-        y: gFocusedCaption.y + diffY
-    }
-    updateCaptionCoords(gFocusedCaption.id, { newCoords }) // Update the model
-    renderCanvas();
+
+    console.log(diffX, diffY)
 }
-
-//     ev = ev.touches[0];
-//     startX = ev.clientX - gCanvas.getBoundingClientRect().x,
-//         startY = ev.clientY - gCanvas.getBoundingClientRect().y
-
-//     // Get the clicked caption and change the mouse cursor accordingly
-//     let caption = getClickedCaption(coords);
-
-//     // Click is down? there is focused caption? let's move it!
-//     if (gFocusedCaption && caption) {
-//         ev.preventDefault();
-//         gElInputText.style.display = 'none';
-//         let mouseX = parseInt(ev.clientX - gCanvas.getBoundingClientRect().x);
-//         let mouseY = parseInt(ev.clientY - gCanvas.getBoundingClientRect().y);
-
-//         var dx = mouseX - startX;
-//         var dy = mouseY - startY;
-//         startX = mouseX;
-//         startY = mouseY;
-//         let newCoords = {
-//             x: gFocusedCaption.x + dx,
-//             y: gFocusedCaption.y + dy
-//         }
-//         updateCaptionCoords(gFocusedCaption.id, newCoords) // Update the model
-//         renderCanvas();
-//     }
-// }
 
 // EDITOR TOOLS START
 // Clicked on add new caption
@@ -269,11 +239,14 @@ function onEditorDownload() {
 
 // EDITOR TOOLS END
 
-function onUpdateCaptionText(el) {
-    el.style.display = 'none';
+function onUpdateCaptionText(el, ev) {
     updateCaptionText(gFocusedCaption.id, el.value);
+    if (ev.which === 13) {
+        gElInputText.style.display = 'none';
+    }
     renderCanvas();
 }
+
 
 
 // Change state of editor toolbar to get style of focused caption
