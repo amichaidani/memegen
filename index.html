@@ -64,8 +64,10 @@
                 <div class="tools-wrapper">
                     <div class="caption-tools">
                         <div class="edit-tools">
-                            <span class="color-swatch"><i class="fas fa-palette" onclick="propagateColorClick()"></i>
-                                <input type="color" class="caption-color-picker" onchange="onCaptionChangeColor(this)">
+                            <span class="color-swatch">
+                                <button
+                                    class="jscolor {valueElement:null,value:'66ccff',onFineChange:'onCaptionChangeColor(this)'}">
+                                </button>
                             </span>
                             <span class="change-caption-style btn-group">
                                 <button class="btn-caption-smaller" onclick="onCaptionSmaller()">-</button>
@@ -91,6 +93,7 @@
             <canvas hidden></canvas>
         </section>
     </main>
+    <script src="lib/jscolor.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/gallery-service.js"></script>
     <script src="js/editor-service.js"></script>

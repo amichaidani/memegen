@@ -133,9 +133,8 @@ function onCaptionDelete() {
 // Clicked on caption color change
 function onCaptionChangeColor(el) {
     if (gFocusedCaption) {
-        let chosenColor = el.value;
+        let chosenColor = '#' + el
         let id = +gFocusedCaption.dataset.id;
-
         changeCaptionColor(id, chosenColor);
         gFocusedCaption.style.color = chosenColor;
     }
@@ -212,11 +211,12 @@ function propagateColorClick() {
 
 // Change state of editor toolbar to get style of focused caption
 function updateTools() {
-    let elColorPicker = $('.caption-color-picker')
     if (gFocusedCaption) {
-        $(elColorPicker).val(rgb2hex($(gFocusedCaption).css("color")));
+        let caption = getCaptionById(+gFocusedCaption.dataset.id);
+        let elColorPicker = $('.jscolor')[0];
+        elColorPicker.jscolor.fromString(caption.color);
     } else {
-        $(elColorPicker).val('#ffffff');
+        elColorPicker.jscolor.fromString('ffffff')
     }
 }
 
