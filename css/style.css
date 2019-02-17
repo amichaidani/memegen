@@ -182,50 +182,10 @@ button:hover {
     color: #fff;
 }
 
-input[type="color"] {
-    -webkit-appearance: none;
-    border: none;
-    width: 40px;
-    background: 0;
-}
-
-input[type="color"]:focus {
-    outline: 0;
-}
-
-input[type="color"]::-webkit-color-swatch-wrapper {
-    padding: 0;
-    cursor: pointer;
-}
-
-input[type="color"]::-webkit-color-swatch-wrapper:focus {
-    outline: 0;
-}
-
-input[type="color"]::-webkit-color-swatch {
-    border: none;
-    border-radius: 3px;
-    height: 30px;
-    margin-top: -1px;
-    border: 1px solid #333;
-    box-sizing: border-box;
-}
-
-@media (max-width:420px) {
-    input[type="color"]::-webkit-color-swatch {
-        border: none;
-        border-radius: 3px;
-        height: 40px;
-    }
-}
-
-input[type="color"]::-webkit-color-swatch:active {
-    outline: 0;
-}
-
 .color-swatch {
     position: relative;
     cursor: pointer;
+    margin-right: 0.5rem;
 }
 
 .color-swatch .fas {
