@@ -150,3 +150,8 @@ function onUploadMeme() {
     renderKeywords();
 }
 
+function hideModal() {
+    let elModal = document.querySelector('.modal')
+    elModal.classList.add('hide')
+    elModal.style.display="none"
+}
