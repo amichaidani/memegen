@@ -93,6 +93,9 @@ input {
     .search-box-icon {
         height: 40px;
     }
+    div.tags-wrapper {
+        display: none;
+    }
 }
 
 label, button {
@@ -227,11 +230,6 @@ header {
 @media (max-width:740px) {
     .logo-container {
         flex-shrink: 2;
-    }
-}
-
-@media (max-width:740px) {
-    .logo-container {
         order: -1;
     }
 }
@@ -294,6 +292,13 @@ header {
 @media (max-width:420px) {
     .upload-meme-btn {
         width: 100%;
+    }
+}
+
+@media (min-width:420px) {
+
+    .mobile-flex-con {
+        display: unset;
     }
 }
 
@@ -557,7 +562,7 @@ ul.drop-down-list {
     font-size: 16px;
     padding: 12px 20px 12px 40px;
     border: 1px solid #ddd;
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
 }
 
 .search-box-wrapper .drop-down-list {
