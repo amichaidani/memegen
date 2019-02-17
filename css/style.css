@@ -4,6 +4,10 @@
 
 /* ========== */
 
+:root {
+    --main-border-color: rgba(255, 255, 255, 0.5);
+}
+
 html {
     font-size: 16px;
 }
@@ -13,7 +17,8 @@ body {
     margin: 0;
     font-weight: 400;
     line-height: 1.45;
-    color: #333;
+    color: #ffffff;
+    background-color: #20262e;
 }
 
 /* ========== */
@@ -34,7 +39,7 @@ p {
 }
 
 h1, h2, h3, h4, h5 {
-    margin: 0 0 1rem;
+    margin: 0;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
 }
@@ -69,10 +74,12 @@ small, .text_small {
 
 /* ========== */
 
-input[type="search"] {
-    height: 30px;
+input {
+    background: #1b2027;
+    color: #fff;
+    height: 40px;
     border-radius: 3px;
-    border: 1px solid #333;
+    border: 1px solid var(--main-border-color);
     -webkit-appearance: none;
 }
 
@@ -81,31 +88,34 @@ input[type="search"] {
         width: 100%;
     }
     .search-box-icon {
-        height: 30px;
+        height: 40px;
     }
 }
 
 label, button {
-    background: 0;
-    border: 1px solid #333;
-    background: #fff;
+    background: none;
+    border: 1px solid var(--main-border-color);
+    color: #ffffff;
     border-radius: 3px;
     min-width: 40px;
-    height: 30px;
+    height: 40px;
     cursor: pointer;
     margin-right: 0;
     display: inline-block;
-    font-weight: 700;
+    font-weight: 500;
+}
+
+label:hover {
+    background-color: #0963b8;
+    color: #fff;
 }
 
 @media (max-width:420px) {
     button {
         background: 0;
-        border: 1px solid #333;
-        background: #fff;
+        border: 1px solid var(--main-border-color);
+        background: none;
         border-radius: 3px;
-        min-width: 40px;
-        height: 40px;
         cursor: pointer;
         margin-right: 0;
         display: inline-block;
@@ -114,12 +124,9 @@ label, button {
     }
 }
 
-label.upload-meme-btn:before {
-    font-family: 'Font Awesome 5 Free';
-    content: '\f0fe';
+label.upload-meme-btn i {
     margin-right: 0.3rem;
-    font-weight: 500;
-    color: #999;
+    color: var(--main-border-color);
     font-size: 0.8em;
 }
 
@@ -156,12 +163,12 @@ button:focus {
 }
 
 .btn-group button:first-child {
-    border-left: 1px solid #333;
+    border-left: 1px solid var(--main-border-color);
     border-radius: 3px 0px 0px 3px;
 }
 
 .btn-group button:last-child {
-    border-right: 1px solid #333;
+    border-right: 1px solid var(--main-border-color);
     border-radius: 0px 3px 3px 0px;
 }
 
@@ -174,7 +181,7 @@ button:focus {
         margin-left: 0;
     }
     .btn-group button {
-        border: 1px solid #333;
+        border: 1px solid var(--main-border-color);
         border-radius: 3px;
         margin-right: 0.2rem;
     }
@@ -187,7 +194,7 @@ button:focus {
 }
 
 button:hover {
-    background: red;
+    background: #0963b8;
     color: #fff;
 }
 
@@ -196,21 +203,40 @@ button:hover {
     margin-right: 0.5rem;
 }
 
-.jscolor:before {
-    font-family: 'Font Awesome 5 Free';
-    content: '\f53f';
-}
-
 /* ========== */
 
 /* Header */
 
 /* ========== */
 
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1c2128;
+    box-shadow: 0 0 5px rgba(28, 33, 40, 0);
+}
+
+.logo-container {
+    width: 100%;
+}
+
+@media (max-width:740px) {
+    .logo-container {
+        flex-shrink: 2;
+    }
+}
+
+@media (max-width:740px) {
+    .logo-container {
+        order: -1;
+    }
+}
+
 .logo {
     font-family: 'Pacifico', cursive;
-    color: red;
-    padding: 0px 20px 10px 20px;
+    color: #ffffff;
+    padding: 0px 20px 25px 20px;
     text-align: center;
     cursor: default;
 }
@@ -225,12 +251,13 @@ button:hover {
     max-width: 980px;
     margin: auto;
     padding: 10px 10px;
+    margin-top: 20px;
 }
 
 .grid-container {
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
+    grid-template-columns: repeat(4, 1fr);
     max-width: 980px;
     margin: 20px auto;
     align-items: stretch;
@@ -268,7 +295,7 @@ button:hover {
 }
 
 .meme-img {
-    width: 200px;
+    width: auto;
     height: 200px;
     background-position: center center;
     background-size: cover;
@@ -276,6 +303,13 @@ button:hover {
     background-repeat: no-repeat;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     transition: .3s;
+    font-size: 0;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+
+.meme-img:hover {
+    box-shadow: 0 0 0 2px #0963b8, 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .meme-search-box>* {
@@ -297,7 +331,7 @@ button:hover {
     justify-content: center;
     align-items: center;
     padding: 0 8px;
-    height: 30px;
+    height: 40px;
     font-weight: 500;
     color: #999;
     font-size: 0.8em;
@@ -355,14 +389,10 @@ button:hover {
     }
 }
 
-.meme-img:hover {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)
-}
-
 /* Tags Style (keywords) */
 
 .tags-container {
-    border: 1px solid #ececec;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     flex-wrap: wrap;
     align-items: baseline;
     padding: 10px;
@@ -397,6 +427,7 @@ button:hover {
 }
 
 [contenteditable] {
+    -webkit-user-select: text;
     user-select: text;
 }
 
@@ -428,11 +459,8 @@ button:hover {
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
     position: absolute;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -o-user-select: none;
+    -webkit-user-select: text;
+    user-select: text;
     position: absolute;
     top: 100px;
     left: 0px;
@@ -449,22 +477,20 @@ button:hover {
         max-width: 100%;
         max-height: auto;
     }
-    .tools-wrapper {
-        position: fixed;
-        bottom: 0;
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        /* background: #fff; */
-        /* box-shadow: 1px 1px 10px rgba(0, 0, 0, .15); */
-        padding: 20px 0;
-    }
 }
 
-.tools-wrapper {
-    background: #fff;
+.caption-tools-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: #1c2128;
+    box-shadow: 0 0 5px rgba(28, 33, 40, 0);
+    padding: 20px 0;
 }
 
 .caption-tools {
