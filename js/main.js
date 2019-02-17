@@ -10,7 +10,6 @@ function init() {
     createGMemes();
     renderMemes();
     galleryControllerInit();
-    initCanvas();
 }
 
 function onChangeView() {

@@ -2,6 +2,8 @@ var gElMemeImg;
 var gCanvas;
 var gCtx;
 var gFocusedCaption = null;
+var gElInputText = document.querySelector('.caption-text-input');
+
 
 // Mouse tracking vars
 var gIsDown = false;
@@ -13,9 +15,7 @@ var scrollY;
 var startX;
 var startY;
 
-function initCanvas() {
-    gCanvas = document.querySelector('canvas')
-    gCtx = gCanvas.getContext('2d')
+function setMouseVars() {
     canvasOffset = $(gCanvas).offset();
     offsetX = canvasOffset.left;
     offsetY = canvasOffset.top;
@@ -24,12 +24,15 @@ function initCanvas() {
 }
 
 function initEditor() {
-    createDefaultCaptions();
+    gCanvas = document.querySelector('canvas')
+    gCtx = gCanvas.getContext('2d')
+    setMouseVars();
     setupEditor();
     onChangeView();
 }
 
 function setupEditor() {
+    createDefaultCaptions();
     //Todo: Limit displayed img to max width of 75% of viewport
     let selectedMeme = getSelectedMeme();
     gElMemeImg = document.querySelector('.meme-background');
@@ -41,9 +44,10 @@ function setupEditor() {
         gCtx.canvas.width = gCanvas.width;
         gCtx.canvas.height = gCanvas.height;
         gCtx.drawImage(gElMemeImg, 0, 0, gCanvas.width, gCanvas.height);
-        placeDefaultCaptions();
         renderCaptions();
-    }, 300);
+        placeDefaultCaptions(getCanvasDimensions());
+        renderCanvas();
+    }, 400);
 }
 
 // Re-render canvas
@@ -52,20 +56,7 @@ function renderCanvas() {
     renderCaptions();
 }
 
-// Place the default top and bottom captions
-function placeDefaultCaptions() {
-    let captions = getCaptions();
-    captions.forEach((caption, index) => {
-        caption.x = gCanvas.width / 2;
-        if (index === 0) {
-            caption.y = caption.fontSize + 20;
-        } else {
-            caption.y = gCanvas.height - caption.fontSize + 20;
-        }
-    })
-}
-
-// Render '.caption' elements
+// Render captions
 function renderCaptions() {
     let captions = getCaptions(); // Get captions from model
     captions.forEach(caption => {
@@ -73,7 +64,7 @@ function renderCaptions() {
     });
 }
 
-// Render single new caption
+// Render single caption
 function renderSingleCaption(caption) {
     // Set font
     // Set colors and stroke
@@ -91,24 +82,6 @@ function renderSingleCaption(caption) {
     gCtx.strokeText(caption.txt, caption.x, caption.y);
 }
 
-// Hanlding touch events
-function onCaptionTouch(el, ev) {
-    ev.stopPropagation();
-    ev.preventDefault();
-    ev = ev.touches[0];
-    console.log(ev);
-
-    gFocusedCaption = el;
-    updateTools();
-    gOffset = [
-        $(el).offset().left - ev.clientX,
-        $(el).offset().top - ev.clientY
-    ];
-
-    gFocusedCaption.style.left = (ev.clientX - gOffset[0]) + 'px';
-    gFocusedCaption.style.top = (ev.clientY - gOffset[1]) + 'px';
-}
-
 // Mouse down event on canvas
 function onCanvasMouseDown(ev) {
     gIsDown = true;
@@ -122,9 +95,14 @@ function onCanvasMouseDown(ev) {
     let caption = getClickedCaption(coords);
     if (caption) {
         gFocusedCaption = caption;
+        gElInputText.value = caption.txt;
+        gElInputText.style.display = "inline-block";
+        gElInputText.style.left = coords.x + 'px';
+        gElInputText.style.top = coords.y + 'px';
     }
     else {
         gFocusedCaption = null;
+        gElInputText.style.display = 'none';
     }
     updateTools();
 }
@@ -132,12 +110,10 @@ function onCanvasMouseDown(ev) {
 // Mouse out event on canvas
 function onCanvasRelease() {
     gIsDown = false;
-    console.log('out')
 }
 
 // Track mouse movement for drag-and-drop
 function onCanvasMouseMove(ev) {
-    event.preventDefault();
 
     // Get coords of event
     let coords = {
@@ -155,6 +131,7 @@ function onCanvasMouseMove(ev) {
     // Click is down? there is focused caption? let's move it!
     if (gIsDown && gFocusedCaption) {
         ev.preventDefault();
+        gElInputText.style.display = 'none';
         let mouseX = parseInt(ev.clientX - offsetX);
         let mouseY = parseInt(ev.clientY - offsetY);
 
@@ -171,11 +148,38 @@ function onCanvasMouseMove(ev) {
     }
 };
 
+function onCanvasTouch(ev) {
+    console.log(ev);
+
+}
+// Hanlding touch events
+// function onCaptionTouch(el, ev) {
+//     ev.stopPropagation();
+//     ev.preventDefault();
+//     ev = ev.touches[0];
+//     console.log(ev);
+
+//     gFocusedCaption = el;
+//     updateTools();
+//     gOffset = [
+//         $(el).offset().left - ev.clientX,
+//         $(el).offset().top - ev.clientY
+//     ];
+
+//     gFocusedCaption.style.left = (ev.clientX - gOffset[0]) + 'px';
+//     gFocusedCaption.style.top = (ev.clientY - gOffset[1]) + 'px';
+// }
+
+
 // EDITOR TOOLS START
 // Clicked on add new caption
 function onCaptionAdd() {
-    createCaption('New Caption', { width: gCanvas.width, height: gCanvas.height });
+    createCaption('New Caption', getCanvasDimensions());
     renderCanvas();
+}
+
+function getCanvasDimensions() {
+    return { width: gCanvas.width, height: gCanvas.height }
 }
 
 // Clicked on delete caption
@@ -222,6 +226,13 @@ function onEditorDownload() {
 }
 
 // EDITOR TOOLS END
+
+function onUpdateCaptionText(el) {
+    el.style.display = 'none';
+    updateCaptionText(gFocusedCaption.id, el.value);
+    renderCanvas();
+}
+
 
 // Change state of editor toolbar to get style of focused caption
 function updateTools() {
