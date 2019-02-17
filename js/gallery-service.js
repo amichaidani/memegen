@@ -124,7 +124,6 @@ function createGMemes() {
     gMemes.push(createMeme('img/meme4.jpg', ['nature', 'kids']));
     gMemes.push(createMeme('img/meme5.jpg', ['wondering', 'thinking']));
     gMemes.push(createMeme('img/meme6.jpg', ['one_more_time', 'jackson']));
-    gMemes.push(createMeme('img/meme7.jpg', ['finger']));
     gMemes.push(createMeme('img/meme8.jpg', ['leader', 'politics']));
     gMemes.push(createMeme('img/meme9.jpg', ['comics', 'frog']));
     gMemes.push(createMeme('img/meme10.jpg', ['amen', 'woman']));

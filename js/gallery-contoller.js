@@ -9,6 +9,9 @@ function galleryControllerInit() {
     renderDropDownList();
 
 }
+function resetGalleryView() {
+    renderMemes();
+}
 
 function onSelectMeme(el) {
     changeSelectedMeme(el.dataset["id"]); // Model update
@@ -139,8 +142,13 @@ function hideDropDownList() {
     elList.classList.add('hide');
 }
 
-function onUploadMeme() {
-    let str = prompt('Please type Keywords (seperated by space) to describe the Meme');
+function showModal () {
+    let elModal = document.querySelector('.modal')
+    elModal.style.display="flex"
+}
+
+function onUploadMeme(str) {
+    
     str = str.toLowerCase();
     let keywords = str.split(' ');
     const selectedFile = document.getElementById('add_meme').files[0];
@@ -148,5 +156,10 @@ function onUploadMeme() {
     addMeme(objectURL, keywords);
     renderMemes();
     renderKeywords();
+    hideModal();
 }
 
+function hideModal() {
+    let elModal = document.querySelector('.modal')
+    elModal.style.display="none"
+}
