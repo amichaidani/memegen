@@ -102,7 +102,6 @@ function onCanvasMouseDown(ev) {
         gElInputText.style.top = coords.y + 'px';
     }
     else {
-        gFocusedCaption = null;
         hideInputCaption()
     }
     updateTools();
