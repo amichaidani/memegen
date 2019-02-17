@@ -56,9 +56,16 @@
                         <div class="tags-container flex align-center">
                         </div>
                     </div>
+                    <!-- Meme grid -->
+                    <div class="grid-container"></div>
                 </div>
-                <!-- Meme grid -->
-                <div class="grid-container"></div>
+            </div>
+
+            <div class="modal">
+                <div class="modal-content">
+                    <h3>Enter Keywords</h3>
+                    <input class="input-keywords" type="text">
+                </div>
             </div>
         </section>
 
@@ -69,7 +76,8 @@
                 <div class="editor-container">
                     <input type="text" class="caption-text-input" onchange="onUpdateCaptionText(this)">
                     <canvas onmousedown="onCanvasMouseDown(event)" onmouseup="onCanvasRelease()"
-                        onmousemove="onCanvasMouseMove(event)" ontouchmove="onCanvasTouch(event)"  ontouchend="onCanvasTouchEnd(event)" ontouchstart="onCanvasTouchStart(event)"></canvas>
+                        onmousemove="onCanvasMouseMove(event)" ontouchmove="onCanvasTouch(event)"
+                        ontouchend="onCanvasTouchEnd(event)" ontouchstart="onCanvasTouchStart(event)"></canvas>
                 </div>
                 <div class="caption-tools-wrapper">
                     <div class="caption-tools">
