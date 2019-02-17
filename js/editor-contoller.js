@@ -1,3 +1,4 @@
+'use strict'
 var gFocusedCaption = null;
 var gElMemeImg;
 var gCanvas;
@@ -7,6 +8,7 @@ var gMousePosition;
 var gOffset = [0, 0];
 var elCaption;
 var gIsDown = false;
+var gElCaptionReady = false;
 
 function initEditor() {
     setupEditor();
@@ -56,8 +58,10 @@ function renderNewCaption(caption) {
     $('.editor-container').append(strHTML);
     $('.caption').last()[0].focus();
     gFocusedCaption = $('.caption').last()[0];
+
     $(gFocusedCaption).css('left', ((gElMemeImg.width / 2) - ($(gFocusedCaption).outerWidth() / 2)) + 'px');
     $(gFocusedCaption).css('top', ((gElMemeImg.height / 2) - ($(gFocusedCaption).outerHeight() / 2)) + 'px');
+
     updateTools();
 }
 
@@ -70,12 +74,12 @@ function onCaptionTouch(el, ev) {
     gFocusedCaption = el;
     updateTools();
     gOffset = [
-        el.offsetLeft - ev.clientX,
-        el.offsetTop - ev.clientY
+        $(el).offset().left - ev.clientX,
+        $(el).offset().top - ev.clientY
     ];
 
-    gFocusedCaption.style.left = ev.clientX + 'px';
-    gFocusedCaption.style.top = ev.clientY + 'px';
+    gFocusedCaption.style.left = (ev.clientX - gOffset[0]) + 'px';
+    gFocusedCaption.style.top = (ev.clientY - gOffset[1]) + 'px';
 }
 
 // CAPTIONS DRAG FUNCTION START
@@ -96,28 +100,28 @@ function onCaptionRelease() {
     gIsDown = false;
 }
 
-// Track mouse movement for drag-and-drop
-document.addEventListener('mousemove', function (event) {
-    event.preventDefault();
+// // Track mouse movement for drag-and-drop
+// document.addEventListener('mousemove', function (event) {
+//     event.preventDefault();
 
-    // if (event.clientX
-    if (gIsDown && gFocusedCaption) {
-        gMousePosition = {
+//     // if (event.clientX
+//     if (gIsDown && gFocusedCaption) {
+//         gMousePosition = {
 
-            x: event.clientX,
-            y: event.clientY
+//             x: event.clientX,
+//             y: event.clientY
 
-        };
+//         };
 
-        if (gMousePosition.x + gOffset[0] <= 0 ||
-            gMousePosition.y + gOffset[1] <= $(gElMemeImg).position().top ||
-            gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= gElMemeImg.offsetWidth ||
-            gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > gElMemeImg.offsetHeight
-        ) return;
+//         if (gMousePosition.x + gOffset[0] <= 0 ||
+//             gMousePosition.y + gOffset[1] <= $(gElMemeImg).position().top ||
+//             gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= gElMemeImg.offsetWidth ||
+//             gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > gElMemeImg.offsetHeight
+//         ) return;
 
-        dragCaptions();
-    }
-}, true);
+//         dragCaptions();
+//     }
+// }, true);
 
 function dragCaptions() {
     gFocusedCaption.style.left = (gMousePosition.x + gOffset[0]) + 'px';
