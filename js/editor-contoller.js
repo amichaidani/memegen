@@ -222,6 +222,7 @@ function onCaptionChangeColor(el) {
 // Clicked on caption enlarge font size
 function onCaptionTextSizeChange(el) {
     if (gFocusedCaption) {
+        hideInputCaption();
         let action = el.dataset.action;
         if (action === 'enlarge') {
             captionLarger(gFocusedCaption.id);
