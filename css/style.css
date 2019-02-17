@@ -86,6 +86,7 @@ input {
 @media (max-width:420px) {
     input[type="search"] {
         width: 100%;
+        text-align: center;
     }
     .search-box-icon {
         height: 40px;
@@ -183,7 +184,7 @@ button:focus {
     .btn-group button {
         border: 1px solid var(--main-border-color);
         border-radius: 3px;
-        margin-right: 0.2rem;
+        margin-right: 0.1rem;
     }
     .btn-group button:first-child {
         border-radius: 3px;
@@ -259,7 +260,7 @@ header {
     grid-gap: 10px;
     grid-template-columns: repeat(4, 1fr);
     max-width: 980px;
-    margin: 20px auto;
+    margin: 10px auto;
     align-items: stretch;
     justify-content: space-between;
 }
@@ -391,12 +392,18 @@ header {
 
 /* Tags Style (keywords) */
 
-.tags-container {
+.tags-wrapper {
     border: 1px solid rgba(255, 255, 255, 0.2);
-    flex-wrap: wrap;
-    align-items: baseline;
-    padding: 10px;
+    min-height: 40px;
     border-radius: 3px;
+    display: flex;
+    justify-items: center;
+}
+
+.tags-container {
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 10px;
 }
 
 .tags-container span {
@@ -464,10 +471,17 @@ header {
     -webkit-user-select: text;
     user-select: text;
     position: absolute;
+    touch-action: none;
     top: 100px;
     left: 0px;
     cursor: move;
     font-size: 50px;
+}
+
+@media (max-width:420px) {
+    .caption {
+        font-size: 30px;
+    }
 }
 
 .caption:focus {

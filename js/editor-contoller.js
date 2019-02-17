@@ -1,8 +1,4 @@
 'use strict'
-
-// TODO:
-// 2) Touch commands for mobile
-
 var gFocusedCaption = null;
 var gElMemeImg;
 var gCanvas;
@@ -12,6 +8,7 @@ var gMousePosition;
 var gOffset = [0, 0];
 var elCaption;
 var gIsDown = false;
+var gElCaptionReady = false;
 
 function initEditor() {
     setupEditor();
@@ -36,6 +33,7 @@ function setupEditor() {
 
 }
 
+// Place the default top and bottom captions
 function placeDefaultCaptions() {
     $('.caption').each(function (idx) {
         $(this).css('left', ((gElMemeImg.width / 2) - ($(this).outerWidth() / 2)) + 'px');
@@ -55,14 +53,33 @@ function renderCaptions() {
 function renderNewCaption(caption) {
     let strHTML = '';
     strHTML += `
-        <div class="caption" data-id="${caption.id}" onmousedown="onCaptionClick(this,event)" onmouseup="onCaptionRelease()" contenteditable="true" oninput="onCaptionChange(this)">${caption.txt}</span>
+        <div class="caption" data-id="${caption.id}" onmousedown="onCaptionClick(this,event)" onmouseup="onCaptionRelease()" contenteditable="true" oninput="onCaptionChange(this)" ontouchmove="onCaptionTouch(this,event)">${caption.txt}</span>
         `
     $('.editor-container').append(strHTML);
     $('.caption').last()[0].focus();
     gFocusedCaption = $('.caption').last()[0];
+
     $(gFocusedCaption).css('left', ((gElMemeImg.width / 2) - ($(gFocusedCaption).outerWidth() / 2)) + 'px');
     $(gFocusedCaption).css('top', ((gElMemeImg.height / 2) - ($(gFocusedCaption).outerHeight() / 2)) + 'px');
+
     updateTools();
+}
+
+function onCaptionTouch(el, ev) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    ev = ev.touches[0];
+    console.log(ev);
+
+    gFocusedCaption = el;
+    updateTools();
+    gOffset = [
+        $(el).offset().left - ev.clientX,
+        $(el).offset().top - ev.clientY
+    ];
+
+    gFocusedCaption.style.left = (ev.clientX - gOffset[0]) + 'px';
+    gFocusedCaption.style.top = (ev.clientY - gOffset[1]) + 'px';
 }
 
 // CAPTIONS DRAG FUNCTION START
@@ -81,33 +98,36 @@ function onCaptionClick(el, ev) {
 // Released mouse from caption
 function onCaptionRelease() {
     gIsDown = false;
-    $(gFocusedCaption).focus();
-    // gFocusedCaption = null;
 }
 
-// Track mouse movement for drag-and-drop
-document.addEventListener('mousemove', function (event) {
-    event.preventDefault();
+// // Track mouse movement for drag-and-drop
+// document.addEventListener('mousemove', function (event) {
+//     event.preventDefault();
 
-    // if (event.clientX
-    if (gIsDown && gFocusedCaption) {
-        gMousePosition = {
+//     // if (event.clientX
+//     if (gIsDown && gFocusedCaption) {
+//         gMousePosition = {
 
-            x: event.clientX,
-            y: event.clientY
+//             x: event.clientX,
+//             y: event.clientY
 
-        };
+//         };
 
-        if (gMousePosition.x + gOffset[0] <= 0 ||
-            gMousePosition.y + gOffset[1] <= $(gElMemeImg).position().top ||
-            gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= gElMemeImg.offsetWidth ||
-            gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > gElMemeImg.offsetHeight
-        ) return;
+//         if (gMousePosition.x + gOffset[0] <= 0 ||
+//             gMousePosition.y + gOffset[1] <= $(gElMemeImg).position().top ||
+//             gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= gElMemeImg.offsetWidth ||
+//             gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > gElMemeImg.offsetHeight
+//         ) return;
 
-        gFocusedCaption.style.left = (gMousePosition.x + gOffset[0]) + 'px';
-        gFocusedCaption.style.top = (gMousePosition.y + gOffset[1]) + 'px';
-    }
-}, true);
+//         dragCaptions();
+//     }
+// }, true);
+
+function dragCaptions() {
+    gFocusedCaption.style.left = (gMousePosition.x + gOffset[0]) + 'px';
+    gFocusedCaption.style.top = (gMousePosition.y + gOffset[1]) + 'px';
+
+}
 // CAPTIONS DRAG FUNCTION END
 
 // EDITOR TOOLS START
@@ -149,7 +169,6 @@ function onCaptionLarger() {
         if (size) {
             $(gFocusedCaption).css('font-size', size + 'px')
         }
-        $(gFocusedCaption).focus();
     }
 }
 
@@ -158,9 +177,8 @@ function onCaptionSmaller() {
     if (gFocusedCaption) {
         let size = captionSmaller(+gFocusedCaption.dataset.id);
         if (size) {
-            $(gFocusedCaption).css('font-size', size + 'px').focus();
+            $(gFocusedCaption).css('font-size', size + 'px')
         }
-        $(gFocusedCaption).focus();
     }
 }
 

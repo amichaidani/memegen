@@ -18,7 +18,7 @@
     <title>Meme Generator</title>
 </head>
 
-<body onload="init()">
+<body onload="init()" ontouchmove="console.log(event)">
     <header>
         <div class="logo-container">
             <h1 class="logo">memegen</h1>
@@ -50,8 +50,11 @@
                     </div>
                 </div>
                 <!-- Tags cloud -->
-                <div class="tags-container flex align-center">
+                <div class="tags-wrapper">
+                    <div class="tags-container flex align-center">
+                    </div>
                 </div>
+
                 <!-- Meme grid -->
                 <div class="grid-container">
                 </div>
