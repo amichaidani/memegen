@@ -33,11 +33,12 @@
                     <div class="image-upload gallery-tool">
                         <label for="add_meme" class="upload-meme-btn"><i class="fas fa-upload"></i>Upload Meme</label>
                         <section class="add-meme-section hide">
-                            <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg" onchange="showModal()">
+                            <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
+                                onchange="showModal()">
                         </section>
                     </div>
                     <!-- end of image upload -->
-                   
+
                     <!-- Search box -->
                     <div class="meme-search-box gallery-tool">
                         <span class="search-box-wrapper">
@@ -64,7 +65,7 @@
                 <div class="modal-content">
                     <span class="close-modal-btn" onclick="hideModal()">✖</span>
                     <h3>Enter Keywords</h3>
-                    <input class="input-keywords" type="text"  onchange="onUploadMeme(this.value)">
+                    <input class="input-keywords" type="text" onchange="onUploadMeme(this.value)">
                 </div>
             </div>
         </section>
@@ -104,8 +105,8 @@
                             </span>
                         </div>
                         <div class="save-tools"> <span class="btn-group">
-                                <button class="btn-back-to-gallery" title="Back to gallery"
-                                    onclick="onChangeView()">Gallery</button>
+                                <button class="btn-back-to-gallery" title="Back to gallery" onclick="onChangeView()"><i
+                                        class="fas fa-chevron-left"></i> Gallery</button>
                                 <button class="btn-editor-reset" title="Reset" onclick="onEditorReset()"><i
                                         class="fas fa-undo"></i></button>
                                 <a href="" download="my-meme.jpg" id="download-link"><button class="btn-editor-download"

@@ -103,7 +103,7 @@ function onCanvasMouseDown(ev) {
     }
     else {
         gFocusedCaption = null;
-        gElInputText.style.display = 'none';
+        hideInputCaption()
     }
     updateTools();
 }
@@ -131,7 +131,7 @@ function onCanvasMouseMove(ev) {
     // Click is down? there is focused caption? let's move it!
     if (gIsDown && gFocusedCaption) {
         ev.preventDefault();
-        gElInputText.style.display = 'none';
+        hideInputCaption();
         let mouseX = parseInt(ev.clientX - offsetX);
         let mouseY = parseInt(ev.clientY - offsetY);
 
@@ -205,6 +205,7 @@ function onCaptionDelete() {
         deleteCaption(gFocusedCaption.id);
     }
     gFocusedCaption = null;
+    hideInputCaption();
     updateTools();
     renderCanvas();
 }
@@ -245,7 +246,7 @@ function onEditorDownload() {
 function onUpdateCaptionText(el, ev) {
     updateCaptionText(gFocusedCaption.id, el.value);
     if (ev.which === 13) {
-        gElInputText.style.display = 'none';
+        hideInputCaption()
     }
     renderCanvas();
 }
@@ -260,3 +261,6 @@ function updateTools() {
     }
 }
 
+function hideInputCaption() {
+    gElInputText.style.display = 'none';
+}
