@@ -227,11 +227,6 @@ header {
 @media (max-width:740px) {
     .logo-container {
         flex-shrink: 2;
-    }
-}
-
-@media (max-width:740px) {
-    .logo-container {
         order: -1;
     }
 }
@@ -294,6 +289,13 @@ header {
 @media (max-width:420px) {
     .upload-meme-btn {
         width: 100%;
+    }
+}
+
+@media (min-width:420px) {
+
+    .mobile-flex-con {
+        display: unset;
     }
 }
 
@@ -406,7 +408,6 @@ header {
     justify-items: center;
     padding: 10px 0;
 }
-
 
 .tags-container {
     flex-wrap: wrap;

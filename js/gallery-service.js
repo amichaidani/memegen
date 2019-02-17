@@ -110,7 +110,8 @@ function filterMemes(str) {
             }
         })
     })
-    return memesToDiplay;
+    let uniqueMemesToDisplay = [...new Set(memesToDiplay)]; 
+    return uniqueMemesToDisplay;
 }
 
 
