@@ -9,8 +9,8 @@ var gNextMemeId = 1
 var gMemes = [];
 var gKeywords = [];
 var gKeywordsMap = {} // Mapping the search freq of each keyword.
-const MIN_KEY_WORD_FONT_SIZE = 14;
-const MAX_KEY_WORD_FONT_SIZE = 40;
+// const MIN_KEY_WORD_FONT_SIZE = 14;
+// const MAX_KEY_WORD_FONT_SIZE = 40;
 
 var gSelectedMeme = null;
 

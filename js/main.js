@@ -1,3 +1,5 @@
+'use strict'
+
 const GALLERY_VIEW = 'gallery';
 const EDITOR_VIEW = 'editor';
 var gCurrentView = GALLERY_VIEW;

@@ -1,3 +1,7 @@
+'use strict'
+const MIN_KEY_WORD_FONT_SIZE = 14;
+const MAX_KEY_WORD_FONT_SIZE = 40;
+
 function galleryControllerInit() {
     createKeywords();
     createKeywordsMap();
@@ -12,6 +16,16 @@ function onSelectMeme(el) {
 function renderMemes(memes) {
     let strHTMLs = getMemesStrHTMLs(memes);
     $('.grid-container').html(strHTMLs)
+}
+
+function onSelectKeyword(elClass) {
+    console.log('onselect keywords works!');
+    // console.log('elclass: ', el.classList[0]);
+    console.log('elclass: ', elClass[0]);
+    onKeywordSearch(elClass[0]);
+    onFilterMemes(elClass[0]);
+
+
 }
 
 function getMemesStrHTMLs(memes) {
@@ -65,7 +79,7 @@ function getKeywordsStrHTMLs(keywords, keywordsMap) {
     let strHTMLs = []
     keywords.forEach(keyword => {
         let KeywordToDiplay = keyword.charAt(0).toUpperCase() + keyword.substring(1, keyword.length)
-        let strHTML = `<span class="${keyword}" style= "font-size:${keywordsMap[keyword].fontSize}px">${KeywordToDiplay}</span>`
+        let strHTML = `<span class="${keyword}" style= "font-size:${keywordsMap[keyword].fontSize}px" onclick="onSelectKeyword(this.classList)">${KeywordToDiplay}</span>`
         strHTMLs.push(strHTML)
     })
 
@@ -74,11 +88,13 @@ function getKeywordsStrHTMLs(keywords, keywordsMap) {
 }
 
 function onUploadMeme() {
-    let str = prompt('Please type Keywords (seperated by space) to describe the Meme')
-    let keywords = str.split(' ')
+    let str = prompt('Please type Keywords (seperated by space) to describe the Meme');
+    str = str.toLowerCase();
+    let keywords = str.split(' ');
     const selectedFile = document.getElementById('add_meme').files[0];
     const objectURL = window.URL.createObjectURL(selectedFile);
-    addMeme(objectURL, keywords)
+    addMeme(objectURL, keywords);
     renderMemes();
     renderKeywords();
 }
+

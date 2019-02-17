@@ -1,3 +1,5 @@
+'use strict'
+
 // TODO:
 // 2) Touch commands for mobile
 
