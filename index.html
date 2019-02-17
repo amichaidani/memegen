@@ -74,10 +74,11 @@
             <img src="" class="meme-background" hidden />
             <div class="editor-wrapper">
                 <div class="editor-container">
-                    <input type="text" class="caption-text-input" onchange="onUpdateCaptionText(this)">
+                    <input type="text" class="caption-text-input" onkeyup="onUpdateCaptionText(this,event)">
                     <canvas onmousedown="onCanvasMouseDown(event)" onmouseup="onCanvasRelease()"
                         onmousemove="onCanvasMouseMove(event)" ontouchmove="onCanvasTouch(event)"
-                        ontouchend="onCanvasTouchEnd(event)" ontouchstart="onCanvasTouchStart(event)"></canvas>
+                        ontouchend="onCanvasTouchEnd(event)" ontouchstart="onCanvasTouchStart(event)"
+                        style="font-family:Impact;"></canvas>
                 </div>
                 <div class="caption-tools-wrapper">
                     <div class="caption-tools">
