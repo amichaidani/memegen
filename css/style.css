@@ -79,8 +79,10 @@ input {
     color: #fff;
     height: 40px;
     border-radius: 3px;
+    padding: 0 10px;
     border: 1px solid var(--main-border-color);
     -webkit-appearance: none;
+    box-sizing: border-box;
 }
 
 @media (max-width:420px) {
@@ -437,16 +439,6 @@ header {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
 }
 
-[contenteditable] {
-    -webkit-user-select: text;
-    user-select: text;
-}
-
-[contenteditable]:focus {
-    outline: 2px dashed rgba(255, 255, 255, 0.5);
-    user-select: text;
-}
-
 .meme-background {
     max-height: 400px;
     width: auto;
@@ -457,37 +449,6 @@ header {
         width: 100%;
         height: auto;
     }
-}
-
-.caption {
-    display: block;
-    white-space: nowrap;
-    text-align: center;
-    text-overflow: clip;
-    line-height: 0.8em;
-    font-family: Impact, arial, sans-serif;
-    color: #ffffff;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
-    position: absolute;
-    -webkit-user-select: text;
-    user-select: text;
-    position: absolute;
-    touch-action: none;
-    top: 100px;
-    left: 0px;
-    cursor: move;
-    font-size: 50px;
-}
-
-@media (max-width:420px) {
-    .caption {
-        font-size: 30px;
-    }
-}
-
-.caption:focus {
-    cursor: text;
 }
 
 @media (max-width:740px) {
@@ -520,6 +481,11 @@ header {
 .edit-tools {
     display: flex;
     justify-content: center;
+}
+
+.caption-text-input {
+    display: none;
+    position: absolute;
 }
 
 /* Animations */

@@ -1,7 +1,6 @@
-'use strict'
-
 var gCaptions = [];
 var gCaptionNextId = 0;
+var gDefaultTextSize;
 
 function createDefaultCaptions() {
     gCaptions = [];
@@ -9,19 +8,37 @@ function createDefaultCaptions() {
     createCaption('Heading Bottom');
 }
 
+function placeDefaultCaptions(canvasDimensions) {
+    gCaptions.forEach((caption, index) => {
+        caption.x = canvasDimensions.width / 2;
+        if (index === 0) {
+            caption.y = caption.fontSize + 20;
+        } else {
+            caption.y = canvasDimensions.height - caption.fontSize + 20;
+        }
+    })
+}
+function updateCaptionsSizeByMediaQuery(isMobile) {
+    if (isMobile){
+        gDefaultTextSize = 30;
+    } else {
+        gDefaultTextSize = 50;
+
+    }
+}
 function createCaption(txt, canvasDimensions) {
     let caption = {
         id: gCaptionNextId++,
         txt: txt,
+        textWidth: 0,
+        align: 'center',
         x: (canvasDimensions) ? canvasDimensions.width / 2 : 0,
         y: (canvasDimensions) ? canvasDimensions.height / 2 : 0,
-        fontSize: 50,
+        fontSize: gDefaultTextSize,
         fontFamily: 'Impact',
         color: '#ffffff',
         strokeColor: '#000000',
         strokeWidth: 2,
-        textWidth: 0,
-        align: 'center'
     }
     gCaptions.push(caption);
     return caption;
@@ -29,10 +46,18 @@ function createCaption(txt, canvasDimensions) {
 
 function getClickedCaption(coords) {
     let clickedCaption = gCaptions.find(caption => {
-        return (coords.x >= caption.x
-            && coords.x <= caption.x + caption.textWidth
-            && coords.y >= caption.y - caption.fontSize
-            && coords.y <= caption.y)
+        if (caption.align === 'center') {
+            return (coords.x >= caption.x - (caption.textWidth / 2)
+                && coords.x <= caption.x + (caption.textWidth / 2)
+                && coords.y >= caption.y - caption.fontSize
+                && coords.y <= caption.y)
+        }
+        if (caption.align === 'left') {
+            return (coords.x >= caption.x
+                && coords.x <= caption.x
+                && coords.y >= caption.y - caption.fontSize
+                && coords.y <= caption.y)
+        }
     });
     return clickedCaption;
 }
@@ -88,4 +113,9 @@ function captionSmaller(id) {
     if (caption.fontSize <= 10) return false;
     caption.fontSize -= 10;
     return caption.fontSize;
+}
+
+function updateCaptionText(id, newTxt) {
+    let caption = getCaptionById(id);
+    caption.txt = newTxt;
 }

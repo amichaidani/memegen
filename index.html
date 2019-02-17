@@ -18,7 +18,7 @@
     <title>Meme Generator</title>
 </head>
 
-<body onload="init()" ontouchmove="console.log(event)">
+<body onload="init()">
     <header>
         <div class="logo-container">
             <h1 class="logo">memegen</h1>
@@ -66,7 +66,9 @@
             <img src="" class="meme-background" hidden />
             <div class="editor-wrapper">
                 <div class="editor-container">
-                    <canvas onmousedown="onCanvasMouseDown(event)" onmouseup="onCanvasRelease()" onmousemove="onCanvasMouseMove(event)"></canvas>
+                    <input type="text" class="caption-text-input" onchange="onUpdateCaptionText(this)">
+                    <canvas onmousedown="onCanvasMouseDown(event)" onmouseup="onCanvasRelease()"
+                        onmousemove="onCanvasMouseMove(event)" ontouchmove="onCanvasTouch(event)"></canvas>
                 </div>
                 <div class="caption-tools-wrapper">
                     <div class="caption-tools">
