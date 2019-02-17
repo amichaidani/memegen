@@ -1,14 +1,6 @@
 'use strict'
 
 var gNextMemeId = 1
-// TO DO : 
-// The user may also filter the list by selecting a keyword from a
-//  list where each word size is determined by the popularity
-//   of the keyword search (make an initial “random” setup so it will look good from the start):
-// Start editing , key words, 
-// Add keyword input to keywords cloud
-// keys of gkeywords map to lower case
-
 var gMemes = [];
 var gKeywords = [];
 var gKeywordsMap = {} // Mapping the search freq of each keyword.
@@ -64,28 +56,16 @@ function getMemeById(id) {
     return gMemes[searchedImgIdx]
 }
 
-function getKeywordsStrHTMLs() {
-
-    let strHTMLs = []
-    gKeywords.forEach(keyword => {
-        let KeywordToDiplay = keyword.charAt(0).toUpperCase() + keyword.substring(1, keyword.length)
-        let strHTML = `<span class="${keyword}" style= "font-size:${gKeywordsMap[keyword].fontSize}px">${KeywordToDiplay}</span>`
-        strHTMLs.push(strHTML)
-    })
-
-    strHTMLs = strHTMLs.join('')
-    return strHTMLs
+function getMemes () {
+    return gMemes;
 }
 
-function getMemesStrHTMLs(memes) {
-    let strHTMLs = []
-    memes.forEach(meme => {
-        let strHTML = `<div style="background-image: url(${meme.url})" data-id="${meme.id}" class="meme-img" onclick="onSelectMeme(this)"></div>`
-        strHTMLs.push(strHTML)
-    })
+function getKeywords () {
+    return gKeywords
+}
 
-    strHTMLs = strHTMLs.join('')
-    return strHTMLs
+function getKeywordsMap () {
+    return gKeywordsMap
 }
 
 function addMeme(url, keywords) {   // User adds new Meme
