@@ -84,7 +84,6 @@ function renderSingleCaption(caption) {
 
 // Mouse down event on canvas
 function onCanvasMouseDown(ev) {
-    gIsDown = true;
     startX = parseInt(ev.clientX - offsetX);
     startY = parseInt(ev.clientY - offsetY);
 
@@ -94,6 +93,8 @@ function onCanvasMouseDown(ev) {
     }
     let caption = getClickedCaption(coords);
     if (caption) {
+        gIsDown = true;
+
         gFocusedCaption = caption;
         gElInputText.value = caption.txt;
         gElInputText.style.display = "inline-block";
@@ -114,7 +115,6 @@ function onCanvasRelease() {
 
 // Track mouse movement for drag-and-drop
 function onCanvasMouseMove(ev) {
-
     // Get coords of event
     let coords = {
         x: event.offsetX,
@@ -148,39 +148,44 @@ function onCanvasMouseMove(ev) {
     }
 };
 
+var touchStartX;
+var touchStartY;
+
 function onCanvasTouchStart(ev) {
-    // console.log('yay');
+    ev = ev.touches[0];
+    touchStartX = ev.clientX - gCanvas.getBoundingClientRect().x;
+    touchStartY = ev.clientY - gCanvas.getBoundingClientRect().y;
+
+    let caption = getClickedCaption({ x: touchStartX, y: touchStartY });
+    if (caption) {
+        gIsDown = true;
+        gFocusedCaption = caption;
+    }
 }
 
-function onCanvasTouchEnd() {
-    // gIsDown = false;
+function onCanvasTouchEnd(ev) {
+    gIsDown = false;
 }
 
-var touchLastX = -1
-var touchLastY = -1
 
 function onCanvasTouch(ev) {
-    gIsDown = true;
-    ev = ev.touches[0];
-    startX = ev.clientX - gCanvas.getBoundingClientRect().x;
-    startY = ev.clientY - gCanvas.getBoundingClientRect().y;
-
-    let caption = getClickedCaption({ x: startX, y: startY });
-    gFocusedCaption = caption;
-    let diffX = 0;
-    let diffY = 0;
-
-    if (caption) {
-        if (startX !== touchLastX || startY !== touchLastY) {
-            diffX = startX - touchLastX;
-            diffY = startY - touchLastY;
+    ev = ev.touches[0]
+    let newTouchX = ev.clientX - gCanvas.getBoundingClientRect().x;
+    let newTouchY = ev.clientY - gCanvas.getBoundingClientRect().y;
+    if (gIsDown) {
+        let diffX = touchStartX - newTouchX;
+        let diffY = touchStartY - newTouchY;
+        console.log(diffX, diffY)
+        let newCoords = {
+            x: gFocusedCaption.x - diffX,
+            y: gFocusedCaption.y - diffY
         }
-    }
-    
-    touchLastX = startX;
-    touchLastY = startY;
+        touchStartX = newTouchX;
+        touchStartY = newTouchY;
+        updateCaptionCoords(gFocusedCaption.id, newCoords) // Update the model
+        renderCanvas();
 
-    console.log(diffX, diffY)
+    }
 }
 
 // EDITOR TOOLS START
