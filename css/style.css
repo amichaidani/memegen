@@ -612,4 +612,10 @@ ul.drop-down-list {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 20px;
+}
+
+.modal-content>* {
+    width: 100%;
+    margin-bottom: 1rem;
 }
