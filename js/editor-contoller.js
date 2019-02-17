@@ -93,9 +93,8 @@ function onCanvasMouseDown(ev) {
         y: ev.offsetY
     }
     let caption = getClickedCaption(coords);
+    gIsDown = true;
     if (caption) {
-        gIsDown = true;
-
         gFocusedCaption = caption;
         gElInputText.value = caption.txt;
         gElInputText.style.display = "inline-block";
@@ -113,7 +112,6 @@ function onCanvasMouseDown(ev) {
 function onCanvasRelease() {
     gIsDown = false;
     hideInputCaption();
-    gFocusedCaption = null;
 }
 
 // Track mouse movement for drag-and-drop
