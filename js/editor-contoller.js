@@ -44,8 +44,7 @@ function setupEditor() {
         gCanvas.height = $(gElMemeImg).outerHeight();
         gCtx.canvas.width = gCanvas.width;
         gCtx.canvas.height = gCanvas.height;
-        gCtx.drawImage(gElMemeImg, 0, 0, gCanvas.width, gCanvas.height);
-        renderCaptions();
+        renderCanvas();
         placeDefaultCaptions(getCanvasDimensions());
         renderCanvas();
     }, 400);
@@ -149,37 +148,70 @@ function onCanvasMouseMove(ev) {
     }
 };
 
+function onCanvasTouchStart(ev) {
+    // console.log('yay');
+}
+
+function onCanvasTouchEnd() {
+    // gIsDown = false;
+}
+
+var touchLastX = -1
+var touchLastY = -1
+
 function onCanvasTouch(ev) {
     gIsDown = true;
     ev = ev.touches[0];
-    startX = parseInt(ev.clientX - offsetX);
-    startY = parseInt(ev.clientY - offsetY);
+    startX = ev.clientX - gCanvas.getBoundingClientRect().x;
+    startY = ev.clientY - gCanvas.getBoundingClientRect().y;
 
-    let coords = {
-        x: ev.clientX - gCanvas.getBoundingClientRect().x,
-        y: ev.clientY - gCanvas.getBoundingClientRect().Y,
-    }
+    let caption = getClickedCaption({ x: startX, y: startY });
+    gFocusedCaption = caption;
+    let diffX = 0;
+    let diffY = 0;
 
-    let caption = getClickedCaption(coords);
-
-    if (gFocusedCaption) {
-        ev.preventDefault();
-        gElInputText.style.display = 'none';
-        let mouseX = parseInt(ev.clientX - offsetX);
-        let mouseY = parseInt(ev.clientY - offsetY);
-
-        var dx = mouseX - startX;
-        var dy = mouseY - startY;
-        startX = mouseX;
-        startY = mouseY;
-        let newCoords = {
-            x: gFocusedCaption.x + dx,
-            y: gFocusedCaption.y + dy
+    if (caption) {
+        if (startX !== touchLastX || startY !== touchLastY) {
+            diffX = startX - touchLastX;
+            diffY = startY - touchLastY;
         }
-        updateCaptionCoords(gFocusedCaption.id, newCoords) // Update the model
-        renderCanvas();
     }
+    touchLastX = startX;
+    touchLastY = startY;
+    let newCoords = {
+        x: gFocusedCaption.x + diffX,
+        y: gFocusedCaption.y + diffY
+    }
+    updateCaptionCoords(gFocusedCaption.id, { newCoords }) // Update the model
+    renderCanvas();
 }
+
+//     ev = ev.touches[0];
+//     startX = ev.clientX - gCanvas.getBoundingClientRect().x,
+//         startY = ev.clientY - gCanvas.getBoundingClientRect().y
+
+//     // Get the clicked caption and change the mouse cursor accordingly
+//     let caption = getClickedCaption(coords);
+
+//     // Click is down? there is focused caption? let's move it!
+//     if (gFocusedCaption && caption) {
+//         ev.preventDefault();
+//         gElInputText.style.display = 'none';
+//         let mouseX = parseInt(ev.clientX - gCanvas.getBoundingClientRect().x);
+//         let mouseY = parseInt(ev.clientY - gCanvas.getBoundingClientRect().y);
+
+//         var dx = mouseX - startX;
+//         var dy = mouseY - startY;
+//         startX = mouseX;
+//         startY = mouseY;
+//         let newCoords = {
+//             x: gFocusedCaption.x + dx,
+//             y: gFocusedCaption.y + dy
+//         }
+//         updateCaptionCoords(gFocusedCaption.id, newCoords) // Update the model
+//         renderCanvas();
+//     }
+// }
 
 // EDITOR TOOLS START
 // Clicked on add new caption
@@ -246,7 +278,7 @@ function onUpdateCaptionText(el) {
 
 // Change state of editor toolbar to get style of focused caption
 function updateTools() {
-    let elColorPicker = $('.jscolor')[0];
+    let elColorPicker = document.querySelector('.jscolor')
     if (gFocusedCaption) {
         elColorPicker.jscolor.fromString(gFocusedCaption.color);
     } else {

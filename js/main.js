@@ -5,6 +5,7 @@ const EDITOR_VIEW = 'editor';
 var gCurrentView = GALLERY_VIEW;
 
 function init() {
+    // jQuery is very nice for hiding and showing. Yup.
     $('.gallery').show();
     $('.editor').hide();
     createGMemes();
@@ -12,6 +13,7 @@ function init() {
     galleryControllerInit();
 }
 
+// jQuery is also very nice for toggle fade animations. C'mon, i'm dreaming of VUE..
 function onChangeView() {
     if (gCurrentView === GALLERY_VIEW) {
         $('.gallery').fadeToggle('fast', function () {

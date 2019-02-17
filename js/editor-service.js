@@ -1,6 +1,7 @@
 var gCaptions = [];
 var gCaptionNextId = 0;
 var gDefaultTextSize;
+var gDefaultTextFontFamily = 'Impact';
 
 function createDefaultCaptions() {
     gCaptions = [];
@@ -19,7 +20,7 @@ function placeDefaultCaptions(canvasDimensions) {
     })
 }
 function updateCaptionsSizeByMediaQuery(isMobile) {
-    if (isMobile){
+    if (isMobile) {
         gDefaultTextSize = 30;
     } else {
         gDefaultTextSize = 50;
@@ -35,7 +36,7 @@ function createCaption(txt, canvasDimensions) {
         x: (canvasDimensions) ? canvasDimensions.width / 2 : 0,
         y: (canvasDimensions) ? canvasDimensions.height / 2 : 0,
         fontSize: gDefaultTextSize,
-        fontFamily: 'Impact',
+        fontFamily: gDefaultTextFontFamily,
         color: '#ffffff',
         strokeColor: '#000000',
         strokeWidth: 2,

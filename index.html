@@ -70,7 +70,7 @@
                 <div class="editor-container">
                     <input type="text" class="caption-text-input" onchange="onUpdateCaptionText(this)">
                     <canvas onmousedown="onCanvasMouseDown(event)" onmouseup="onCanvasRelease()"
-                        onmousemove="onCanvasMouseMove(event)" ontouchmove="onCanvasTouch(event)"></canvas>
+                        onmousemove="onCanvasMouseMove(event)" ontouchmove="onCanvasTouch(event)"  ontouchend="onCanvasTouchEnd(event)" ontouchstart="onCanvasTouchStart(event)"></canvas>
                 </div>
                 <div class="caption-tools-wrapper">
                     <div class="caption-tools">
