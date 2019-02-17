@@ -527,7 +527,7 @@ header {
 .tada {
     -webkit-animation-name: tada;
     animation-name: tada;
-    animation-duration: 4s;
+    animation-duration: .8s;
   }
   
 @-webkit-keyframes tada {
