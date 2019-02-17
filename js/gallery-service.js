@@ -113,39 +113,41 @@ function filterMemes(str) {
 }
 
 
+// Adding memes to gallery
+
 function createGMemes() {
-    gMemes.push(createMeme('img/meme1.jpg', ['smiling']));
-    gMemes.push(createMeme('img/meme2.jpg', ['crying', 'sad']));
-    gMemes.push(createMeme('img/meme3.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme4.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme1.jpg', ['snicky']));
+    gMemes.push(createMeme('img/meme2.jpg', ['bossing', 'trump','leader']));
+    gMemes.push(createMeme('img/meme3.jpg', ['sad', 'crying']));
+    gMemes.push(createMeme('img/meme4.jpg', ['nature', 'kids']));
     gMemes.push(createMeme('img/meme5.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme6.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme7.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme8.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme9.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme10.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme11.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme12.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme13.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme14.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme15.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme16.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme17.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme18.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme19.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme20.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme21.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme22.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme23.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme24.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme25.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme26.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme27.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme28.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme29.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme30.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme31.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme32.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme33.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme34.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme6.jpg', ['one_more_time', 'jackson']));
+    gMemes.push(createMeme('img/meme7.jpg', ['finger']));
+    gMemes.push(createMeme('img/meme8.jpg', ['leader', 'politics']));
+    gMemes.push(createMeme('img/meme9.jpg', ['comics', 'frog']));
+    gMemes.push(createMeme('img/meme10.jpg', ['amen', 'woman']));
+    gMemes.push(createMeme('img/meme11.jpg', ['evil', 'percise']));
+    gMemes.push(createMeme('img/meme12.jpg', ['woman', 'actor']));
+    gMemes.push(createMeme('img/meme13.jpg', ['patrick', 'laughing']));
+    gMemes.push(createMeme('img/meme14.jpg', ['putin', 'lecturing']));
+    gMemes.push(createMeme('img/meme15.jpg', ['toys', 'kids']));
+    gMemes.push(createMeme('img/meme16.jpg', ['dogs', 'love']));
+    gMemes.push(createMeme('img/meme17.jpg', ['dogs', 'babies','love']));
+    gMemes.push(createMeme('img/meme18.jpg', ['babies', 'beach','mad']));
+    gMemes.push(createMeme('img/meme19.jpg', ['cat', 'sleep']));
+    gMemes.push(createMeme('img/meme20.jpg', ['comedian']));
+    gMemes.push(createMeme('img/meme21.jpg', ['babies', 'far_east']));
+    gMemes.push(createMeme('img/meme22.jpg', ['told_you','media']));
+    gMemes.push(createMeme('img/meme23.jpg', ['mad', 'scared','shout']));
+    gMemes.push(createMeme('img/meme24.jpg', ['lecturing', 'media']));
+    gMemes.push(createMeme('img/meme25.jpg', ['evil', 'finger']));
+    gMemes.push(createMeme('img/meme26.jpg', ['think', 'actor']));
+    gMemes.push(createMeme('img/meme27.jpg', ['kids', 'africa']));
+    gMemes.push(createMeme('img/meme28.jpg', ['trump', 'fuck_you']));
+    gMemes.push(createMeme('img/meme29.jpg', ['babies', 'amazed']));
+    gMemes.push(createMeme('img/meme30.jpg', ['dogs', 'yoga']));
+    gMemes.push(createMeme('img/meme31.jpg', ['happy', 'smiling','leader']));
+    gMemes.push(createMeme('img/meme32.jpg', ['sport', 'hard','challenge']));
+    gMemes.push(createMeme('img/meme33.jpg', ['drink', 'actor']));
+    gMemes.push(createMeme('img/meme34.jpg', ['media', 'nature']));
 }
