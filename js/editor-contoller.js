@@ -1,6 +1,3 @@
-// TODO:
-// 2) Touch commands for mobile
-
 var gFocusedCaption = null;
 var gElMemeImg;
 var gCanvas;
@@ -34,6 +31,7 @@ function setupEditor() {
 
 }
 
+// Place the default top and bottom captions
 function placeDefaultCaptions() {
     $('.caption').each(function (idx) {
         $(this).css('left', ((gElMemeImg.width / 2) - ($(this).outerWidth() / 2)) + 'px');
@@ -53,7 +51,7 @@ function renderCaptions() {
 function renderNewCaption(caption) {
     let strHTML = '';
     strHTML += `
-        <div class="caption" data-id="${caption.id}" onmousedown="onCaptionClick(this,event)" onmouseup="onCaptionRelease()" contenteditable="true" oninput="onCaptionChange(this)">${caption.txt}</span>
+        <div class="caption" data-id="${caption.id}" onmousedown="onCaptionClick(this,event)" onmouseup="onCaptionRelease()" contenteditable="true" oninput="onCaptionChange(this)" ontouchmove="onCaptionTouch(this,event)">${caption.txt}</span>
         `
     $('.editor-container').append(strHTML);
     $('.caption').last()[0].focus();
@@ -61,6 +59,22 @@ function renderNewCaption(caption) {
     $(gFocusedCaption).css('left', ((gElMemeImg.width / 2) - ($(gFocusedCaption).outerWidth() / 2)) + 'px');
     $(gFocusedCaption).css('top', ((gElMemeImg.height / 2) - ($(gFocusedCaption).outerHeight() / 2)) + 'px');
     updateTools();
+}
+
+function onCaptionTouch(el, ev) {
+    ev.stopPropagation();
+    ev = ev.touches[0];
+    console.log(ev);
+    
+    gFocusedCaption = el;
+    updateTools();
+    gOffset = [
+        el.offsetLeft - ev.clientX,
+        el.offsetTop - ev.clientY
+    ];
+
+    gFocusedCaption.style.left = ev.clientX  + 'px';
+    gFocusedCaption.style.top = ev.clientY + 'px';
 }
 
 // CAPTIONS DRAG FUNCTION START
@@ -102,10 +116,15 @@ document.addEventListener('mousemove', function (event) {
             gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > gElMemeImg.offsetHeight
         ) return;
 
-        gFocusedCaption.style.left = (gMousePosition.x + gOffset[0]) + 'px';
-        gFocusedCaption.style.top = (gMousePosition.y + gOffset[1]) + 'px';
+        dragCaptions();
     }
 }, true);
+
+function dragCaptions() {
+    gFocusedCaption.style.left = (gMousePosition.x + gOffset[0]) + 'px';
+    gFocusedCaption.style.top = (gMousePosition.y + gOffset[1]) + 'px';
+
+}
 // CAPTIONS DRAG FUNCTION END
 
 // EDITOR TOOLS START

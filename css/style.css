@@ -86,6 +86,7 @@ input {
 @media (max-width:420px) {
     input[type="search"] {
         width: 100%;
+        text-align: center;
     }
     .search-box-icon {
         height: 40px;
@@ -391,12 +392,18 @@ header {
 
 /* Tags Style (keywords) */
 
-.tags-container {
+.tags-wrapper {
     border: 1px solid rgba(255, 255, 255, 0.2);
-    flex-wrap: wrap;
-    align-items: baseline;
-    padding: 10px;
+    min-height: 40px;
     border-radius: 3px;
+    display: flex;
+    justify-items: center;
+}
+
+.tags-container {
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 10px;
 }
 
 .tags-container span {
