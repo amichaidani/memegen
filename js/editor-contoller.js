@@ -63,9 +63,10 @@ function renderNewCaption(caption) {
 
 function onCaptionTouch(el, ev) {
     ev.stopPropagation();
+    ev.preventDefault();
     ev = ev.touches[0];
     console.log(ev);
-    
+
     gFocusedCaption = el;
     updateTools();
     gOffset = [
@@ -73,7 +74,7 @@ function onCaptionTouch(el, ev) {
         el.offsetTop - ev.clientY
     ];
 
-    gFocusedCaption.style.left = ev.clientX  + 'px';
+    gFocusedCaption.style.left = ev.clientX + 'px';
     gFocusedCaption.style.top = ev.clientY + 'px';
 }
 
