@@ -168,6 +168,7 @@ function onCanvasTouchStart(ev) {
 
 function onCanvasTouchEnd(ev) {
     gIsDown = false;
+    gFocusedCaption = null;
     hideInputCaption()
 }
 
