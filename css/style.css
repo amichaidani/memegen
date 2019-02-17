@@ -76,6 +76,15 @@ input[type="search"] {
     -webkit-appearance: none;
 }
 
+@media (max-width:420px) {
+    input[type="search"] {
+        width: 100%;
+    }
+    .search-box-icon {
+        height: 30px;
+    }
+}
+
 label, button {
     background: 0;
     border: 1px solid #333;
@@ -183,17 +192,13 @@ button:hover {
 }
 
 .color-swatch {
-    position: relative;
     cursor: pointer;
     margin-right: 0.5rem;
 }
 
-.color-swatch .fas {
-    position: absolute;
-    top: 7px;
-    left: 15px;
-    mix-blend-mode: difference;
-    color: #ffff;
+.jscolor:before {
+    font-family: 'Font Awesome 5 Free';
+    content: '\f53f';
 }
 
 /* ========== */
@@ -256,11 +261,6 @@ button:hover {
     justify-content: flex-end;
 }
 
-.btn-search:before {
-    font-family: 'Font Awesome 5 Free';
-    content: '\f002';
-}
-
 @media (max-width:420px) {
     .upload-meme-btn {
         width: 100%;
@@ -283,9 +283,24 @@ button:hover {
 }
 
 .meme-search {
-    margin-right: 0.2rem;
     margin-bottom: 0;
-    padding: 0 0.5rem;
+    padding: 0 0.5rem 0 25px;
+}
+
+.search-box-wrapper {
+    position: relative;
+}
+
+.search-box-icon {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 8px;
+    height: 30px;
+    font-weight: 500;
+    color: #999;
+    font-size: 0.8em;
 }
 
 .add-meme-section label {
@@ -317,7 +332,7 @@ button:hover {
         flex-direction: column;
         /* justify-content: center; */
         text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
     }
     .gallery-tool {
         flex-direction: column;
@@ -381,8 +396,13 @@ button:hover {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
 }
 
+[contenteditable] {
+    user-select: text;
+}
+
 [contenteditable]:focus {
     outline: 2px dashed rgba(255, 255, 255, 0.5);
+    user-select: text;
 }
 
 .meme-background {
@@ -425,7 +445,6 @@ button:hover {
 }
 
 @media (max-width:740px) {
-    
     .canvas-main {
         max-width: 100%;
         max-height: auto;

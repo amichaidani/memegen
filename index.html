@@ -40,10 +40,12 @@
 
                     <!-- Search box -->
                     <div class="meme-search-box gallery-tool">
-                        <input type="search" id="meme-search" class="meme-search" name="meme-search"
-                            placeholder="Enter keywords" onkeyup="onSearch(this.value, event)" >
-                        <button class="btn-search"></button>
-                        <!-- onchange="onKeywordSearch(this.value, event) -->
+                        <span class="search-box-wrapper">
+                            <span class="search-box-icon"><i class="fas fa-search"></i></span>
+                            <input type="search" id="meme-search" class="meme-search" name="meme-search"
+                                placeholder="Enter keywords" onkeyup="onSearch(this.value, event)">
+                            <!-- <button class="btn-search"></button> -->
+                        </span>
                     </div>
                 </div>
                 <!-- Tags cloud -->
@@ -66,26 +68,26 @@
                     <div class="caption-tools">
                         <div class="edit-tools">
                             <span class="color-swatch">
-                                <button
+                                <button title="Change color"
                                     class="jscolor {valueElement:null,value:'66ccff',onFineChange:'onCaptionChangeColor(this)'}">
                                 </button>
                             </span>
                             <span class="change-caption-style btn-group">
-                                <button class="btn-caption-smaller" onclick="onCaptionSmaller()">-</button>
-                                <button class="btn-caption-larger" onclick="onCaptionLarger()">+</button>
+                                <button class="btn-caption-smaller" title="Shrink text" onclick="onCaptionSmaller()">-</button>
+                                <button class="btn-caption-larger" title="Enlarge text" onclick="onCaptionLarger()">+</button>
                             </span>
                             <span class="add-delete-caption btn-group">
-                                <button class="btn-caption-delete" onclick="onCaptionDelete()"><i
+                                <button class="btn-caption-delete" title="Delete caption" onclick="onCaptionDelete()"><i
                                         class="far fa-trash-alt"></i>
                                 </button>
-                                <button class="btn-caption-add" onclick="onCaptionAdd()">Add</button>
+                                <button class="btn-caption-add" title="Add new caption" onclick="onCaptionAdd()">Add</button>
                             </span>
                         </div>
                         <div class="save-tools"> <span class="btn-group">
-                                <button class="btn-back-to-gallery" onclick="onChangeView()">Gallery</button>
-                                <button class="btn-editor-reset" onclick="onEditorReset()">Reset</button>
-                                <a href="" download="my-meme.jpg" id="download-link"><button class="btn-editor-download"
-                                        onclick="onEditorDownload()">Download</button></a>
+                                <button class="btn-back-to-gallery" title="Back to gallery" onclick="onChangeView()">Gallery</button>
+                                <button class="btn-editor-reset" title="Reset" onclick="onEditorReset()"><i class="fas fa-undo"></i></button>
+                                <a href="" download="my-meme.jpg" id="download-link"><button class="btn-editor-download" title="Download"
+                                        onclick="onEditorDownload()"><i class="fas fa-file-download"></i></button></a>
                             </span>
                         </div>
                     </div>

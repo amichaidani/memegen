@@ -205,15 +205,11 @@ function downloadImg() {
 }
 // EDITOR TOOLS END
 
-function propagateColorClick() {
-    $('.caption-color-picker')[0].click();
-}
-
 // Change state of editor toolbar to get style of focused caption
 function updateTools() {
+    let elColorPicker = $('.jscolor')[0];
     if (gFocusedCaption) {
         let caption = getCaptionById(+gFocusedCaption.dataset.id);
-        let elColorPicker = $('.jscolor')[0];
         elColorPicker.jscolor.fromString(caption.color);
     } else {
         elColorPicker.jscolor.fromString('ffffff')
