@@ -112,7 +112,7 @@ function onCanvasMouseDown(ev) {
 // Mouse out event on canvas
 function onCanvasRelease() {
     gIsDown = false;
-    gFocusedCaption = null;
+    hideInputCaption();
 }
 
 // Track mouse movement for drag-and-drop
@@ -171,7 +171,6 @@ function onCanvasTouchEnd(ev) {
     hideInputCaption()
 }
 
-
 function onCanvasTouch(ev) {
     ev.preventDefault();
     ev = ev.touches[0]
@@ -188,7 +187,6 @@ function onCanvasTouch(ev) {
         touchStartY = newTouchY;
         updateCaptionCoords(gFocusedCaption.id, newCoords) // Update the model
         renderCanvas();
-
     }
 }
 
