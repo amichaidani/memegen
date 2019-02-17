@@ -1,5 +1,6 @@
 'use strict'
-
+// meme6  , Say-That-Again-I-Dare-You
+// meme7 , 1950s-middle-finger.jpg
 var gNextMemeId = 1
 var gMemes = [];
 var gKeywords = [];
@@ -20,10 +21,14 @@ function createMeme(url, keywords) {
 }
 
 function createGMemes() {
-    gMemes.push(createMeme('img/man.png', ['smiling']));
+    gMemes.push(createMeme('img/meme1.jpg', ['smiling']));
     gMemes.push(createMeme('img/meme3.jpg', ['crying', 'sad']));
-    gMemes.push(createMeme('img/meme4.jpg', ['teaching', 'in_nature']));
     gMemes.push(createMeme('img/meme5.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme6.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme7.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme8.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme9.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme10.jpg', ['wondering', 'thinking']));
 }
 
 
