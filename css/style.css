@@ -624,3 +624,7 @@ ul.drop-down-list {
     top: -70px;
     cursor: pointer;
 }
+
+li:hover {
+    cursor: pointer;
+}
