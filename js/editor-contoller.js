@@ -15,6 +15,7 @@ var scrollY;
 var startX;
 var startY;
 
+// just a bit of jQuery, helps with ACTUAL DIMENSIONS calcs
 function setMouseVars() {
     canvasOffset = $(gCanvas).offset();
     offsetX = canvasOffset.left;
@@ -38,7 +39,6 @@ function setupEditor() {
     let selectedMeme = getSelectedMeme();
     gElMemeImg = document.querySelector('.meme-background');
     gElMemeImg.src = selectedMeme.url;
-
     setTimeout(() => {
         gCanvas.width = $(gElMemeImg).outerWidth();
         gCanvas.height = $(gElMemeImg).outerHeight();
@@ -47,7 +47,7 @@ function setupEditor() {
         renderCanvas();
         placeDefaultCaptions(getCanvasDimensions());
         renderCanvas();
-    }, 400);
+    }, 300);
 }
 
 // Re-render canvas
