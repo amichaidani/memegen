@@ -30,7 +30,7 @@ function createMeme(url, keywords) {
 function createGMemes() {
     gMemes.push(createMeme('img/man.png', ['smiling']));
     gMemes.push(createMeme('img/meme3.jpg', ['crying', 'sad']));
-    gMemes.push(createMeme('img/meme4.jpg', ['teaching', 'in nature']));
+    gMemes.push(createMeme('img/meme4.jpg', ['teaching', 'in_nature']));
     gMemes.push(createMeme('img/meme5.jpg', ['wondering', 'thinking']));
 }
 
@@ -77,9 +77,9 @@ function getKeywordsStrHTMLs() {
     return strHTMLs
 }
 
-function getMemesStrHTMLs() {
+function getMemesStrHTMLs(memes) {
     let strHTMLs = []
-    gMemes.forEach(meme => {
+    memes.forEach(meme => {
         let strHTML = `<div style="background-image: url(${meme.url})" data-id="${meme.id}" class="meme-img" onclick="onSelectMeme(this)"></div>`
         strHTMLs.push(strHTML)
     })
@@ -109,12 +109,26 @@ function changeFontSizeToKeywords(idx, word) {
     if (fontSize < MAX_KEY_WORD_FONT_SIZE) {
         if (fontSize > MIN_KEY_WORD_FONT_SIZE) gKeywordsMap[word].fontSize = fontSize;
     }
-        gKeywords.splice(idx, 1);
-        gKeywords.forEach(keyword => {
-            let fontSize = gKeywordsMap[keyword].fontSize;
-            if (fontSize >= MIN_KEY_WORD_FONT_SIZE) {
-                gKeywordsMap[keyword].fontSize -= 0.1 * fontSize;
+    gKeywords.splice(idx, 1);
+    gKeywords.forEach(keyword => {
+        let fontSize = gKeywordsMap[keyword].fontSize;
+        if (fontSize >= MIN_KEY_WORD_FONT_SIZE) {
+            gKeywordsMap[keyword].fontSize -= 0.1 * fontSize;
+        }
+    })
+    gKeywords.unshift(word);
+}
+
+function filterMemes(str) {
+    let chars = str.toLowerCase();
+    let memesToDiplay = [];
+    if (str.length === 0) return memesToDiplay = gMemes
+    gMemes.forEach(meme => {
+        meme.keywords.forEach(keyword => {
+            if (keyword.substring(0, chars.length) === chars) {
+                memesToDiplay.push(meme);
             }
         })
-        gKeywords.unshift(word);
-    }
+    })
+    return memesToDiplay;
+}

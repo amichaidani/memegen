@@ -419,7 +419,7 @@ button:hover {
 }
 
 @media (max-width:740px) {
-    .editor {}
+    
     .canvas-main {
         max-width: 100%;
         max-height: auto;
