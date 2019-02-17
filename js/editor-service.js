@@ -14,12 +14,30 @@ function createCaption(txt) {
         x: 0,
         y: 0,
         fontSize: 50,
-        color: '#fff',
-        strokeColor: '#000',
-        strokeWidth: 4
+        fontFamily: 'Impact',
+        color: '#ffffff',
+        strokeColor: '#000000',
+        strokeWidth: 2,
+        textWidth: 0,
+        align: 'center'
     }
     gCaptions.push(caption);
     return caption;
+}
+
+function getClickedCaption(coords) {
+    let clickedCaption = gCaptions.find(caption => {
+        return (coords.x >= caption.x
+            && coords.x <= caption.x + caption.textWidth
+            && coords.y >= caption.y - caption.fontSize
+            && coords.y <= caption.y)
+    });
+    return clickedCaption;
+}
+
+function updateCaptionMeasureText(id, width) {
+    let caption = getCaptionById(id);
+    caption.textWidth = width;
 }
 
 function updateCaption(id, newTxt) {

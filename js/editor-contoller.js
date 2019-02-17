@@ -1,7 +1,8 @@
 'use strict'
-var gFocusedCaption = null;
 var gElMemeImg;
 var gCanvas;
+var gCtx;
+var gFocusedCaption = null;
 
 // Mouse tracking vars
 var gMousePosition;
@@ -11,6 +12,7 @@ var gIsDown = false;
 var gElCaptionReady = false;
 
 function initEditor() {
+    createDefaultCaptions();
     setupEditor();
     onChangeView();
 }
@@ -20,24 +22,33 @@ function setupEditor() {
     let selectedMeme = getSelectedMeme();
     gElMemeImg = document.querySelector('.meme-background');
     gElMemeImg.src = selectedMeme.url;
-
-    $('.caption').remove(); // Clear all caption elements
-    createDefaultCaptions(); // Construct default top/bottom captions
-    renderCaptions(); // Create caption elements and inject to DOM
-
+    gCanvas = document.querySelector('canvas')
+    gCtx = gCanvas.getContext('2d');
     setTimeout(() => {
-        placeDefaultCaptions()
+        gCanvas.width = $(gElMemeImg).outerWidth();
+        gCanvas.height = $(gElMemeImg).outerHeight();
+        gCtx.canvas.width = gCanvas.width;
+        gCtx.canvas.height = gCanvas.height;
+        gCtx.drawImage(gElMemeImg, 0, 0, gCanvas.width, gCanvas.height);
+        placeDefaultCaptions();
+        renderCaptions();
     }, 300);
-
-    gFocusedCaption = null;
-
 }
 
+function renderCanvas() {
+    gCtx.drawImage(gElMemeImg, 0, 0, gCanvas.width, gCanvas.height);
+    renderCaptions();
+}
 // Place the default top and bottom captions
 function placeDefaultCaptions() {
-    $('.caption').each(function (idx) {
-        $(this).css('left', ((gElMemeImg.width / 2) - ($(this).outerWidth() / 2)) + 'px');
-        $(this).css('top', (idx === 0) ? '20px' : gElMemeImg.height - 70 + 'px');
+    let captions = getCaptions();
+    captions.forEach((caption, index) => {
+        caption.x = gCanvas.width / 2;
+        if (index === 0) {
+            caption.y = caption.fontSize + 20;
+        } else {
+            caption.y = gCanvas.height - caption.fontSize + 20;
+        }
     })
 }
 
@@ -45,23 +56,25 @@ function placeDefaultCaptions() {
 function renderCaptions() {
     let captions = getCaptions(); // Get captions from model
     captions.forEach(caption => {
-        renderNewCaption(caption)
+        renderSingleCaption(caption);
     });
 }
 
 // Render single new caption
-function renderNewCaption(caption) {
-    let strHTML = '';
-    strHTML += `
-        <div class="caption" data-id="${caption.id}" onmousedown="onCaptionClick(this,event)" onmouseup="onCaptionRelease()" contenteditable="true" oninput="onCaptionChange(this)" ontouchmove="onCaptionTouch(this,event)">${caption.txt}</span>
-        `
-    $('.editor-container').append(strHTML);
-    $('.caption').last()[0].focus();
-    gFocusedCaption = $('.caption').last()[0];
-
-    $(gFocusedCaption).css('left', ((gElMemeImg.width / 2) - ($(gFocusedCaption).outerWidth() / 2)) + 'px');
-    $(gFocusedCaption).css('top', ((gElMemeImg.height / 2) - ($(gFocusedCaption).outerHeight() / 2)) + 'px');
-
+function renderSingleCaption(caption) {
+    // Set font
+    gCtx.font = caption.fontSize + 'px ' + caption.fontFamily;
+    // Set colors and stroke
+    gCtx.fillStyle = caption.color;
+    gCtx.strokeStyle = caption.strokeColor;
+    gCtx.lineWidth = caption.strokeWidth;
+    // Get the measured text width
+    let textWidth = gCtx.measureText(caption.txt);
+    // Update the model with the measured text width
+    updateCaptionMeasureText(caption.id, textWidth.width);
+    // Paint it!
+    gCtx.fillText(caption.txt, caption.x, caption.y);
+    gCtx.strokeText(caption.txt, caption.x, caption.y);
     updateTools();
 }
 
@@ -84,44 +97,49 @@ function onCaptionTouch(el, ev) {
 
 // CAPTIONS DRAG FUNCTION START
 // Clicked on caption
-function onCaptionClick(el, ev) {
-    ev.stopPropagation();
+function onCanvasClick(ev) {
     gIsDown = true;
-    gFocusedCaption = el;
-    updateTools();
-    gOffset = [
-        el.offsetLeft - ev.clientX,
-        el.offsetTop - ev.clientY
-    ];
+    let coords = {
+        x: ev.offsetX,
+        y: ev.offsetY
+    }
+    let caption = getClickedCaption(coords);
+    if (caption) {
+        gFocusedCaption = caption;
+        updateTools(caption);
+    }
+    else {
+        gFocusedCaption = null;
+    }
 }
 
 // Released mouse from caption
-function onCaptionRelease() {
+function onCanvasRelease() {
     gIsDown = false;
+    console.log('out')
 }
 
-// // Track mouse movement for drag-and-drop
-// document.addEventListener('mousemove', function (event) {
-//     event.preventDefault();
+// Track mouse movement for drag-and-drop
+document.addEventListener('mousemove', function (event) {
+    event.preventDefault();
 
-//     // if (event.clientX
-//     if (gIsDown && gFocusedCaption) {
-//         gMousePosition = {
+    if (gIsDown && gFocusedCaption) {
+        gMousePosition = {
 
-//             x: event.clientX,
-//             y: event.clientY
+            x: event.clientX,
+            y: event.clientY
 
-//         };
+        };
 
-//         if (gMousePosition.x + gOffset[0] <= 0 ||
-//             gMousePosition.y + gOffset[1] <= $(gElMemeImg).position().top ||
-//             gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= gElMemeImg.offsetWidth ||
-//             gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > gElMemeImg.offsetHeight
-//         ) return;
+        if (gMousePosition.x + gOffset[0] <= 0 ||
+            gMousePosition.y + gOffset[1] <= $(gElMemeImg).position().top ||
+            gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= gElMemeImg.offsetWidth ||
+            gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > gElMemeImg.offsetHeight
+        ) return;
 
-//         dragCaptions();
-//     }
-// }, true);
+        dragCaptions();
+    }
+}, true);
 
 function dragCaptions() {
     gFocusedCaption.style.left = (gMousePosition.x + gOffset[0]) + 'px';
@@ -138,8 +156,8 @@ function onCaptionChange(el) {
 
 // Clicked on add new caption
 function onCaptionAdd() {
-    let caption = createCaption('New Caption');
-    renderNewCaption(caption);
+    let caption = createCaption('New Caption', gCanvas.width);
+    renderSingleCaption(caption);
 }
 
 // Clicked on delete caption
@@ -156,30 +174,22 @@ function onCaptionDelete() {
 function onCaptionChangeColor(el) {
     if (gFocusedCaption) {
         let chosenColor = '#' + el
-        let id = +gFocusedCaption.dataset.id;
-        changeCaptionColor(id, chosenColor);
-        gFocusedCaption.style.color = chosenColor;
+        changeCaptionColor(gFocusedCaption.id, chosenColor);
+        renderCanvas();
     }
 }
 
 // Clicked on caption enlarge font size
-function onCaptionLarger() {
+function onCaptionTextSizeChange(el) {
     if (gFocusedCaption) {
-        let size = captionLarger(+gFocusedCaption.dataset.id);
-        if (size) {
-            $(gFocusedCaption).css('font-size', size + 'px')
+        let action = el.dataset.action;
+        if (action === 'enlarge') {
+            captionLarger(gFocusedCaption.id);
+        } else {
+            captionSmaller(gFocusedCaption.id);
         }
     }
-}
-
-// Clicked on caption decrease font size
-function onCaptionSmaller() {
-    if (gFocusedCaption) {
-        let size = captionSmaller(+gFocusedCaption.dataset.id);
-        if (size) {
-            $(gFocusedCaption).css('font-size', size + 'px')
-        }
-    }
+    renderCanvas();
 }
 
 // Clicked on reset
@@ -189,34 +199,7 @@ function onEditorReset() {
 
 // Clicked on download
 function onEditorDownload() {
-    renderToCanvas();
-}
-
-function renderToCanvas() {
-    // Get canvas
-    gCanvas = $('canvas')[0];
-    let elCtx = gCanvas.getContext('2d');
-    // Set canvas to EXACT dimensions of meme img
-    $(gCanvas).css('width', $(gElMemeImg).outerWidth() + 'px');
-    $(gCanvas).css('height', $(gElMemeImg).outerHeight() + 'px');
-    // .. And set the context to the right size as well
-    elCtx.canvas.width = $(gCanvas).width();
-    elCtx.canvas.height = $(gCanvas).height();
-
-    // Draw meme background img
-    elCtx.drawImage(gElMemeImg, 0, 0, $(gCanvas).width(), $(gCanvas).height());
-
-    $('.caption').each(function (index) {
-        elCtx.fillStyle = $(this).css('color');
-        elCtx.font = 'normal normal 300 ' + $(this).css('font-size') + ' Impact';
-        elCtx.strokeStyle = $(this).css('-webkit-text-stroke-color');
-        elCtx.lineWidth = 4;
-        elCtx.strokeText($(this).text(), $(this).position().left, $(this).position().top + $(this).outerHeight());
-        elCtx.fillText($(this).text(), $(this).position().left, $(this).position().top + $(this).outerHeight());
-    });
-
     downloadImg();
-
 }
 
 function downloadImg() {
@@ -226,10 +209,9 @@ function downloadImg() {
 // EDITOR TOOLS END
 
 // Change state of editor toolbar to get style of focused caption
-function updateTools() {
+function updateTools(caption) {
     let elColorPicker = $('.jscolor')[0];
-    if (gFocusedCaption) {
-        let caption = getCaptionById(+gFocusedCaption.dataset.id);
+    if (caption) {
         elColorPicker.jscolor.fromString(caption.color);
     } else {
         elColorPicker.jscolor.fromString('ffffff')
