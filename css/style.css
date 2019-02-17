@@ -492,6 +492,7 @@ header {
 .caption-text-input {
     display: none;
     position: absolute;
+    text-align: center;
 }
 
 /* Animations */
