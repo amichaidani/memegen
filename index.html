@@ -63,10 +63,10 @@
 
         <!-- Editor section -->
         <section class="editor">
-            <img id="selected-img" src="" hidden />
+            <img src="" class="meme-background" hidden />
             <div class="editor-wrapper">
-                <div <div class="editor-container">
-                    <img class="meme-background" src="">
+                <div class="editor-container">
+                    <canvas onmousedown="onCanvasClick(event)" onmouseup="onCanvasRelease()"></canvas>
                 </div>
                 <div class="caption-tools-wrapper">
                     <div class="caption-tools">
@@ -79,9 +79,9 @@
                             </span>
                             <span class="change-caption-style btn-group">
                                 <button class="btn-caption-smaller" title="Shrink text"
-                                    onclick="onCaptionSmaller()">-</button>
+                                    onclick="onCaptionTextSizeChange(this)" data-action="shrink">-</button>
                                 <button class="btn-caption-larger" title="Enlarge text"
-                                    onclick="onCaptionLarger()">+</button>
+                                    onclick="onCaptionTextSizeChange(this)" data-action="enlarge">+</button>
                             </span>
                             <span class="add-delete-caption btn-group">
                                 <button class="btn-caption-delete" title="Delete caption" onclick="onCaptionDelete()"><i
@@ -104,7 +104,6 @@
                     </div>
                 </div>
             </div>
-            <canvas hidden></canvas>
         </section>
     </main>
     <script src="lib/jscolor.js"></script>
