@@ -85,6 +85,7 @@ function renderSingleCaption(caption) {
 
 // Mouse down event on canvas
 function onCanvasMouseDown(ev) {
+    gIsDown = true;
     startX = parseInt(ev.clientX - offsetX);
     startY = parseInt(ev.clientY - offsetY);
 
@@ -93,7 +94,6 @@ function onCanvasMouseDown(ev) {
         y: ev.offsetY
     }
     let caption = getClickedCaption(coords);
-    gIsDown = true;
     if (caption) {
         gFocusedCaption = caption;
         gElInputText.value = caption.txt;
@@ -103,6 +103,7 @@ function onCanvasMouseDown(ev) {
     }
     else {
         hideInputCaption()
+        gFocusedCaption = null;
     }
     updateTools();
 }
@@ -111,6 +112,10 @@ function onCanvasMouseDown(ev) {
 function onCanvasRelease() {
     gIsDown = false;
     hideInputCaption();
+}
+
+function releaseButton() {
+    gIsDown = false;
 }
 
 // Track mouse movement for drag-and-drop
@@ -142,6 +147,7 @@ function onCanvasMouseMove(ev) {
         let newCoords = {
             x: gFocusedCaption.x + dx,
             y: gFocusedCaption.y + dy
+
         }
         updateCaptionCoords(gFocusedCaption.id, newCoords) // Update the model
         renderCanvas();
@@ -153,21 +159,20 @@ function onCanvasMouseMove(ev) {
 var touchStartX;
 var touchStartY;
 function onCanvasTouchStart(ev) {
+    gIsDown = true;
     ev = ev.touches[0];
     touchStartX = ev.clientX - gCanvas.getBoundingClientRect().x;
     touchStartY = ev.clientY - gCanvas.getBoundingClientRect().y;
 
     let caption = getClickedCaption({ x: touchStartX, y: touchStartY });
     if (caption) {
-        gIsDown = true;
         gFocusedCaption = caption;
     }
 }
 
 function onCanvasTouchEnd(ev) {
     gIsDown = false;
-    gFocusedCaption = null;
-    hideInputCaption()
+    hideInputCaption();
 }
 
 function onCanvasTouch(ev) {
@@ -265,3 +270,4 @@ function updateTools() {
 function hideInputCaption() {
     gElInputText.style.display = 'none';
 }
+
