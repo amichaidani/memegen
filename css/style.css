@@ -394,6 +394,10 @@ header {
 
 /* Tags Style (keywords) */
 
+.gallery-content {
+    flex-direction: column;
+}
+
 .tags-wrapper {
     border: 1px solid rgba(255, 255, 255, 0.2);
     min-height: 40px;
@@ -402,6 +406,7 @@ header {
     justify-items: center;
     padding: 10px 0;
 }
+
 
 .tags-container {
     flex-wrap: wrap;
@@ -546,7 +551,6 @@ header {
 
 ul.drop-down-list {
     position: absolute;
-    
 }
 
 .search-box-wrapper .meme-search {
