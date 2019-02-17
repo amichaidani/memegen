@@ -93,6 +93,9 @@ input {
     .search-box-icon {
         height: 40px;
     }
+    div.tags-wrapper {
+        display: none;
+    }
 }
 
 label, button {
@@ -559,7 +562,7 @@ ul.drop-down-list {
     font-size: 16px;
     padding: 12px 20px 12px 40px;
     border: 1px solid #ddd;
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
 }
 
 .search-box-wrapper .drop-down-list {
