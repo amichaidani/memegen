@@ -15,7 +15,7 @@ function placeDefaultCaptions(canvasDimensions) {
         if (index === 0) {
             caption.y = caption.fontSize + 20;
         } else {
-            caption.y = canvasDimensions.height - caption.fontSize + 20;
+            caption.y = canvasDimensions.height - 20;
         }
     })
 }
