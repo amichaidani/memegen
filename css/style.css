@@ -427,7 +427,7 @@ input[type="color"]::-webkit-color-swatch:active {
 }
 
 @media (max-width:740px) {
-    .editor {}
+    
     .canvas-main {
         max-width: 100%;
         max-height: auto;

@@ -9,8 +9,9 @@ function onSelectMeme(el) {
     onEditMeme();
 }
 
-function renderMemes() {
-    let strHTMLs = getMemesStrHTMLs();
+function renderMemes(memes) {
+    if (!memes) memes = gMemes;
+    let strHTMLs = getMemesStrHTMLs(memes);
     $('.grid-container').html(strHTMLs)
 }
 
@@ -21,8 +22,12 @@ function onEditMeme() {
 function onKeywordSearch(searchedWord) {
     let str = searchedWord.toLowerCase();
     let regex = /([a-z])\w*/g;
-    firstWord = str.match(regex).forEach(keyword => updateKeywords(keyword))
+    str.match(regex).forEach(keyword => updateKeywords(keyword))
     renderKeywords();
+}
+function onFilterMemes(str) {
+    let memesToDiplay = filterMemes(str); 
+    renderMemes(memesToDiplay)  
 }
 
 function renderKeywords() {
