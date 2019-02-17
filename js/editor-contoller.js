@@ -148,9 +148,10 @@ function onCanvasMouseMove(ev) {
     }
 };
 
+
+// Touch events
 var touchStartX;
 var touchStartY;
-
 function onCanvasTouchStart(ev) {
     ev = ev.touches[0];
     touchStartX = ev.clientX - gCanvas.getBoundingClientRect().x;
@@ -169,13 +170,13 @@ function onCanvasTouchEnd(ev) {
 
 
 function onCanvasTouch(ev) {
+    ev.preventDefault();
     ev = ev.touches[0]
     let newTouchX = ev.clientX - gCanvas.getBoundingClientRect().x;
     let newTouchY = ev.clientY - gCanvas.getBoundingClientRect().y;
     if (gIsDown) {
         let diffX = touchStartX - newTouchX;
         let diffY = touchStartY - newTouchY;
-        console.log(diffX, diffY)
         let newCoords = {
             x: gFocusedCaption.x - diffX,
             y: gFocusedCaption.y - diffY
@@ -188,7 +189,6 @@ function onCanvasTouch(ev) {
     }
 }
 
-// EDITOR TOOLS START
 // Clicked on add new caption
 function onCaptionAdd() {
     createCaption('New Caption', getCanvasDimensions());
@@ -242,8 +242,6 @@ function onEditorDownload() {
     document.querySelector('#download-link').href = imgContent;
 }
 
-// EDITOR TOOLS END
-
 function onUpdateCaptionText(el, ev) {
     updateCaptionText(gFocusedCaption.id, el.value);
     if (ev.which === 13) {
@@ -251,8 +249,6 @@ function onUpdateCaptionText(el, ev) {
     }
     renderCanvas();
 }
-
-
 
 // Change state of editor toolbar to get style of focused caption
 function updateTools() {
