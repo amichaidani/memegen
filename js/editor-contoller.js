@@ -3,7 +3,7 @@ var gCanvas;
 var gCtx;
 var gFocusedCaption = null;
 var gElInputText = document.querySelector('.caption-text-input');
-
+var gIsMobile = window.matchMedia("(max-width: 420px)").matches
 
 // Mouse tracking vars
 var gIsDown = false;
@@ -24,6 +24,7 @@ function setMouseVars() {
 }
 
 function initEditor() {
+    updateCaptionsSizeByMediaQuery(gIsMobile)
     gCanvas = document.querySelector('canvas')
     gCtx = gCanvas.getContext('2d')
     setMouseVars();
@@ -149,27 +150,36 @@ function onCanvasMouseMove(ev) {
 };
 
 function onCanvasTouch(ev) {
-    console.log(ev);
+    gIsDown = true;
+    ev = ev.touches[0];
+    startX = parseInt(ev.clientX - offsetX);
+    startY = parseInt(ev.clientY - offsetY);
 
+    let coords = {
+        x: ev.clientX - gCanvas.getBoundingClientRect().x,
+        y: ev.clientY - gCanvas.getBoundingClientRect().Y,
+    }
+
+    let caption = getClickedCaption(coords);
+
+    if (gFocusedCaption) {
+        ev.preventDefault();
+        gElInputText.style.display = 'none';
+        let mouseX = parseInt(ev.clientX - offsetX);
+        let mouseY = parseInt(ev.clientY - offsetY);
+
+        var dx = mouseX - startX;
+        var dy = mouseY - startY;
+        startX = mouseX;
+        startY = mouseY;
+        let newCoords = {
+            x: gFocusedCaption.x + dx,
+            y: gFocusedCaption.y + dy
+        }
+        updateCaptionCoords(gFocusedCaption.id, newCoords) // Update the model
+        renderCanvas();
+    }
 }
-// Hanlding touch events
-// function onCaptionTouch(el, ev) {
-//     ev.stopPropagation();
-//     ev.preventDefault();
-//     ev = ev.touches[0];
-//     console.log(ev);
-
-//     gFocusedCaption = el;
-//     updateTools();
-//     gOffset = [
-//         $(el).offset().left - ev.clientX,
-//         $(el).offset().top - ev.clientY
-//     ];
-
-//     gFocusedCaption.style.left = (ev.clientX - gOffset[0]) + 'px';
-//     gFocusedCaption.style.top = (ev.clientY - gOffset[1]) + 'px';
-// }
-
 
 // EDITOR TOOLS START
 // Clicked on add new caption

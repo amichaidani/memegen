@@ -14,6 +14,7 @@ var gKeywordsMap = {} // Mapping the search freq of each keyword.
 
 var gSelectedMeme = null;
 
+
 function createMeme(url, keywords) {
     let meme = {
         id: gNextMemeId,
