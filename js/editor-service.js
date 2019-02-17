@@ -9,12 +9,12 @@ function createDefaultCaptions() {
     createCaption('Heading Bottom');
 }
 
-function createCaption(txt) {
+function createCaption(txt, canvasDimensions) {
     let caption = {
         id: gCaptionNextId++,
         txt: txt,
-        x: 0,
-        y: 0,
+        x: (canvasDimensions) ? canvasDimensions.width / 2 : 0,
+        y: (canvasDimensions) ? canvasDimensions.height / 2 : 0,
         fontSize: 50,
         fontFamily: 'Impact',
         color: '#ffffff',
@@ -42,14 +42,15 @@ function updateCaptionMeasureText(id, width) {
     caption.textWidth = width;
 }
 
-function updateCaption(id, newTxt) {
-    let caption = getCaptionById(id)
-    caption.txt = newTxt;
+function updateCaptionCoords(id, coords) {
+    let caption = getCaptionById(id);
+    caption.x = coords.x;
+    caption.y = coords.y;
 }
 
 function deleteCaption(id) {
-    let captioniDx = getCaptionIdxById(id);
-    gCaptions.splice(captioniDx, 1);
+    let captionIndex = getCaptionIdxById(id);
+    gCaptions.splice(captionIndex, 1);
 }
 
 function getCaptionIdxById(id) {

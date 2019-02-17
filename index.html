@@ -44,8 +44,8 @@
                         <span class="search-box-wrapper">
                             <span class="search-box-icon"><i class="fas fa-search"></i></span>
                             <input type="search" id="meme-search" class="meme-search" name="meme-search"
-                                placeholder="Enter keywords" onkeyup="onSearch(this.value, event)">
-                            <!-- <button class="btn-search"></button> -->
+                                placeholder="Enter keywords" onkeyup="onSearch(this.value, event)" onblur="hideDropDownList()">
+                                <ul class="drop-down-list hide" id="drop-down-list"></ul>
                         </span>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
             <img src="" class="meme-background" hidden />
             <div class="editor-wrapper">
                 <div class="editor-container">
-                    <canvas onmousedown="onCanvasClick(event)" onmouseup="onCanvasRelease()"></canvas>
+                    <canvas onmousedown="onCanvasMouseDown(event)" onmouseup="onCanvasRelease()" onmousemove="onCanvasMouseMove(event)"></canvas>
                 </div>
                 <div class="caption-tools-wrapper">
                     <div class="caption-tools">

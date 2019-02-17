@@ -398,6 +398,7 @@ header {
     border-radius: 3px;
     display: flex;
     justify-items: center;
+    padding: 10px 0;
 }
 
 .tags-container {
@@ -523,77 +524,94 @@ header {
 
 /* Animations */
 
-
 .tada {
     -webkit-animation-name: tada;
     animation-name: tada;
-    animation-duration: .8s;
-  }
-  
+    animation-duration: 1.3s;
+}
+
 @-webkit-keyframes tada {
     from {
-      -webkit-transform: scale3d(1, 1, 1);
-      transform: scale3d(1, 1, 1);
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
     }
-  
-    10%,
-    20% {
-      -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
-      transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+    10%, 20% {
+        -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
     }
-  
-    30%,
-    50%,
-    70%,
-    90% {
-      -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
-      transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
     }
-  
-    40%,
-    60%,
-    80% {
-      -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
-      transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    40%, 60%, 80% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
     }
-  
     to {
-      -webkit-transform: scale3d(1, 1, 1);
-      transform: scale3d(1, 1, 1);
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
     }
-  }
-  
-  @keyframes tada {
+}
+
+@keyframes tada {
     from {
-      -webkit-transform: scale3d(1, 1, 1);
-      transform: scale3d(1, 1, 1);
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
     }
-  
-    10%,
-    20% {
-      -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
-      transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+    10%, 20% {
+        -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
     }
-  
-    30%,
-    50%,
-    70%,
-    90% {
-      -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
-      transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
     }
-  
-    40%,
-    60%,
-    80% {
-      -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
-      transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    40%, 60%, 80% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
     }
-  
     to {
-      -webkit-transform: scale3d(1, 1, 1);
-      transform: scale3d(1, 1, 1);
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
     }
-  }
-  
-  
+}
+
+/* Drop-Down-List */
+
+ul.drop-down-list {
+    position: absolute;
+    
+}
+
+.search-box-wrapper .meme-search {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+
+.search-box-wrapper .drop-down-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.search-box-wrapper .drop-down-list li a {
+    border: 1px solid #ddd;
+    margin-top: -1px;
+    /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+}
+
+.search-box-wrapper .drop-down-list li a:hover:not(.header) {
+    background-color: #eee;
+    /* Add a hover effect to all links, except for headers */
+}
+
+/* End of drop-down-list settings */

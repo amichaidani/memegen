@@ -6,6 +6,8 @@ function galleryControllerInit() {
     createKeywords();
     createKeywordsMap();
     renderKeywords();
+    renderDropDownList();
+
 }
 
 function onSelectMeme(el) {
@@ -15,17 +17,36 @@ function onSelectMeme(el) {
 
 function renderMemes(memes) {
     let strHTMLs = getMemesStrHTMLs(memes);
-    $('.grid-container').html(strHTMLs)
+    $('.grid-container').html(strHTMLs);
 }
 
-function onSelectKeyword(elClass) {
-    console.log('onselect keywords works!');
-    // console.log('elclass: ', el.classList[0]);
-    console.log('elclass: ', elClass[0]);
-    onKeywordSearch(elClass[0]);
-    onFilterMemes(elClass[0]);
+function onSelectKeyword(input) {
+    if (typeof (input) === 'str') {
+        onKeywordSearch(input);
+        onFilterMemes(input);
+    } else {
+        onKeywordSearch(input[0]);
+        onFilterMemes(input[0]);
+    }
 
+}
 
+function clickOnDropDownLi() {
+    let input = document.getElementById('meme-search');
+    let filter = input.value.toUpperCase();
+    let ul = document.getElementById('drop-down-list');
+    let li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (let i = 0; i < li.length; i++) {
+        let a = li[i].getElementsByTagName("a")[0];
+        let txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
 }
 
 function getMemesStrHTMLs(memes) {
@@ -43,8 +64,10 @@ function onEditMeme() {
     initEditor();
 }
 function onSearch(value, ev) {
-    if (ev.key === 'Enter')  onKeywordSearch(value); 
+    if (ev.key === 'Enter') onKeywordSearch(value);
     onFilterMemes(value);
+    clickOnDropDownLi()
+    document.querySelector('ul.drop-down-list').classList.remove('hide')
 }
 function onKeywordSearch(searchedWord) {
     if (searchedWord.length === 0) return
@@ -55,7 +78,7 @@ function onKeywordSearch(searchedWord) {
     if (matchedKeywords) {
         str.match(regex).forEach(keyword => updateKeywords(keyword))
         renderKeywords();
-    } else alert ('Sorry, only ABC English characters are being supported at the moment')
+    } else alert('Sorry, only ABC English characters are being supported at the moment')
 }
 
 function onFilterMemes(str) {
@@ -65,31 +88,55 @@ function onFilterMemes(str) {
 
 function renderKeywords() {
     let keywords = getKeywords();
-    let keywordsMap = getKeywordsMap ();
+    let keywordsMap = getKeywordsMap();
     let strHTMLs = getKeywordsStrHTMLs(keywords, keywordsMap);
     let elContainer = document.querySelector('.tags-container')
     elContainer.innerHTML = strHTMLs
     $(elContainer).hide(); //Jquery is been used here for animations purposes
     $(elContainer).fadeIn();
+
+
+    function getKeywordsStrHTMLs(keywords, keywordsMap) {
+
+        let strHTMLs = []
+        keywords.forEach(keyword => {
+            let KeywordToDiplay = keyword.charAt(0).toUpperCase() + keyword.substring(1, keyword.length)
+            let strHTML = `<span class="${keyword}" style= "font-size:${keywordsMap[keyword].fontSize}px" onclick="onSelectKeyword(this.classList)" onmouseover="onHoverKeyword(this.classList)">${KeywordToDiplay}</span>`
+            strHTMLs.push(strHTML)
+        })
+
+        strHTMLs = strHTMLs.join('')
+        return strHTMLs
+    }
 }
 
-function onHoverKeyword (elClass) {
-    console.log('on hover init!');
-    
+function onHoverKeyword(elClass) {
     let elKeyword = document.querySelector(`.tags-container .${elClass[0]}`)
     elKeyword.classList.toggle('tada')
 }
-function getKeywordsStrHTMLs(keywords, keywordsMap) {
 
-    let strHTMLs = []
-    keywords.forEach(keyword => {
-        let KeywordToDiplay = keyword.charAt(0).toUpperCase() + keyword.substring(1, keyword.length)
-        let strHTML = `<span class="${keyword}" style= "font-size:${keywordsMap[keyword].fontSize}px" onclick="onSelectKeyword(this.classList)" onmouseover="onHoverKeyword(this.classList)">${KeywordToDiplay}</span>`
-        strHTMLs.push(strHTML)
-    })
+function renderDropDownList() {
+    let elList = document.querySelector('.drop-down-list');
+    let keywords = getKeywords();
+    let strHTMLs = getListStrHTMLs(keywords);
+    elList.innerHTML = strHTMLs
 
-    strHTMLs = strHTMLs.join('')
-    return strHTMLs
+    function getListStrHTMLs(keywords) {
+        let strHTMLs = []
+        keywords.forEach(keyword => {
+            let KeywordToDiplay = keyword.charAt(0).toUpperCase() + keyword.substring(1, keyword.length);
+            let strHTML = ` <li class=""><a class="${keyword}" onmousedown="onSelectKeyword(this.classList)" >${KeywordToDiplay}</a></li>`
+            strHTMLs.push(strHTML);
+        })
+        strHTMLs = strHTMLs.join('')
+        return strHTMLs
+    }
+}
+
+
+function hideDropDownList() {
+    let elList = document.querySelector('ul.drop-down-list');
+    elList.classList.add('hide');
 }
 
 function onUploadMeme() {
