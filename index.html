@@ -41,8 +41,9 @@
                     <!-- Search box -->
                     <div class="meme-search-box gallery-tool">
                         <input type="search" id="meme-search" class="meme-search" name="meme-search"
-                            placeholder="Enter keywords" onkeyup="onFilterMemes(this.value)" onchange="onKeywordSearch(this.value)">
+                            placeholder="Enter keywords" onkeyup="onSearch(this.value, event)" >
                         <button class="btn-search"></button>
+                        <!-- onchange="onKeywordSearch(this.value, event) -->
                     </div>
                 </div>
                 <!-- Tags cloud -->

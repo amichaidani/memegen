@@ -18,13 +18,25 @@ function renderMemes(memes) {
 function onEditMeme() {
     initEditor();
 }
-
+function onSearch(value, ev) {
+    if (ev.key === 'Enter')  onKeywordSearch(value); 
+    onFilterMemes(value);
+}
 function onKeywordSearch(searchedWord) {
+    if (searchedWord.length === 0) return
+
     let str = searchedWord.toLowerCase();
     let regex = /([a-z])\w*/g;
     str.match(regex).forEach(keyword => updateKeywords(keyword))
     renderKeywords();
 }
+
+// function onKeywordSearch(searchedWord) {
+//     let str = searchedWord.toLowerCase();
+//     let regex = /([a-z])\w*/g;
+//     str.match(regex).forEach(keyword => updateKeywords(keyword))
+//     renderKeywords();
+// }
 function onFilterMemes(str) {
     let memesToDiplay = filterMemes(str);
     if (memesToDiplay.length !== 0) renderMemes(memesToDiplay)
