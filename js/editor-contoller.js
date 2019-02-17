@@ -99,7 +99,7 @@ function onCanvasMouseDown(ev) {
         gFocusedCaption = caption;
         gElInputText.value = caption.txt;
         gElInputText.style.display = "inline-block";
-        gElInputText.style.left = coords.x - (gElInputText.offsetWidth/2)  + 'px';
+        gElInputText.style.left = coords.x - (gElInputText.offsetWidth / 2) + 'px';
         gElInputText.style.top = coords.y + 'px';
     }
     else {
@@ -192,7 +192,7 @@ function onCanvasTouch(ev) {
 
 // Clicked on add new caption
 function onCaptionAdd() {
-    createCaption('New Caption', getCanvasDimensions());
+    gFocusedCaption = createCaption('New Caption', getCanvasDimensions());
     renderCanvas();
 }
 
