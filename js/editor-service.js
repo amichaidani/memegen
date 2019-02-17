@@ -1,5 +1,7 @@
-gCaptions = [];
-gCaptionNextId = 0;
+'use strict'
+
+var gCaptions = [];
+var gCaptionNextId = 0;
 
 function createDefaultCaptions() {
     gCaptions = [];

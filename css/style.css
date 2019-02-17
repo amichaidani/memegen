@@ -408,7 +408,9 @@ header {
 
 .tags-container span {
     margin-left: 5px;
+    cursor: pointer;
 }
+/* tags-container */
 
 /* ========== */
 
