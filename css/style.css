@@ -467,9 +467,9 @@ header {
     -webkit-text-stroke-color: black;
     position: absolute;
     -moz-user-select: none;
-    -webkit-user-select: none;
+    -webkit-user-select: text;
     -ms-user-select: none;
-    user-select: none;
+    user-select: text;
     -o-user-select: none;
     position: absolute;
     top: 100px;
@@ -480,6 +480,7 @@ header {
 
 .caption:focus {
     cursor: text;
+    
 }
 
 @media (max-width:740px) {
