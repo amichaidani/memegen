@@ -184,7 +184,7 @@ button:focus {
     .btn-group button {
         border: 1px solid var(--main-border-color);
         border-radius: 3px;
-        margin-right: 0.2rem;
+        margin-right: 0.1rem;
     }
     .btn-group button:first-child {
         border-radius: 3px;
