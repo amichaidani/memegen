@@ -94,8 +94,6 @@ function onCaptionClick(el, ev) {
 // Released mouse from caption
 function onCaptionRelease() {
     gIsDown = false;
-    $(gFocusedCaption).focus();
-    // gFocusedCaption = null;
 }
 
 // Track mouse movement for drag-and-drop
@@ -167,7 +165,6 @@ function onCaptionLarger() {
         if (size) {
             $(gFocusedCaption).css('font-size', size + 'px')
         }
-        $(gFocusedCaption).focus();
     }
 }
 
@@ -176,9 +173,8 @@ function onCaptionSmaller() {
     if (gFocusedCaption) {
         let size = captionSmaller(+gFocusedCaption.dataset.id);
         if (size) {
-            $(gFocusedCaption).css('font-size', size + 'px').focus();
+            $(gFocusedCaption).css('font-size', size + 'px')
         }
-        $(gFocusedCaption).focus();
     }
 }
 
