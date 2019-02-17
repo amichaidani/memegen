@@ -1,15 +1,27 @@
-'use strict'
 var gElMemeImg;
 var gCanvas;
 var gCtx;
 var gFocusedCaption = null;
 
 // Mouse tracking vars
-var gMousePosition;
-var gOffset = [0, 0];
-var elCaption;
 var gIsDown = false;
-var gElCaptionReady = false;
+var canvasOffset;
+var offsetX;
+var offsetY;
+var scrollX;
+var scrollY;
+var startX;
+var startY;
+
+function initCanvas() {
+    gCanvas = document.querySelector('canvas')
+    gCtx = gCanvas.getContext('2d')
+    canvasOffset = $(gCanvas).offset();
+    offsetX = canvasOffset.left;
+    offsetY = canvasOffset.top;
+    scrollX = $(gCanvas).scrollLeft();
+    scrollY = $(gCanvas).scrollTop();
+}
 
 function initEditor() {
     createDefaultCaptions();
@@ -22,8 +34,7 @@ function setupEditor() {
     let selectedMeme = getSelectedMeme();
     gElMemeImg = document.querySelector('.meme-background');
     gElMemeImg.src = selectedMeme.url;
-    gCanvas = document.querySelector('canvas')
-    gCtx = gCanvas.getContext('2d');
+
     setTimeout(() => {
         gCanvas.width = $(gElMemeImg).outerWidth();
         gCanvas.height = $(gElMemeImg).outerHeight();
@@ -35,10 +46,12 @@ function setupEditor() {
     }, 300);
 }
 
+// Re-render canvas
 function renderCanvas() {
     gCtx.drawImage(gElMemeImg, 0, 0, gCanvas.width, gCanvas.height);
     renderCaptions();
 }
+
 // Place the default top and bottom captions
 function placeDefaultCaptions() {
     let captions = getCaptions();
@@ -63,11 +76,12 @@ function renderCaptions() {
 // Render single new caption
 function renderSingleCaption(caption) {
     // Set font
-    gCtx.font = caption.fontSize + 'px ' + caption.fontFamily;
     // Set colors and stroke
     gCtx.fillStyle = caption.color;
     gCtx.strokeStyle = caption.strokeColor;
     gCtx.lineWidth = caption.strokeWidth;
+    gCtx.font = caption.fontSize + 'px ' + caption.fontFamily;
+    gCtx.textAlign = caption.align;
     // Get the measured text width
     let textWidth = gCtx.measureText(caption.txt);
     // Update the model with the measured text width
@@ -75,9 +89,9 @@ function renderSingleCaption(caption) {
     // Paint it!
     gCtx.fillText(caption.txt, caption.x, caption.y);
     gCtx.strokeText(caption.txt, caption.x, caption.y);
-    updateTools();
 }
 
+// Hanlding touch events
 function onCaptionTouch(el, ev) {
     ev.stopPropagation();
     ev.preventDefault();
@@ -95,10 +109,12 @@ function onCaptionTouch(el, ev) {
     gFocusedCaption.style.top = (ev.clientY - gOffset[1]) + 'px';
 }
 
-// CAPTIONS DRAG FUNCTION START
-// Clicked on caption
-function onCanvasClick(ev) {
+// Mouse down event on canvas
+function onCanvasMouseDown(ev) {
     gIsDown = true;
+    startX = parseInt(ev.clientX - offsetX);
+    startY = parseInt(ev.clientY - offsetY);
+
     let coords = {
         x: ev.offsetX,
         y: ev.offsetY
@@ -106,68 +122,70 @@ function onCanvasClick(ev) {
     let caption = getClickedCaption(coords);
     if (caption) {
         gFocusedCaption = caption;
-        updateTools(caption);
     }
     else {
         gFocusedCaption = null;
     }
+    updateTools();
 }
 
-// Released mouse from caption
+// Mouse out event on canvas
 function onCanvasRelease() {
     gIsDown = false;
     console.log('out')
 }
 
 // Track mouse movement for drag-and-drop
-document.addEventListener('mousemove', function (event) {
+function onCanvasMouseMove(ev) {
     event.preventDefault();
 
-    if (gIsDown && gFocusedCaption) {
-        gMousePosition = {
-
-            x: event.clientX,
-            y: event.clientY
-
-        };
-
-        if (gMousePosition.x + gOffset[0] <= 0 ||
-            gMousePosition.y + gOffset[1] <= $(gElMemeImg).position().top ||
-            gMousePosition.x + gOffset[0] + gFocusedCaption.offsetWidth >= gElMemeImg.offsetWidth ||
-            gMousePosition.y + gOffset[1] + gFocusedCaption.offsetHeight > gElMemeImg.offsetHeight
-        ) return;
-
-        dragCaptions();
+    // Get coords of event
+    let coords = {
+        x: event.offsetX,
+        y: event.offsetY
     }
-}, true);
+    // Get the clicked caption and change the mouse cursor accordingly
+    let caption = getClickedCaption(coords);
+    if (caption) {
+        document.body.style.cursor = 'move';
+    } else {
+        document.body.style.cursor = 'initial';
+    }
 
-function dragCaptions() {
-    gFocusedCaption.style.left = (gMousePosition.x + gOffset[0]) + 'px';
-    gFocusedCaption.style.top = (gMousePosition.y + gOffset[1]) + 'px';
+    // Click is down? there is focused caption? let's move it!
+    if (gIsDown && gFocusedCaption) {
+        ev.preventDefault();
+        let mouseX = parseInt(ev.clientX - offsetX);
+        let mouseY = parseInt(ev.clientY - offsetY);
 
-}
-// CAPTIONS DRAG FUNCTION END
+        var dx = mouseX - startX;
+        var dy = mouseY - startY;
+        startX = mouseX;
+        startY = mouseY;
+        let newCoords = {
+            x: gFocusedCaption.x + dx,
+            y: gFocusedCaption.y + dy
+        }
+        updateCaptionCoords(gFocusedCaption.id, newCoords) // Update the model
+        renderCanvas();
+    }
+};
 
 // EDITOR TOOLS START
-// Changed value of caption text
-function onCaptionChange(el) {
-    updateCaption(+el.dataset.id, el.innerText);
-}
-
 // Clicked on add new caption
 function onCaptionAdd() {
-    let caption = createCaption('New Caption', gCanvas.width);
-    renderSingleCaption(caption);
+    createCaption('New Caption', { width: gCanvas.width, height: gCanvas.height });
+    renderCanvas();
 }
 
 // Clicked on delete caption
 function onCaptionDelete() {
     if (gFocusedCaption) {
-        deleteCaption(+gFocusedCaption.dataset.id);
-        gFocusedCaption.remove();
-        gFocusedCaption = null;
+        deleteCaption(gFocusedCaption.id);
     }
+    gFocusedCaption = null;
     updateTools();
+    renderCanvas();
 }
 
 // Clicked on caption color change
@@ -199,20 +217,17 @@ function onEditorReset() {
 
 // Clicked on download
 function onEditorDownload() {
-    downloadImg();
-}
-
-function downloadImg() {
     let imgContent = gCanvas.toDataURL('image/jpeg');
     document.querySelector('#download-link').href = imgContent;
 }
+
 // EDITOR TOOLS END
 
 // Change state of editor toolbar to get style of focused caption
-function updateTools(caption) {
+function updateTools() {
     let elColorPicker = $('.jscolor')[0];
-    if (caption) {
-        elColorPicker.jscolor.fromString(caption.color);
+    if (gFocusedCaption) {
+        elColorPicker.jscolor.fromString(gFocusedCaption.color);
     } else {
         elColorPicker.jscolor.fromString('ffffff')
     }
