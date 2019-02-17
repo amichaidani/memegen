@@ -113,6 +113,7 @@ function onCanvasMouseDown(ev) {
 function onCanvasRelease() {
     gIsDown = false;
     hideInputCaption();
+    gFocusedCaption = null;
 }
 
 // Track mouse movement for drag-and-drop
@@ -177,7 +178,7 @@ function onCanvasTouch(ev) {
     ev = ev.touches[0]
     let newTouchX = ev.clientX - gCanvas.getBoundingClientRect().x;
     let newTouchY = ev.clientY - gCanvas.getBoundingClientRect().y;
-    if (gIsDown) {
+    if (gIsDown && gFocusedCaption) {
         let diffX = touchStartX - newTouchX;
         let diffY = touchStartY - newTouchY;
         let newCoords = {
