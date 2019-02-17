@@ -1,6 +1,10 @@
 'use strict'
 // meme6  , Say-That-Again-I-Dare-You
 // meme7 , 1950s-middle-finger.jpg
+// meme 12 Oprah-You-Get-A
+// meme 13 patrcik
+// meme 14 putin
+// 
 var gNextMemeId = 1
 var gMemes = [];
 var gKeywords = [];
@@ -20,22 +24,12 @@ function createMeme(url, keywords) {
     return meme
 }
 
-function createGMemes() {
-    gMemes.push(createMeme('img/meme1.jpg', ['smiling']));
-    gMemes.push(createMeme('img/meme3.jpg', ['crying', 'sad']));
-    gMemes.push(createMeme('img/meme5.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme6.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme7.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme8.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme9.jpg', ['wondering', 'thinking']));
-    gMemes.push(createMeme('img/meme10.jpg', ['wondering', 'thinking']));
-}
-
-
 function createKeywords() {
+    let keywords = [];
     gMemes.forEach(meme => {
-        meme.keywords.forEach(keyword => gKeywords.push(keyword));
-    });
+        meme.keywords.forEach(keyword => keywords.push(keyword));
+    });  
+    gKeywords = [...new Set(keywords)]; 
 }
 
 function createKeywordsMap() {
@@ -116,4 +110,42 @@ function filterMemes(str) {
         })
     })
     return memesToDiplay;
+}
+
+
+function createGMemes() {
+    gMemes.push(createMeme('img/meme1.jpg', ['smiling']));
+    gMemes.push(createMeme('img/meme2.jpg', ['crying', 'sad']));
+    gMemes.push(createMeme('img/meme3.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme4.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme5.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme6.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme7.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme8.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme9.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme10.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme11.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme12.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme13.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme14.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme15.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme16.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme17.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme18.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme19.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme20.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme21.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme22.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme23.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme24.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme25.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme26.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme27.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme28.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme29.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme30.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme31.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme32.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme33.jpg', ['wondering', 'thinking']));
+    gMemes.push(createMeme('img/meme34.jpg', ['wondering', 'thinking']));
 }
