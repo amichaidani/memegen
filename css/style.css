@@ -183,18 +183,12 @@ button:hover {
 }
 
 .color-swatch {
-    position: relative;
     cursor: pointer;
     margin-right: 0.5rem;
 }
 
-.color-swatch .fas {
-    position: absolute;
-    top: 7px;
-    left: 15px;
-    mix-blend-mode: difference;
-    color: #ffff;
-}
+
+
 
 /* ========== */
 
