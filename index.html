@@ -20,7 +20,7 @@
 
 <body onload="init()">
     <header>
-        <div class="logo-container">
+        <div class="logo-container" onclick="resetGalleryView()">
             <h1 class="logo">memegen</h1>
         </div>
     </header>
@@ -33,12 +33,11 @@
                     <div class="image-upload gallery-tool">
                         <label for="add_meme" class="upload-meme-btn"><i class="fas fa-upload"></i>Upload Meme</label>
                         <section class="add-meme-section hide">
-                            <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg"
-                                onchange="onUploadMeme()">
+                            <input type="file" class="" id="add_meme" name="add_meme" accept="image/png, image/jpeg" onchange="showModal()">
                         </section>
                     </div>
                     <!-- end of image upload -->
-
+                   
                     <!-- Search box -->
                     <div class="meme-search-box gallery-tool">
                         <span class="search-box-wrapper">
@@ -65,7 +64,7 @@
                 <div class="modal-content">
                     <span class="close-modal-btn" onclick="hideModal()">✖</span>
                     <h3>Enter Keywords</h3>
-                    <input class="input-keywords" type="text">
+                    <input class="input-keywords" type="text"  onchange="onUploadMeme(this.value)">
                 </div>
             </div>
         </section>

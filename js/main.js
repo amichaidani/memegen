@@ -29,5 +29,6 @@ function onChangeView() {
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera        
         });
         gCurrentView = GALLERY_VIEW;
+        resetGalleryView();
     }
 }
