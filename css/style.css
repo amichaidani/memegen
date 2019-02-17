@@ -219,6 +219,22 @@ header {
     box-shadow: 0 0 5px rgba(28, 33, 40, 0);
 }
 
+.logo-container {
+    width: 100%;
+}
+
+@media (max-width:740px) {
+    .logo-container {
+        flex-shrink: 2;
+    }
+}
+
+@media (max-width:740px) {
+    .logo-container {
+        order: -1;
+    }
+}
+
 .logo {
     font-family: 'Pacifico', cursive;
     color: #ffffff;
@@ -267,6 +283,12 @@ header {
 
 .image-upload {
     justify-content: flex-start;
+}
+
+@media (max-width:740px) {
+    .image-upload {
+        justify-content: center;
+    }
 }
 
 .meme-search-box {
