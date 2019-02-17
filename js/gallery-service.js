@@ -95,7 +95,7 @@ function changeFontSizeToKeywords(idx, word) {
             gKeywordsMap[keyword].fontSize -= 0.1 * fontSize;
         }
     })
-    gKeywords.unshift(word);
+    gKeywords.splice(idx, 0, word);
 }
 
 function filterMemes(str) {

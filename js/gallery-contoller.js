@@ -73,13 +73,18 @@ function renderKeywords() {
     $(elContainer).fadeIn();
 }
 
-
+function onHoverKeyword (elClass) {
+    console.log('on hover init!');
+    
+    let elKeyword = document.querySelector(`.tags-container .${elClass[0]}`)
+    elKeyword.classList.toggle('tada')
+}
 function getKeywordsStrHTMLs(keywords, keywordsMap) {
 
     let strHTMLs = []
     keywords.forEach(keyword => {
         let KeywordToDiplay = keyword.charAt(0).toUpperCase() + keyword.substring(1, keyword.length)
-        let strHTML = `<span class="${keyword}" style= "font-size:${keywordsMap[keyword].fontSize}px" onclick="onSelectKeyword(this.classList)">${KeywordToDiplay}</span>`
+        let strHTML = `<span class="${keyword}" style= "font-size:${keywordsMap[keyword].fontSize}px" onclick="onSelectKeyword(this.classList)" onmouseover="onHoverKeyword(this.classList)">${KeywordToDiplay}</span>`
         strHTMLs.push(strHTML)
     })
 
