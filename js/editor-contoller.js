@@ -1,10 +1,9 @@
 // TODO:
-// 1) handle canvas img resizing
 // 2) Touch commands for mobile
-// 3) download gMemes
 
 var gFocusedCaption = null;
 var gElMemeImg;
+var gCanvas;
 
 // Mouse tracking vars
 var gMousePosition;
@@ -13,11 +12,11 @@ var elCaption;
 var gIsDown = false;
 
 function initEditor() {
-    rednerEditor();
+    setupEditor();
     onChangeView();
 }
 
-function rednerEditor() {
+function setupEditor() {
     //Todo: Limit displayed img to max width of 75% of viewport
     let selectedMeme = getSelectedMeme();
     gElMemeImg = document.querySelector('.meme-background');
@@ -27,8 +26,19 @@ function rednerEditor() {
     createDefaultCaptions(); // Construct default top/bottom captions
     renderCaptions(); // Create caption elements and inject to DOM
 
+    setTimeout(() => {
+        placeDefaultCaptions()
+    }, 300);
+
     gFocusedCaption = null;
 
+}
+
+function placeDefaultCaptions() {
+    $('.caption').each(function (idx) {
+        $(this).css('left', ((gElMemeImg.width / 2) - ($(this).outerWidth() / 2)) + 'px');
+        $(this).css('top', (idx === 0) ? '20px' : gElMemeImg.height - 70 + 'px');
+    })
 }
 
 // Render '.caption' elements
@@ -48,6 +58,8 @@ function renderNewCaption(caption) {
     $('.editor-container').append(strHTML);
     $('.caption').last()[0].focus();
     gFocusedCaption = $('.caption').last()[0];
+    $(gFocusedCaption).css('left', ((gElMemeImg.width / 2) - ($(gFocusedCaption).outerWidth() / 2)) + 'px');
+    $(gFocusedCaption).css('top', ((gElMemeImg.height / 2) - ($(gFocusedCaption).outerHeight() / 2)) + 'px');
     updateTools();
 }
 
@@ -153,18 +165,49 @@ function onCaptionSmaller() {
 
 // Clicked on reset
 function onEditorReset() {
-    rednerEditor();
+    setupEditor();
 }
 
 // Clicked on download
 function onEditorDownload() {
-    rednerEditor();
+    renderToCanvas();
 }
 
+function renderToCanvas() {
+    // Get canvas
+    gCanvas = $('canvas')[0];
+    let elCtx = gCanvas.getContext('2d');
+    // Set canvas to EXACT dimensions of meme img
+    $(gCanvas).css('width', $(gElMemeImg).outerWidth() + 'px');
+    $(gCanvas).css('height', $(gElMemeImg).outerHeight() + 'px');
+    // .. And set the context to the right size as well
+    elCtx.canvas.width = $(gCanvas).width();
+    elCtx.canvas.height = $(gCanvas).height();
+
+    // Draw meme background img
+    elCtx.drawImage(gElMemeImg, 0, 0, $(gCanvas).width(), $(gCanvas).height());
+
+    $('.caption').each(function (index) {
+        elCtx.fillStyle = $(this).css('color');
+        elCtx.font = 'normal normal 300 ' + $(this).css('font-size') + ' Impact';
+        elCtx.strokeStyle = $(this).css('-webkit-text-stroke-color');
+        elCtx.lineWidth = 4;
+        elCtx.strokeText($(this).text(), $(this).position().left, $(this).position().top + $(this).outerHeight());
+        elCtx.fillText($(this).text(), $(this).position().left, $(this).position().top + $(this).outerHeight());
+    });
+
+    downloadImg();
+
+}
+
+function downloadImg() {
+    let imgContent = gCanvas.toDataURL('image/jpeg');
+    document.querySelector('#download-link').href = imgContent;
+}
 // EDITOR TOOLS END
 
 function propagateColorClick() {
-    $("#caption-color-picker")[0].click();
+    $('.caption-color-picker')[0].click();
 }
 
 // Change state of editor toolbar to get style of focused caption
@@ -176,24 +219,4 @@ function updateTools() {
         $(elColorPicker).val('#ffffff');
     }
 }
-
-// function drawCaptionsOnCanvas() {
-//     $('.caption').each(function (idx) {
-//         fontStr = $(this).css('font-size') + ' ' + $(this).css('font-family');
-//         captionCoords = {
-//             x: $(this).position().left,
-//             y: $(this).position().top + $(this).outerHeight()
-//         }
-//         text = $(this).text();
-//         color = $(this).css('color');
-//         gCtx.font = fontStr;
-//         gCtx.fillStyle = color;
-//         gCtx.strokeStyle = 'black';
-//         gCtx.lineWidth = 4;
-//         gCtx.strokeText(text, captionCoords.x, captionCoords.y);
-//         gCtx.fillText(text, captionCoords.x, captionCoords.y);
-//     });
-// }
-
-
 

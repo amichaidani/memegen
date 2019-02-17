@@ -87,15 +87,42 @@ label, button {
     margin-right: 0;
     display: inline-block;
     font-weight: 700;
-    -webkit-appearance: none;
 }
-label.upload-meme-btn {
-    padding: 0 5px;
-    position: relative;
-    bottom: 5px;
-    right: 0.2em;
+
+@media (max-width:420px) {
+    button {
+        background: 0;
+        border: 1px solid #333;
+        background: #fff;
+        border-radius: 3px;
+        min-width: 40px;
+        height: 40px;
+        cursor: pointer;
+        margin-right: 0;
+        display: inline-block;
+        font-weight: 700;
+        -webkit-appearance: none;
+    }
+}
+
+label.upload-meme-btn:before {
+    font-family: 'Font Awesome 5 Free';
+    content: '\f0fe';
+    margin-right: 0.3rem;
     font-weight: 500;
-    line-height: 2;
+    color: #999;
+    font-size: 0.8em;
+}
+
+label.upload-meme-btn {
+    position: static;
+    bottom: 5px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem 0.5rem;
+    box-sizing: border-box;
 }
 
 .btn {
@@ -116,7 +143,7 @@ button:focus {
 .btn-group button {
     padding: 0.2rem 0.5rem;
     border-left: 0;
-    border-radius: 0;
+    border-radius: 0px;
 }
 
 .btn-group button:first-child {
@@ -129,10 +156,17 @@ button:focus {
     border-radius: 0px 3px 3px 0px;
 }
 
+.btn-group a {
+    margin-left: -1px;
+}
+
 @media (max-width:420px) {
+    .btn-group a {
+        margin-left: 0;
+    }
     .btn-group button {
         border: 1px solid #333;
-        border-radius: 0;
+        border-radius: 3px;
         margin-right: 0.2rem;
     }
     .btn-group button:first-child {
@@ -175,6 +209,14 @@ input[type="color"]::-webkit-color-swatch {
     margin-top: -1px;
     border: 1px solid #333;
     box-sizing: border-box;
+}
+
+@media (max-width:420px) {
+    input[type="color"]::-webkit-color-swatch {
+        border: none;
+        border-radius: 3px;
+        height: 40px;
+    }
 }
 
 input[type="color"]::-webkit-color-swatch:active {
@@ -247,13 +289,11 @@ input[type="color"]::-webkit-color-swatch:active {
 }
 
 .image-upload {
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
-.btn-upload-meme:before {
-    font-family: 'Font Awesome 5 Free';
-    content: '\f093';
-    margin-right: 0.3rem;
+.meme-search-box {
+    justify-content: flex-end;
 }
 
 .btn-search:before {
@@ -265,10 +305,6 @@ input[type="color"]::-webkit-color-swatch:active {
     .upload-meme-btn {
         width: 100%;
     }
-}
-
-.meme-search-box {
-    justify-content: flex-start;
 }
 
 .meme-img {
@@ -382,6 +418,7 @@ input[type="color"]::-webkit-color-swatch:active {
     margin: 0 auto;
     overflow: hidden;
     font-size: 0;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
 }
 
 [contenteditable]:focus {
@@ -389,22 +426,23 @@ input[type="color"]::-webkit-color-swatch:active {
 }
 
 .meme-background {
-    max-height: 60vh;
+    max-height: 400px;
     width: auto;
 }
 
-@media (max-width:420px) {
+@media(max-width:420px) {
     .meme-background {
-        max-height: 60vh;
-        width: auto;
+        width: 100%;
+        height: auto;
     }
 }
 
 .caption {
     display: block;
+    white-space: nowrap;
     text-align: center;
     text-overflow: clip;
-    line-height: 1;
+    line-height: 0.8em;
     font-family: Impact, arial, sans-serif;
     color: #ffffff;
     -webkit-text-stroke-width: 2px;
@@ -444,6 +482,10 @@ input[type="color"]::-webkit-color-swatch:active {
         /* box-shadow: 1px 1px 10px rgba(0, 0, 0, .15); */
         padding: 20px 0;
     }
+}
+
+.tools-wrapper {
+    background: #fff;
 }
 
 .caption-tools {

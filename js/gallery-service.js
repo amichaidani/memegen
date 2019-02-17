@@ -77,9 +77,9 @@ function getKeywordsStrHTMLs() {
     return strHTMLs
 }
 
-function getMemesStrHTMLs() {
+function getMemesStrHTMLs(memes) {
     let strHTMLs = []
-    gMemes.forEach(meme => {
+    memes.forEach(meme => {
         let strHTML = `<div style="background-image: url(${meme.url})" data-id="${meme.id}" class="meme-img" onclick="onSelectMeme(this)"></div>`
         strHTMLs.push(strHTML)
     })
@@ -121,17 +121,14 @@ function changeFontSizeToKeywords(idx, word) {
 
 function filterMemes(str) {
     let chars = str.toLowerCase();
-    let memesToDiplay = gMemes.filter(meme => {
-         debugger
-        meme.keywords.filter(keyword => {
-            keyword.charAt(0) === chars.charAt(0)
-           
-            // for (let i = 0; i < chars.length; i++) {
-            //      if (keyword.charAt(i) !== chars.charAt(i)) return false;
-            // }
-            // return keyword;
+    let memesToDiplay = [];
+    if (str.length === 0) return memesToDiplay = gMemes
+    gMemes.forEach(meme => {
+        meme.keywords.forEach(keyword => {
+            if (keyword.substring(0, chars.length) === chars) {
+                memesToDiplay.push(meme);
+            }
         })
-        // return meme;
     })
     return memesToDiplay;
 }

@@ -26,8 +26,8 @@ function onKeywordSearch(searchedWord) {
     renderKeywords();
 }
 function onFilterMemes(str) {
-    let memesToDiplay = filterMemes(str); 
-    renderMemes(memesToDiplay)  
+    let memesToDiplay = filterMemes(str);
+    if (memesToDiplay.length !== 0) renderMemes(memesToDiplay)
 }
 
 function renderKeywords() {
