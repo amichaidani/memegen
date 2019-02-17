@@ -77,7 +77,7 @@ small, .text_small {
 input {
     background: #1b2027;
     color: #fff;
-    height: 30px;
+    height: 40px;
     border-radius: 3px;
     border: 1px solid var(--main-border-color);
     -webkit-appearance: none;
@@ -88,7 +88,7 @@ input {
         width: 100%;
     }
     .search-box-icon {
-        height: 30px;
+        height: 40px;
     }
 }
 
@@ -98,7 +98,7 @@ label, button {
     color: #ffffff;
     border-radius: 3px;
     min-width: 40px;
-    height: 30px;
+    height: 40px;
     cursor: pointer;
     margin-right: 0;
     display: inline-block;
@@ -116,8 +116,6 @@ label:hover {
         border: 1px solid var(--main-border-color);
         background: none;
         border-radius: 3px;
-        min-width: 40px;
-        height: 40px;
         cursor: pointer;
         margin-right: 0;
         display: inline-block;
@@ -253,6 +251,7 @@ header {
     max-width: 980px;
     margin: auto;
     padding: 10px 10px;
+    margin-top: 20px;
 }
 
 .grid-container {
@@ -283,12 +282,6 @@ header {
 
 .image-upload {
     justify-content: flex-start;
-}
-
-@media (max-width:740px) {
-    .image-upload {
-        justify-content: center;
-    }
 }
 
 .meme-search-box {
@@ -338,7 +331,7 @@ header {
     justify-content: center;
     align-items: center;
     padding: 0 8px;
-    height: 30px;
+    height: 40px;
     font-weight: 500;
     color: #999;
     font-size: 0.8em;
@@ -477,7 +470,6 @@ header {
 
 .caption:focus {
     cursor: text;
-    
 }
 
 @media (max-width:740px) {
