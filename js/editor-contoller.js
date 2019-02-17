@@ -99,7 +99,7 @@ function onCanvasMouseDown(ev) {
         gFocusedCaption = caption;
         gElInputText.value = caption.txt;
         gElInputText.style.display = "inline-block";
-        gElInputText.style.left = coords.x - (gElInputText.offsetWidth / 2) + 'px';
+        gElInputText.style.left = coords.x - (gElInputText.offsetWidth / 3) + 'px';
         gElInputText.style.top = coords.y + 'px';
     }
     else {
@@ -112,6 +112,7 @@ function onCanvasMouseDown(ev) {
 // Mouse out event on canvas
 function onCanvasRelease() {
     gIsDown = false;
+    gFocusedCaption = null;
 }
 
 // Track mouse movement for drag-and-drop
